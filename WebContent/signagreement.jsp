@@ -8,8 +8,10 @@
 </head>
 <body>
 合同：<%
-String agreement=(String)session.getAttribute("agreement");
-out.print(agreement+"<br>");
+String agreementname=(String)session.getAttribute("agreementname");
+String agreementintroduce=(String)session.getAttribute("agreementintroduce");
+out.print("合同名:"+agreementname+"<br>");
+out.print("合同内容:"+agreementintroduce+"<br>");
 %>
 <a href="servlet/signagreement">签订合同</a>
 <a href="task.jsp">返回</a>

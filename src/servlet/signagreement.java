@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import bean.task;
 import dao.Agreement;
 import dao.Alreadytask;
+import dao.Signagreement;
 import dao.Task;
 
 /**
@@ -37,14 +38,21 @@ public class signagreement extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
-		String list = request.getParameter("list");
+	   
 		HttpSession session = request.getSession(); 
-		String agreement=(String)session.getAttribute("agreement");
+		int aid=(int)session.getAttribute("aid");
+		
 		int tid=(int)session.getAttribute("tid");
 		int uid=(int)session.getAttribute("uid");
-		Agreement a=new Agreement();
+	
+		Signagreement a=new Signagreement();
 		Alreadytask k=new Alreadytask();
 		Task s=new Task();
+		if(a.insertsignagreement(uid, aid)==1 &&s.updateaccept(tid)==1 && k.insertalreadytask(tid, uid)==1) {
+			response.sendRedirect(request.getContextPath()+"/user.jsp");
+			
+		}
+		
 		
 		
 	

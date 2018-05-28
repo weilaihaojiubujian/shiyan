@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.task;
+import dao.Agreement;
 import dao.Alreadytask;
 import dao.Task;
 
@@ -48,12 +49,18 @@ public class checktask extends HttpServlet {
 			 String h=t.toString();
 			 if(h.equals(list)) {
 				 int tid=t.getTid();
-				 session.setAttribute("tid", tid);
-				 
+				 if(tid!=0)
+				 {
+					 session.setAttribute("tid", tid);
+				 }
+				
+				
 			
 				 int uid=(int)session.getAttribute("uid");
+			
 				 Alreadytask k=new Alreadytask();
-				 if(k.selectall(uid)==1)
+				 Agreement a=new Agreement();
+				 if(k.selectall(uid)==1 && a.selectagreement(tid, session)==1)
 				 {
 					 response.sendRedirect(request.getContextPath()+"/signagreement.jsp");
 				 }
