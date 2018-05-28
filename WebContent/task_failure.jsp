@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="5;url=yonghu.jsp">
+<meta http-equiv="refresh" content="5;url=user.jsp">
 <title>没有可以接受的任务</title>
 </head>
 <body>

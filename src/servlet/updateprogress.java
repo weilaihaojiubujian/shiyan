@@ -56,7 +56,7 @@ public class updateprogress extends HttpServlet {
 		else
 		{
 			if(x.updateprogress(progress, tid, uid)==1) {
-				response.sendRedirect(request.getContextPath()+"/yonghu.jsp");
+				response.sendRedirect(request.getContextPath()+"/user.jsp");
 			}
 			else {
 				response.sendRedirect(request.getContextPath()+"/updateprogress_failure.jsp");

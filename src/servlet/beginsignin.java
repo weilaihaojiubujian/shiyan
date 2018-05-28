@@ -37,7 +37,7 @@ public class beginsignin extends HttpServlet {
 		int tid=(int)session.getAttribute("tid");
 		Sign a=new Sign();
 		if(a.insertbeginsignin(tid, uid)==1) {
-			response.sendRedirect(request.getContextPath()+"/yonghu.jsp");
+			response.sendRedirect(request.getContextPath()+"/user.jsp");
 		}
 	}
 
