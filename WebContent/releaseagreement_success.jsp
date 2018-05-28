@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="5;url=agreement.jsp">
-<title>发布任务成功</title>
+<meta http-equiv="refresh" content="5;url=user.jsp">
+<title>发布合同成功</title>
 </head>
 <body>
-<h1>恭喜，发布任务成功</h1>
+<h1>恭喜，发布合同成功</h1>
 </body>
 </html>

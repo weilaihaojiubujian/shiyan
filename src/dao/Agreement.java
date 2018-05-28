@@ -6,9 +6,11 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Statement;
 
+import bean.agreement;
+
 public class Agreement {
 
-	public int insertagreement(int tid,int uid,String agreement) {
+	public int insertagreement(agreement a,int tid) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -18,12 +20,14 @@ public class Agreement {
 			      String sql;
 			    
 			     
-			    
-			      sql = "INSERT INTO agreement(u_id,t_id,agreement)" +
-		                   " VALUES ('"+uid+"', '"+tid+"','"+agreement+"')";//插入操作...
+			      String agreementname = a.getAgreementname();
+				  String agreementintroduce = a.getAgreementintroduce();
+			      sql = "INSERT INTO agreement(agreementname,tid,agreementintroduce)" +
+		                   " VALUES ('"+agreementname+"', '"+tid+"','"+agreementintroduce+"')";//插入操作...
 			      stmt.executeUpdate(sql); 
 			     
 			      int i=1;
+			  
 			      return i;
 			
 			    

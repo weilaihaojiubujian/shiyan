@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="refresh" content="5;url=agreement.jsp">
-<title>发布任务成功</title>
+<title>发布合同失败</title>
 </head>
 <body>
-<h1>恭喜，发布任务成功</h1>
+<h1>发布合同失败，请重新发布</h1>
 </body>
 </html>

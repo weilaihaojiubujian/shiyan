@@ -41,7 +41,7 @@ public class yonghuxinxi extends HttpServlet {
 		u.setPassword(password);
 		User h=new User();
 		if(h.selectall(u.getUsername(),u.getPassword(),session)==0) {
-			response.sendRedirect(request.getContextPath()+"/yonghuxinxi.jsp");
+			response.sendRedirect(request.getContextPath()+"/userinformation.jsp");
 		}
 	}
 

@@ -43,12 +43,12 @@ public class releasetask extends HttpServlet {
 		String introduce = request.getParameter("introduce");
 		String p = request.getParameter("price");
 		String d = request.getParameter("date");
-		String agreement = request.getParameter("agreement");
+		
 		double price=Double.parseDouble(p);
 		Date date = null;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		date = dateFormat.parse(d); 
-		t.setAgreement(agreement);
+	
 		t.setDate(date);
 		t.setIntroduce(introduce);
 		t.setPrice(price);
@@ -56,18 +56,18 @@ public class releasetask extends HttpServlet {
 		HttpSession session = request.getSession(); 
 		int uid=(int)session.getAttribute("uid");
 		Task s=new Task();
-		if(s.inserttask(t,uid)==0)
+		if(s.inserttask(t,uid,session)==0)
 		{
 			session.setAttribute("taskname",taskname);
 			session.setAttribute("introduce",introduce);
 			session.setAttribute("price",price);
 			session.setAttribute("date",date);
-			session.setAttribute("agreement",agreement);
+		
 			response.sendRedirect(request.getContextPath()+"/releasetask_success.jsp");
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath()+"/denlu_failure.jsp");
+			response.sendRedirect(request.getContextPath()+"/releasetask_failure.jsp");
 		}
 		 }catch (ParseException e) {
             e.printStackTrace();

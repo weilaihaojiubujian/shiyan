@@ -26,10 +26,7 @@
       <td><label for="date">发布日期:</label></td>
       <td><input type="text"  name="date" id="date" value="" /></td>
       </tr>
-       <tr>
-      <td><label for="agreement">需要签订的合同:</label></td>
-      <td><input type="text"  name="agreement" id="agreement" value="" /></td>
-      </tr>
+       
      </table>    
    <div id="login_control">  
            <input type="submit"  value="发布任务"  name="submit""/> 

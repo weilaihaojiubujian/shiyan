@@ -16,7 +16,7 @@ import bean.task;
 
 public class Task {
 
-	public int inserttask(task t,int uid) {
+	public int inserttask(task t,int uid,HttpSession session) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -26,18 +26,23 @@ public class Task {
 			      String sql;
 			      String taskname = t.getTaskname();
 				  String introduce = t.getIntroduce();
-				  String agreement =t.getAgreement();
+				
 				  double price=t.getPrice();
 				  java.util.Date da =t.getDate();
 				  long q = da.getTime();
 				  java.sql.Date date = new java.sql.Date(q);
-			      sql = "SELECT * FROM task where taskname='"+taskname+"' and introduce='"+introduce+"'and agreement='"+agreement+"'and price='"+price+"' ";
+			      sql = "SELECT * FROM task where taskname='"+taskname+"' and introduce='"+introduce+"'and price='"+price+"' ";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
 			      if(!rs.next()) {
-			    	  String sql_1="INSERT INTO task(taskname,introduce,agreement,price,date,uid)" +
-			                   " VALUES ('"+taskname+"', '"+introduce+"','"+agreement+"','"+price+"','"+date+"','"+uid+"')";//插入操作...
+			    	  String sql_1="INSERT INTO task(taskname,introduce,price,date,uid)" +
+			                   " VALUES ('"+taskname+"', '"+introduce+"','"+price+"','"+date+"','"+uid+"')";//插入操作...
 			          stmt.executeUpdate(sql_1); 
+			          String sql_2 = "SELECT * FROM task where taskname='"+taskname+"' and introduce='"+introduce+"'and price='"+price+"' ";
+				      rs = stmt.executeQuery(sql_2);
+				      rs.next();
+				      int tid=rs.getInt("id");
+				      session.setAttribute("tid",tid);
 			          return i;
 			      }
 			      else
@@ -98,7 +103,7 @@ public class Task {
 			    	  task h=new task();
 			    	  String taskname =rs.getString("taskname");
 					  String introduce = rs.getString("introduce");
-					  String agreement =rs.getString("agreement");
+					
 					  int tid=rs.getInt("id");
 					  double price=rs.getDouble("price");
 					  int accept=rs.getInt("accept");
@@ -110,7 +115,7 @@ public class Task {
 					  h.setTaskname(taskname);
 					  h.setTid(tid);
 					  h.setAccept(accept);
-					  h.setAgreement(agreement);
+					
 					  listtask.add(h);
 					  i++;
 			          
@@ -223,7 +228,7 @@ public class Task {
 			    	
 			    	  String taskname =rs.getString("taskname");
 					  String introduce = rs.getString("introduce");
-					  String agreement =rs.getString("agreement");
+					
 					  double price=rs.getDouble("price");
 					  int accept=rs.getInt("accept");
 					  java.util.Date date=rs.getDate("date");
@@ -234,7 +239,7 @@ public class Task {
 					  h.setTaskname(taskname);
 					  h.setTid(tid);
 					  h.setAccept(accept);
-					  h.setAgreement(agreement);
+					
 					  h.setProgress(progress);
 					  alreadytask.add(h);
 					  session.setAttribute("alreadytask", alreadytask);
@@ -300,7 +305,7 @@ public class Task {
 				    	  task h=new task();
 				    	  String taskname =rs.getString("taskname");
 						  String introduce = rs.getString("introduce");
-						  String agreement =rs.getString("agreement");
+					
 						
 						  double price=rs.getDouble("price");
 						
@@ -311,8 +316,7 @@ public class Task {
 						  h.setPrice(price);
 						  h.setTaskname(taskname);
 						  h.setTid(tid);
-						 
-						  h.setAgreement(agreement);
+						
 						  listcompletetask.add(h);
 						  j++;
 				          
@@ -427,7 +431,7 @@ public class Task {
 			    	  task h=new task();
 			    	  String taskname =rs.getString("taskname");
 					  String introduce = rs.getString("introduce");
-					  String agreement =rs.getString("agreement");
+					
 					  int tid=rs.getInt("id");
 					  double price=rs.getDouble("price");
 					  int accept=rs.getInt("accept");
@@ -439,7 +443,7 @@ public class Task {
 					  h.setTaskname(taskname);
 					  h.setTid(tid);
 					  h.setAccept(accept);
-					  h.setAgreement(agreement);
+				
 					  listalreadytask.add(h);
 					  i++;
 			          

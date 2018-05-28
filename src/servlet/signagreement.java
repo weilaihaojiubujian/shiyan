@@ -45,10 +45,7 @@ public class signagreement extends HttpServlet {
 		Agreement a=new Agreement();
 		Alreadytask k=new Alreadytask();
 		Task s=new Task();
-		if(a.insertagreement(tid, uid, agreement)==1 &&s.updateaccept(tid)==1 && k.insertalreadytask(tid, uid)==1) {
-			response.sendRedirect(request.getContextPath()+"/user.jsp");
-			
-		}
+		
 		
 	
 	}

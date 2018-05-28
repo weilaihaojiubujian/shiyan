@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,21 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.task;
-import dao.Alreadytask;
-import dao.Task;
+import bean.agreement;
+import dao.Agreement;
 
 /**
- * Servlet implementation class checktask
+ * Servlet implementation class releaseagreement
  */
-@WebServlet("/checktask")
-public class checktask extends HttpServlet {
+@WebServlet("/releaseagreement")
+public class releaseagreement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public checktask() {
+    public releaseagreement() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,33 +33,28 @@ public class checktask extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
-		String list = request.getParameter("list");
+		String agreementname = request.getParameter("agreementname");
+		String agreementintroduce = request.getParameter("agreementintroduce");
+		agreement a=new agreement();
+		a.setAgreementintroduce(agreementintroduce);
+		a.setAgreementname(agreementname);
+		
 		HttpSession session = request.getSession(); 
-		System.out.println(list);
-		task n=new task();
-		List<task> q=null;
-		Task s=new Task();
-		q=(List<task>)session.getAttribute("listtask");
-		 for(task t:q)
-		 {
-			 String h=t.toString();
-			 if(h.equals(list)) {
-				 int tid=t.getTid();
-				 session.setAttribute("tid", tid);
-				 
-			
-				 int uid=(int)session.getAttribute("uid");
-				 Alreadytask k=new Alreadytask();
-				 if(k.selectall(uid)==1)
-				 {
-					 response.sendRedirect(request.getContextPath()+"/signagreement.jsp");
-				 }
-				 else
-				 {
-					 response.sendRedirect(request.getContextPath()+"/accepttask_failure.jsp");
-				 }
-			 }
-		 }
+		int tid=(int)session.getAttribute("tid");
+		
+		Agreement q=new Agreement();
+		if(q.insertagreement(a,tid)==1)
+		{
+			session.setAttribute("agreementname",agreementname);
+			session.setAttribute("agreementintroduce",agreementintroduce);
+	
+		
+			response.sendRedirect(request.getContextPath()+"/releaseagreement_success.jsp");
+		}
+		else
+		{
+			response.sendRedirect(request.getContextPath()+"/releaseagreement_failure.jsp");
+		}
 	}
 
 	/**

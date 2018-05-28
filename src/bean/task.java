@@ -11,7 +11,7 @@ public class task {
    private double price;
    private Date date;
    private int accept;
-   private String agreement;
+
    private double progress;
 public String getTaskname() {
 	return taskname;
@@ -49,12 +49,7 @@ public int getAccept() {
 public void setAccept(int accept) {
 	this.accept = accept;
 }
-public String getAgreement() {
-	return agreement;
-}
-public void setAgreement(String agreement) {
-	this.agreement = agreement;
-}
+
 public double getProgress() {
 	return progress;
 }
