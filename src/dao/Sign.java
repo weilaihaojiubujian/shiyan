@@ -85,7 +85,7 @@ public class Sign {
 				  System.out.println(df.format(day));   
 				
 			      int i=0;
-			      String sql_2="UPDATE sign SET stop='"+df.format(day)+"' WHERE tid='"+tid+"' and uid='"+uid+"' and stop is null ";
+			      String sql_2="UPDATE sign SET stop='"+df.format(day)+"' WHERE tid='"+tid+"' and uid='"+uid+"' and stop is null and start is not null ";
 		
 			      stmt.executeUpdate(sql_2); 
 			      i=1;

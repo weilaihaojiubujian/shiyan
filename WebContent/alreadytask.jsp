@@ -7,25 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>已接受的任务</title>
-<script type="text/javascript" >
-function check(){
-	 
-	  var progress=document.getElementById('progress');
-	  var value=document.getElementById('progress').value;
-	 
-	  if(value<0){
-		  alert("任务进度不能为负数,请重新输入")
-		  progress.focus();
-		 
-	  }
-	  else if(value>100)
-	 {
-		  alert("任务进度最大为100,请重新输入")
-		  progress.focus();
-	 }
-	  
-}
-</script>
+
 </head>
 <body>
 已接受的任务:
@@ -55,11 +37,7 @@ for(task t:q){
 }
 
 %>
-<form action="servlet/updateprogress" method="post">
-<label for="progress">任务完成程度:</label>
-<input type="text" value="" name="progress" id="progress" onblur="check()"/>
-<input type="submit"  value="提交任务完成程度"  name="submit"/> 
-</form>
+
 <a href="signin.jsp">签到</a>
 </body>
 </html>
