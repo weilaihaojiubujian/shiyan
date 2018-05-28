@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>outsourcing</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>denlu</servlet-name>
+    <servlet-class>servlet.denlu</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>denlu</servlet-name>
+    <url-pattern>/servlet/denlu</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>zhuce</servlet-name>
+    <servlet-class>servlet.zhuce</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>zhuce</servlet-name>
+    <url-pattern>/servlet/zhuce</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>yonghuxinxi</servlet-name>
+    <servlet-class>servlet.yonghuxinxi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>yonghuxinxi</servlet-name>
+    <url-pattern>/servlet/yonghuxinxi</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>releasetask</servlet-name>
+    <servlet-class>servlet.releasetask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>releasetask</servlet-name>
+    <url-pattern>/servlet/releasetask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>viewtask</servlet-name>
+    <servlet-class>servlet.viewtask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewtask</servlet-name>
+    <url-pattern>/servlet/viewtask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>signagreement</servlet-name>
+    <servlet-class>servlet.signagreement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>signagreement</servlet-name>
+    <url-pattern>/servlet/signagreement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checktask</servlet-name>
+    <servlet-class>servlet.checktask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checktask</servlet-name>
+    <url-pattern>/servlet/checktask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>alreadytask</servlet-name>
+    <servlet-class>servlet.alreadytask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>alreadytask</servlet-name>
+    <url-pattern>/servlet/alreadytask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>updateprogress</servlet-name>
+    <servlet-class>servlet.updateprogress</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateprogress</servlet-name>
+    <url-pattern>/servlet/updateprogress</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>beginsignin</servlet-name>
+    <servlet-class>servlet.beginsignin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>beginsignin</servlet-name>
+    <url-pattern>/servlet/beginsignin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>endsignin</servlet-name>
+    <servlet-class>servlet.endsignin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>endsignin</servlet-name>
+    <url-pattern>/servlet/endsignin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>completetask</servlet-name>
+    <servlet-class>servlet.completetask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>completetask</servlet-name>
+    <url-pattern>/servlet/completetask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkuser</servlet-name>
+    <servlet-class>servlet.checkuser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkuser</servlet-name>
+    <url-pattern>/servlet/checkuser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>deleteuser</servlet-name>
+    <servlet-class>servlet.deleteuser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteuser</servlet-name>
+    <url-pattern>/servlet/deleteuser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkalluser</servlet-name>
+    <servlet-class>servlet.checkalluser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkalluser</servlet-name>
+    <url-pattern>/servlet/checkalluser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkalreadytaskbyuser</servlet-name>
+    <servlet-class>servlet.checkalreadytaskbyuser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkalreadytaskbyuser</servlet-name>
+    <url-pattern>/servlet/checkalreadytaskbyuser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checktaskbyuser</servlet-name>
+    <servlet-class>servlet.checktaskbyuser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checktaskbyuser</servlet-name>
+    <url-pattern>/servlet/checktaskbyuser</url-pattern>
+  </servlet-mapping>
+</web-app>
