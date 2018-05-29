@@ -94,7 +94,7 @@ public class Task {
 			    
 				  
 			    
-			      sql = "SELECT * FROM task where accept=0";
+			      sql = "SELECT * FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask)";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
 			      List<task> listtask=new ArrayList<task>();
@@ -102,19 +102,15 @@ public class Task {
 			      while(rs.next()) {
 			    	  task h=new task();
 			    	  String taskname =rs.getString("taskname");
-					  String introduce = rs.getString("introduce");
+					
 					
 					  int tid=rs.getInt("id");
-					  double price=rs.getDouble("price");
-					  int accept=rs.getInt("accept");
-					  java.util.Date date=rs.getDate("date");
 					
-					  h.setDate(date);
-					  h.setIntroduce(introduce);
-					  h.setPrice(price);
+					
+				
 					  h.setTaskname(taskname);
 					  h.setTid(tid);
-					  h.setAccept(accept);
+				
 					
 					  listtask.add(h);
 					  i++;
@@ -206,7 +202,7 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	public int selecttall(HttpSession session) {
+	public int selecttall(int uid,HttpSession session) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -216,19 +212,17 @@ public class Task {
 			      String sql;
 			    
 			     
-			      int tid=(int)session.getAttribute("tid");
-		    	  double progress=(double)session.getAttribute("progress");
-			      sql = "SELECT * FROM task where id='"+tid+"'  ";
+			      sql = "SELECT task.*,progress FROM task,alreadytask where task.id=t_id and u_id='"+uid+"'  ";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
 			      List<task> alreadytask=new ArrayList<task>();
 			      if(rs.next()) {
 			    	  task h=new task();
 			    	  
-			    	
+			    	  int tid=rs.getInt("id");
 			    	  String taskname =rs.getString("taskname");
 					  String introduce = rs.getString("introduce");
-					
+					  double progress=rs.getDouble("progress");
 					  double price=rs.getDouble("price");
 					  int accept=rs.getInt("accept");
 					  java.util.Date date=rs.getDate("date");
@@ -242,6 +236,7 @@ public class Task {
 					
 					  h.setProgress(progress);
 					  alreadytask.add(h);
+					  session.setAttribute("tid", tid);
 					  session.setAttribute("alreadytask", alreadytask);
 			          i=1;
 			          return 1;
@@ -283,7 +278,7 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	public int selectcompletetask(HttpSession session) {
+	public int selectcompletetask(int uid,HttpSession session) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -293,35 +288,27 @@ public class Task {
 			      String sql;
 			    
 				  
-			      List listtid=(List) session.getAttribute("listtid");
+			     
 			      List<task> listcompletetask=new ArrayList<task>();
 			      int j=0;
-			      for(int i=0;i<listtid.size();i++)
-			      {
-			    	  int tid=(int) listtid.get(i);
-			    	  sql = "SELECT * FROM task where id='"+tid+"'";
-				      rs = stmt.executeQuery(sql);
-				      if(rs.next()) {
+			      sql = "SELECT task.id,task.taskname FROM task,completetask where task.id=t_id and u_id='"+uid+"' ";
+			      rs = stmt.executeQuery(sql);
+			      
+			    
+			    	  
+				  while(rs.next()) {
 				    	  task h=new task();
+				    	  int tid=rs.getInt("id");
 				    	  String taskname =rs.getString("taskname");
-						  String introduce = rs.getString("introduce");
-					
 						
-						  double price=rs.getDouble("price");
-						
-						  java.util.Date date=rs.getDate("date");
-						
-						  h.setDate(date);
-						  h.setIntroduce(introduce);
-						  h.setPrice(price);
+				
 						  h.setTaskname(taskname);
 						  h.setTid(tid);
 						
 						  listcompletetask.add(h);
 						  j++;
 				          
-				      }
-			      }
+				  }
 			      session.setAttribute("listcompletetask",listcompletetask);
 			 
 			     
@@ -449,6 +436,76 @@ public class Task {
 			          
 			      }
 			      session.setAttribute("listalreadytask", listalreadytask);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// ÊÍ·ÅÓï¾ä¶ÔÏó
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selecttid(int tid,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT * FROM task where id='"+tid+"'  ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			     
+			      task h=new task();
+			      while(rs.next()) {
+			    	
+			    	  String taskname =rs.getString("taskname");
+					  String introduce = rs.getString("introduce");
+					
+					 
+					  double price=rs.getDouble("price");
+				
+					  java.util.Date date=rs.getDate("date");
+					
+					  h.setDate(date);
+					  h.setIntroduce(introduce);
+					  h.setPrice(price);
+					  h.setTaskname(taskname);
+					  h.setTid(tid);
+					
+					
+					  i++;
+			          
+			      }
+			      session.setAttribute("task",h);
 			      return i;
 			    
 			   

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,20 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.Completetask;
+import bean.task;
+import dao.Agreement;
+import dao.Alreadytask;
 import dao.Task;
 
 /**
- * Servlet implementation class completetask
+ * Servlet implementation class checkinformation
  */
-@WebServlet("/completetask")
-public class completetask extends HttpServlet {
+@WebServlet("/checkinformation")
+public class checkinformation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public completetask() {
+    public checkinformation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +37,34 @@ public class completetask extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
+		String list = request.getParameter("list");
 		HttpSession session = request.getSession(); 
-		int uid=(int)session.getAttribute("uid");
-		Completetask c=new Completetask();
+		System.out.println(list);
+		task n=new task();
+		List<task> q=null;
 		Task s=new Task();
-		if( s.selectcompletetask(uid,session)!=0) {
+		q=(List<task>)session.getAttribute("listcompletetask");
+		 for(task t:q)
+		 {
+			 String h=t.toString();
+			 if(h.equals(list)) {
+				 int tid=t.getTid();
+				 if(tid!=0)
+				 {
+					 session.setAttribute("tid", tid);
+				 }
+				
+				
 			
-			response.sendRedirect(request.getContextPath()+"/completetask.jsp");
-		}
-		else
-		{
-			response.sendRedirect(request.getContextPath()+"/selectcompletetask_failure.jsp");
-		}
+	
+				 if(s.selecttid(tid, session)==1)
+				 {
+					 response.sendRedirect(request.getContextPath()+"/alreadytaskinformation.jsp");
+				 }
+				
+			 }
+		 }
+		
 	}
 
 	/**

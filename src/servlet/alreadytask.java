@@ -35,9 +35,9 @@ public class alreadytask extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(); 
 		int uid=(int)session.getAttribute("uid");
-		Alreadytask q=new Alreadytask();
+	
 		Task s=new Task();
-		if(q.selecttid(uid,session)==1 &&s.selecttall(session)==1) {
+		if(s.selecttall(uid,session)==1) {
 			response.sendRedirect(request.getContextPath()+"/alreadytask.jsp");
 		}
 		else

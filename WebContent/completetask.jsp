@@ -43,20 +43,14 @@ List<task> q=null;
 	task t = (task) q.get(i);
 	 int tid=t.getTid();
 	 String taskname =t.getTaskname();
-	  String introduce = t.getIntroduce();
-	  double price=t.getPrice();
-	
-	  java.util.Date date=t.getDate();
+
 	  
  
-out.println("序号:"+tid+"<br>");
-out.println("任务名:"+taskname+"<br>");
-out.println("任务介绍:"+introduce+"<br>");
-out.println("可获金额:"+price+"<br>");
-out.println("发布日期:"+date+"<br><br><br>");
-
+out.println("序号:"+(i+1)+"<br>");%>
+<a href="servlet/checkinformation?list=<%=t%>" ><% out.println("任务名:"+taskname+"<br><br><br>");
+%></a>
+<% 
 } %>
-
 
 
 

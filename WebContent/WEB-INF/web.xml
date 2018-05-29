@@ -179,7 +179,7 @@
     <servlet-name>checktaskbyuser</servlet-name>
     <url-pattern>/servlet/checktaskbyuser</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>releaseagreement</servlet-name>
@@ -188,5 +188,25 @@
   <servlet-mapping>
     <servlet-name>releaseagreement</servlet-name>
     <url-pattern>/servlet/releaseagreement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkinformation</servlet-name>
+    <servlet-class>servlet.checkinformation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkinformation</servlet-name>
+    <url-pattern>/servlet/checkinformation</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checknotacceptinformation</servlet-name>
+    <servlet-class>servlet.checknotacceptinformation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checknotacceptinformation</servlet-name>
+    <url-pattern>/servlet/checknotacceptinformation</url-pattern>
   </servlet-mapping>
 </web-app>

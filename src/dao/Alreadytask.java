@@ -116,66 +116,7 @@ public class Alreadytask {
 	   }//end try
 			return 0;
 	}
-	public int selecttid(int uid,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
-			try {
-				conn = connection.getConnection();
-				 stmt = (Statement) conn.createStatement();
-			      String sql;
-			    
-			     
-			    
-			      sql = "SELECT t_id,progress FROM alreadytask where u_id='"+uid+"'  ";
-			      rs = stmt.executeQuery(sql);
-			      int i=0;
-			
-			      if(rs.next()) {
-			    	  int tid=rs.getInt("t_id");
-			    	  double progress=rs.getDouble("progress");
-			    	  session.setAttribute("tid", tid);
-			    	  session.setAttribute("progress", progress);
-			          i=1;
-			          return 1;
-			      }
-			      else
-			      {
-			    	  return 0;
-			      }
-			     
-			    
-			   
-
-	  }catch(SQLException se){
-	      //Handle errors for JDBC
-	      se.printStackTrace();
-	   }catch(Exception e){
-	      //Handle errors for Class.forName
-	      e.printStackTrace();
-	   }finally{
-		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			//  Õ∑≈”Ôæ‰∂‘œÛ
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-	   }//end try
-			return 0;
-	}
+	
 	public int selectall(int uid) {
 		Connection conn = null;
 		  Statement stmt = null;
