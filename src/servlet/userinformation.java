@@ -12,16 +12,16 @@ import bean.user;
 import dao.User;
 
 /**
- * Servlet implementation class yonghuxinxi
+ * Servlet implementation class userinformation
  */
-@WebServlet("/yonghuxinxi")
-public class yonghuxinxi extends HttpServlet {
+@WebServlet("/userinformation")
+public class userinformation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public yonghuxinxi() {
+    public userinformation() {
         super();
         // TODO Auto-generated constructor stub
     }
