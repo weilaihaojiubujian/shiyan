@@ -31,11 +31,11 @@ public class Task {
 				  java.util.Date da =t.getDate();
 				  long q = da.getTime();
 				  java.sql.Date date = new java.sql.Date(q);
-			      sql = "SELECT * FROM task where taskname='"+taskname+"' and introduce='"+introduce+"'and price='"+price+"' ";
+			      sql = "SELECT * FROM task where taskname='"+taskname+"' and introduce='"+introduce+"'and price='"+price+"' and releaseid='"+uid+"' ";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
 			      if(!rs.next()) {
-			    	  String sql_1="INSERT INTO task(taskname,introduce,price,date,uid)" +
+			    	  String sql_1="INSERT INTO task(taskname,introduce,price,date,releaseid)" +
 			                   " VALUES ('"+taskname+"', '"+introduce+"','"+price+"','"+date+"','"+uid+"')";//²åÈë²Ù×÷...
 			          stmt.executeUpdate(sql_1); 
 			          String sql_2 = "SELECT * FROM task where taskname='"+taskname+"' and introduce='"+introduce+"'and price='"+price+"' ";
