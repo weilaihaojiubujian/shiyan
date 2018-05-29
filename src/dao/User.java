@@ -210,18 +210,17 @@ public class User {
 			conn = connection.getConnection();
 			 stmt = (Statement) conn.createStatement();
 		      String sql;
-		      List listuid=(List) session.getAttribute("listuid");
+		  
 		      List<user> listuserinformation=new ArrayList<user>();
 		      
-		      
+		      sql = "SELECT * FROM user where id in (SELECT uid FROM sign where stop is null and start is not null)  ";
+		      rs = stmt.executeQuery(sql);
 		      int j=0;
-		      for(int i=0;i<listuid.size();i++)
-		      {
-		    	  int uid=(int) listuid.get(i);
-		    	  sql = "SELECT * FROM user where id='"+uid+"'  ";
-			      rs = stmt.executeQuery(sql);
-		          if(rs.next()) {
+		
+		    	  
+		       while(rs.next()) {
 		    	  user u = new user();
+		    	  int uid=rs.getInt("id");
 		    	  String username=rs.getString("username");
 		    	  String address=rs.getString("address");
 	              String bankaccount=rs.getString("bankaccount"); 
@@ -236,7 +235,7 @@ public class User {
 	              listuserinformation.add(u);
 	              j++;
 		          }
-		      }
+		    
 		      session.setAttribute("listuserinformation",listuserinformation);
 		      return j;
 		   

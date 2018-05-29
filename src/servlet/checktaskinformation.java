@@ -14,16 +14,16 @@ import bean.task;
 import dao.Task;
 
 /**
- * Servlet implementation class checknotacceptinformation
+ * Servlet implementation class checktaskinformation
  */
-@WebServlet("/checknotacceptinformation")
-public class checknotacceptinformation extends HttpServlet {
+@WebServlet("/checktaskinformation")
+public class checktaskinformation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public checknotacceptinformation() {
+    public checktaskinformation() {
         super();
         // TODO Auto-generated constructor stub
     }

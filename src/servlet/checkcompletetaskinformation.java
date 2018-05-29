@@ -16,16 +16,16 @@ import dao.Alreadytask;
 import dao.Task;
 
 /**
- * Servlet implementation class checkinformation
+ * Servlet implementation class checkcompletetaskinformation
  */
-@WebServlet("/checkinformation")
-public class checkinformation extends HttpServlet {
+@WebServlet("/checkcompletetaskinformation")
+public class checkcompletetaskinformation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public checkinformation() {
+    public checkcompletetaskinformation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,7 +59,7 @@ public class checkinformation extends HttpServlet {
 	
 				 if(s.selecttid(tid, session)==1)
 				 {
-					 response.sendRedirect(request.getContextPath()+"/alreadytaskinformation.jsp");
+					 response.sendRedirect(request.getContextPath()+"/taskinformation.jsp");
 				 }
 				
 			 }

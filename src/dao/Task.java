@@ -409,7 +409,7 @@ public class Task {
 			    
 				  
 			    
-			      sql = "SELECT * FROM task where accept=1 and state=0";
+			      sql = "SELECT id,taskname FROM task where id in (SELECT t_id FROM alreadytask )";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
 			      List<task> listalreadytask=new ArrayList<task>();
@@ -417,19 +417,14 @@ public class Task {
 			      while(rs.next()) {
 			    	  task h=new task();
 			    	  String taskname =rs.getString("taskname");
-					  String introduce = rs.getString("introduce");
+				
 					
 					  int tid=rs.getInt("id");
-					  double price=rs.getDouble("price");
-					  int accept=rs.getInt("accept");
-					  java.util.Date date=rs.getDate("date");
-					
-					  h.setDate(date);
-					  h.setIntroduce(introduce);
-					  h.setPrice(price);
+					 
+				
 					  h.setTaskname(taskname);
 					  h.setTid(tid);
-					  h.setAccept(accept);
+					
 				
 					  listalreadytask.add(h);
 					  i++;
