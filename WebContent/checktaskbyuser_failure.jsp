@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="5;url=administrator.jsp">
+<meta http-equiv="refresh" content="3;url=administrator.jsp">
 <title>查看未接受任务失败</title>
 </head>
 <body>

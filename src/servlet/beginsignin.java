@@ -39,6 +39,9 @@ public class beginsignin extends HttpServlet {
 		if(a.insertbeginsignin(tid, uid)==1) {
 			response.sendRedirect(request.getContextPath()+"/user.jsp");
 		}
+		else {
+			response.sendRedirect(request.getContextPath()+"/beginsignin_failure.jsp");
+		}
 	}
 
 	/**

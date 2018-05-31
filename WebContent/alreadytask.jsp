@@ -27,12 +27,7 @@ for(task t:q){
 	 out.println("任务介绍:"+introduce+"<br>");
 	 out.println("可获金额:"+price+"<br>");
 	 out.println("发布日期:"+date+"<br>");
-	 if(accept==0){
-	 	 out.println("任务状态:未接受<br>");
-	 }
-	 else{
-	 	 out.println("任务状态:已接受<br>");
-	 }
+
 	 out.println("任务完成程度:"+progress+"<br>"); 	 
 }
 

@@ -45,7 +45,7 @@ public class updateprogress extends HttpServlet {
 		{
 			Completetask c=new Completetask();
 			Task t=new Task();
-			if(c.insertcompletetask( tid, uid)==1 && x.delete(tid, uid)==1 && t.updatestate(tid)==1) {
+			if(c.insertcompletetask( tid, uid)==1 && x.delete(tid, uid)==1 ) {
 				response.sendRedirect(request.getContextPath()+"/yonghu.jsp");
 			}
 			else {

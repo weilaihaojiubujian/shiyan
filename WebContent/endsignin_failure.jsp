@@ -4,11 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="3;url=deleteuser.jsp">
-<title>删除用户成功</title>
+<meta http-equiv="refresh" content="3;url=signin.jsp">
+<title>结束签到失败</title>
 </head>
 <body>
-<body>
-<h1>删除用户成功</h1>
+<h1>还没有使用开始签到，无法结束签到</h1>
 </body>
 </html>

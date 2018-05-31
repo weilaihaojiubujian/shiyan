@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="5;url=agreement.jsp">
+<meta http-equiv="refresh" content="3;url=agreement.jsp">
 <title>发布任务成功</title>
 </head>
 <body>

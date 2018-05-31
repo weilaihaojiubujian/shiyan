@@ -151,57 +151,7 @@ public class Task {
 			return 0;
 	}
 	
-	public int updateaccept(int tid) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
-			try {
-				conn = connection.getConnection();
-				 stmt = (Statement) conn.createStatement();
-			      String sql;
-			    
-			     
-			    
-		          String sql_2="UPDATE task SET accept=1 WHERE id='"+tid+"' ";
-                  
-		          stmt.executeUpdate(sql_2); 
-			      int i=1;
-			      return i;
-			
-			    
-			     
-			    
-			   
-
-	  }catch(SQLException se){
-	      //Handle errors for JDBC
-	      se.printStackTrace();
-	   }catch(Exception e){
-	      //Handle errors for Class.forName
-	      e.printStackTrace();
-	   }finally{
-		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-	   }//end try
-			return 0;
-	}
+	
 	public int selecttall(int uid,HttpSession session) {
 		Connection conn = null;
 		  Statement stmt = null;
@@ -224,7 +174,7 @@ public class Task {
 					  String introduce = rs.getString("introduce");
 					  double progress=rs.getDouble("progress");
 					  double price=rs.getDouble("price");
-					  int accept=rs.getInt("accept");
+					
 					  java.util.Date date=rs.getDate("date");
 					  
 					  h.setDate(date);
@@ -232,7 +182,7 @@ public class Task {
 					  h.setPrice(price);
 					  h.setTaskname(taskname);
 					  h.setTid(tid);
-					  h.setAccept(accept);
+					 
 					
 					  h.setProgress(progress);
 					  alreadytask.add(h);
@@ -347,57 +297,7 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	public int updatestate(int tid) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
-			try {
-				conn = connection.getConnection();
-				 stmt = (Statement) conn.createStatement();
-			      String sql;
-			    
-			     
-			    
-		          String sql_2="UPDATE task SET state=1 WHERE id='"+tid+"' ";
-                  
-		          stmt.executeUpdate(sql_2); 
-			      int i=1;
-			      return i;
-			
-			    
-			     
-			    
-			   
-
-	  }catch(SQLException se){
-	      //Handle errors for JDBC
-	      se.printStackTrace();
-	   }catch(Exception e){
-	      //Handle errors for Class.forName
-	      e.printStackTrace();
-	   }finally{
-		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-	   }//end try
-			return 0;
-	}
+	
 	public int selectalreadytask(HttpSession session) {
 		Connection conn = null;
 		  Statement stmt = null;

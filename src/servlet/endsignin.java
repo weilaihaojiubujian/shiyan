@@ -39,6 +39,9 @@ public class endsignin extends HttpServlet {
 		if(a.updateendsignin(tid, uid)==1) {
 			response.sendRedirect(request.getContextPath()+"/updateprogress.jsp");
 		}
+		else {
+			response.sendRedirect(request.getContextPath()+"/endsignin_failure.jsp");
+		}
 	}
 
 	/**

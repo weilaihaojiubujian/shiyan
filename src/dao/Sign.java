@@ -29,13 +29,18 @@ public class Sign {
 
 				  SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 				  System.out.println(df.format(day));   
-				
+				  String sql;
+			      sql = "SELECT * FROM sign where tid='"+tid+"' and uid='"+uid+"' and stop is null and start is not null";
+			      rs = stmt.executeQuery(sql);
 			      int i=0;
-			    
-			      String sql_1="INSERT INTO sign(tid,uid,start)" +
+			      if(!rs.next())
+			      {
+			    	 String sql_1="INSERT INTO sign(tid,uid,start)" +
 			                   " VALUES ('"+tid+"', '"+uid+"','"+df.format(day)+"')";//²åÈë²Ù×÷...
-			      stmt.executeUpdate(sql_1); 
-			      i=1;
+			         stmt.executeUpdate(sql_1); 
+			         i=1;
+			      }
+			      
 			      return i;
 			  
 			    
