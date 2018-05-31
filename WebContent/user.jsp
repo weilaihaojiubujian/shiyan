@@ -13,5 +13,7 @@
 <a href="servlet/userinformation">查看用户的信息</a>
 <a href="servlet/alreadytask">查看已接受的任务</a>
 <a href="servlet/completetask">查看已完成的任务</a>
+<a href="addmoney.jsp">充值</a>
+<a href="reducemoney.jsp">提现</a>
 </body>
 </html>

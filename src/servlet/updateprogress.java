@@ -39,6 +39,7 @@ public class updateprogress extends HttpServlet {
 		
 		Alreadytask x=new Alreadytask();
 		HttpSession session = request.getSession(); 
+		double progress1=(double)session.getAttribute("progress");
 		int tid=(int)session.getAttribute("tid");
 		int uid=(int)session.getAttribute("uid");
 		if(progress==100)
@@ -46,17 +47,20 @@ public class updateprogress extends HttpServlet {
 			Completetask c=new Completetask();
 			Task t=new Task();
 			if(c.insertcompletetask( tid, uid)==1 && x.delete(tid, uid)==1 ) {
-				response.sendRedirect(request.getContextPath()+"/yonghu.jsp");
+				response.sendRedirect(request.getContextPath()+"/updateprogress_success.jsp");
 			}
 			else {
 				response.sendRedirect(request.getContextPath()+"/updateprogress_failure.jsp");
 			}
 			
 		}
+		else if(progress<=progress1) {
+			response.sendRedirect(request.getContextPath()+"/updateprogress_failure1.jsp");
+		}
 		else
 		{
 			if(x.updateprogress(progress, tid, uid)==1) {
-				response.sendRedirect(request.getContextPath()+"/user.jsp");
+				response.sendRedirect(request.getContextPath()+"/updateprogress_success.jsp");
 			}
 			else {
 				response.sendRedirect(request.getContextPath()+"/updateprogress_failure.jsp");

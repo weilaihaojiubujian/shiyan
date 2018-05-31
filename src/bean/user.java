@@ -7,6 +7,7 @@ private String address;
 private String bankaccount;
 private String card;
 private int uid;
+private double money;
 public String getUsername() {
 	return username;
 }
@@ -45,6 +46,14 @@ public String getCard() {
 }
 public void setCard(String card) {
 	this.card = card;
+}
+
+public double getMoney() {
+	return money;
+}
+
+public void setMoney(double money) {
+	this.money = money;
 }
 
 

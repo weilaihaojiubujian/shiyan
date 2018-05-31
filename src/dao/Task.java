@@ -183,7 +183,7 @@ public class Task {
 					  h.setTaskname(taskname);
 					  h.setTid(tid);
 					 
-					
+					  session.setAttribute("progress", progress);
 					  h.setProgress(progress);
 					  alreadytask.add(h);
 					  session.setAttribute("tid", tid);

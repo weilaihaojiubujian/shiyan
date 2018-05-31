@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="3;url=updateprogress.jsp">
-<title>提交任务进度失败</title>
+<meta http-equiv="refresh" content="3;url=addmoney.jsp">
+<title>充值失败</title>
 </head>
 <body>
-<h1>提交任务失败，请重新提交</h1>
+<h1>充值失败,请尝试重新充值</h1>
 </body>
 </html>

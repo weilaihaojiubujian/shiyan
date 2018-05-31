@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.task;
 import dao.Task;
+import dao.User;
 
 /**
  * Servlet implementation class releasetask
@@ -54,21 +55,31 @@ public class releasetask extends HttpServlet {
 		t.setPrice(price);
 		t.setTaskname(taskname);
 		HttpSession session = request.getSession(); 
+		double money=(double)session.getAttribute("money");
 		int uid=(int)session.getAttribute("uid");
 		Task s=new Task();
-		if(s.inserttask(t,uid,session)==0)
+		User u=new User();
+		if(money>=price)
 		{
-			session.setAttribute("taskname",taskname);
-			session.setAttribute("introduce",introduce);
-			session.setAttribute("price",price);
-			session.setAttribute("date",date);
-		
-			response.sendRedirect(request.getContextPath()+"/releasetask_success.jsp");
+			if(s.inserttask(t,uid,session)==0 &&u.updatereducemoney(uid,money-price,session)==1)
+			{
+				session.setAttribute("taskname",taskname);
+				session.setAttribute("introduce",introduce);
+				session.setAttribute("price",price);
+				session.setAttribute("date",date);
+			
+				response.sendRedirect(request.getContextPath()+"/releasetask_success.jsp");
+			}
+			else
+			{
+				response.sendRedirect(request.getContextPath()+"/releasetask_failure.jsp");
+			}
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath()+"/releasetask_failure.jsp");
+			response.sendRedirect(request.getContextPath()+"/releasetask_failure1.jsp");
 		}
+		
 		 }catch (ParseException e) {
             e.printStackTrace();
         }

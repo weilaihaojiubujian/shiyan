@@ -1,8 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,23 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.task;
-import dao.Agreement;
-import dao.Alreadytask;
-import dao.Signagreement;
-import dao.Task;
+import dao.User;
 
 /**
- * Servlet implementation class signagreement
+ * Servlet implementation class addmoney
  */
-@WebServlet("/signagreement")
-public class signagreement extends HttpServlet {
+@WebServlet("/addmoney")
+public class addmoney extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public signagreement() {
+    public addmoney() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,27 +32,20 @@ public class signagreement extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
-	   
+		String p = request.getParameter("addmoney");
+		double addmoney=Double.parseDouble(p);
 		HttpSession session = request.getSession(); 
-		int aid=(int)session.getAttribute("aid");
-		
-		int tid=(int)session.getAttribute("tid");
 		int uid=(int)session.getAttribute("uid");
-	
-		Signagreement a=new Signagreement();
-		Alreadytask k=new Alreadytask();
-		Task s=new Task();
-		if(a.insertsignagreement(uid, aid)==1  && k.insertalreadytask(tid, uid)==1) {
-			response.sendRedirect(request.getContextPath()+"/accepttask_success.jsp");
-			
+		double money=(double)session.getAttribute("money");
+		addmoney+=money;
+		User u=new User();
+		if(u.updateaddmoney(uid,addmoney,session)==1) {
+			response.sendRedirect(request.getContextPath()+"/addmoney_success.jsp");
 		}
-		 else
-		 {
-			 response.sendRedirect(request.getContextPath()+"/accepttask_failure.jsp");
-		 }
+		else {
+			response.sendRedirect(request.getContextPath()+"/addmoney_failure.jsp");
+		}
 		
-		
-	
 	}
 
 	/**

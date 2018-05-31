@@ -16,6 +16,6 @@ user u = new user();
 地址:<%=session.getAttribute("address") %><br>
 银行账户:<%=session.getAttribute("bankaccount") %><br>
 身份证号:<%=session.getAttribute("card") %><br>
-
+拥有金额:<%=session.getAttribute("money") %><br>
 </body>
 </html>

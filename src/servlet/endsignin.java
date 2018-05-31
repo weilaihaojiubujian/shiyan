@@ -37,7 +37,7 @@ public class endsignin extends HttpServlet {
 		int tid=(int)session.getAttribute("tid");
 		Sign a=new Sign();
 		if(a.updateendsignin(tid, uid)==1) {
-			response.sendRedirect(request.getContextPath()+"/updateprogress.jsp");
+			response.sendRedirect(request.getContextPath()+"/endsignin_success.jsp");
 		}
 		else {
 			response.sendRedirect(request.getContextPath()+"/endsignin_failure.jsp");

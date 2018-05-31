@@ -28,10 +28,10 @@
       </tr>
        
      </table>    
-   <div id="login_control">  
+  
            <input type="submit"  value="发布任务"  name="submit""/> 
              
-        </div>  
+    
  </table>
 </form> 
 </body>

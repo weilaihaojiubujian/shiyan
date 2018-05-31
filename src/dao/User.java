@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class User {
 			conn = connection.getConnection();
 			 stmt = (Statement) conn.createStatement();
 		      String sql;
-		      sql = "SELECT username,password,id FROM user where username='"+name+"' and password='"+pass+"'" ;
+		      sql = "SELECT username,password,id,money FROM user where username='"+name+"' and password='"+pass+"'" ;
 		      rs = stmt.executeQuery(sql);
 		    
 		   
@@ -96,9 +97,10 @@ public class User {
 		      {
 		    	  i=1;
 		    	  int uid=rs.getInt("id");
+		    	  double money=rs.getDouble("money");
 		    	  System.out.println("登陆成功");
 		    	  session.setAttribute("uid", uid);	
-			         
+		    	  session.setAttribute("money",money);   
 		          return i;
 		      }
 		      else
@@ -155,11 +157,11 @@ public class User {
 		    	  String address=rs.getString("address");
 	              String bankaccount=rs.getString("bankaccount"); 
 	              String card=rs.getString("card"); 
-	             
+	              double money=rs.getDouble("money");
 	              session.setAttribute("address",address);
 	              session.setAttribute("bankaccount",bankaccount);
 	              session.setAttribute("card",card);
-		        
+	              session.setAttribute("money",money);
 		          System.out.println("查看用户信息成功");
 		          return i;
 		      }
@@ -357,6 +359,108 @@ public class User {
 			
 			    
 			     
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int updateaddmoney(int uid,double addmoney,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			   
+			    
+				
+				
+			      int i=0;
+			      String sql_2="UPDATE user SET money='"+addmoney+"' WHERE  id='"+uid+"'  ";
+			      
+			      stmt.executeUpdate(sql_2); 
+			      session.setAttribute("money",addmoney);
+			      i=1;
+			      return i;
+			  
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int updatereducemoney(int uid,double money,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			   
+			    
+				
+				
+			      int i=0;
+			      String sql_2="UPDATE user SET money='"+money+"' WHERE  id='"+uid+"'  ";
+			      
+			      stmt.executeUpdate(sql_2); 
+			      session.setAttribute("money",money);
+			      i=1;
+			      return i;
+			  
 			    
 			   
 

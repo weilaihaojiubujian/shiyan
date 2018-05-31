@@ -21,6 +21,16 @@ function check(){
 		  alert("任务进度最大为100,请重新输入")
 		  progress.focus();
 	 }
+	  else if(value>=0 &&value<=100)
+	{
+		  
+	}
+	  else
+	{
+		  alert("只能为数字,不能有其他字符,请重新输入")
+		  progress.focus();
+	}
+	  
 	  
 }
 </script>
