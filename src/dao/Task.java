@@ -297,7 +297,75 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	
+	public int selectallcompletetask(HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			     
+			      List<task> listcompletetask=new ArrayList<task>();
+			      int j=0;
+			      sql = "SELECT task.id,task.taskname FROM task,completetask where task.id=t_id  ";
+			      rs = stmt.executeQuery(sql);
+			      
+			    
+			    	  
+				  while(rs.next()) {
+				    	  task h=new task();
+				    	  int tid=rs.getInt("id");
+				    	  String taskname =rs.getString("taskname");
+						
+				
+						  h.setTaskname(taskname);
+						  h.setTid(tid);
+						
+						  listcompletetask.add(h);
+						  j++;
+				          
+				  }
+			      session.setAttribute("listcompletetask",listcompletetask);
+			 
+			     
+			    
+			  
+			      return j;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
 	public int selectalreadytask(HttpSession session) {
 		Connection conn = null;
 		  Statement stmt = null;
@@ -403,6 +471,530 @@ public class Task {
 			      session.setAttribute("task",h);
 			      return i;
 			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilar(String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) and task.taskname like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<String> listsearchtask=new ArrayList<String>();
+				    
+			      while(rs.next()) {
+			    	  task h=new task();
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					
+					
+					
+				
+				
+					
+					  listsearchtask.add(taskname );
+					  i++;
+			          
+			      }
+			      session.setAttribute("listsearchtask", listsearchtask);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilartask(String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname,id FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) and task.taskname like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<task> listtask=new ArrayList<task>();
+				    
+			      while(rs.next()) {
+			    	  task h=new task();
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					  int tid=rs.getInt("id");
+					
+					
+				
+					  h.setTaskname(taskname);
+					  h.setTid(tid);
+				
+					
+					  listtask.add(h);
+					  i++;
+			          
+			      }
+			     
+			      session.setAttribute("listtask", listtask);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilarcomplete(int uid,String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname FROM task,completetask where task.id=t_id and u_id='"+uid+"' and task.taskname like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<String> listsearchcompletetask=new ArrayList<String>();
+				    
+			      while(rs.next()) {
+			    	  task h=new task();
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					
+					
+					
+				
+				
+					
+			    	  listsearchcompletetask.add(taskname );
+					  i++;
+			          
+			      }
+			      session.setAttribute("listsearchcompletetask", listsearchcompletetask);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectallsimilarcomplete(String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname FROM task,completetask where task.id=t_id  and task.taskname like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<String> listsearchcompletetask=new ArrayList<String>();
+				    
+			      while(rs.next()) {
+			    	  task h=new task();
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					
+					
+					
+				
+				
+					
+			    	  listsearchcompletetask.add(taskname );
+					  i++;
+			          
+			      }
+			      session.setAttribute("listsearchcompletetask", listsearchcompletetask);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilarcompletetask(int uid,String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname,task.id  FROM task,completetask where task.id=t_id and u_id='"+uid+"' and task.taskname like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<task> listcompletetask=new ArrayList<task>();
+			 	  
+				  while(rs.next()) {
+				    	  task h=new task();
+				    	  int tid=rs.getInt("id");
+				    	  String taskname =rs.getString("taskname");
+						
+				
+						  h.setTaskname(taskname);
+						  h.setTid(tid);
+						
+						  listcompletetask.add(h);
+						  i++;
+				          
+				  }
+			      session.setAttribute("listcompletetask",listcompletetask);
+			      
+			     
+			    
+			  
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectallsimilarcompletetask(String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname,task.id  FROM task,completetask where task.id=t_id  and task.taskname like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<task> listcompletetask=new ArrayList<task>();
+			 	  
+				  while(rs.next()) {
+				    	  task h=new task();
+				    	  int tid=rs.getInt("id");
+				    	  String taskname =rs.getString("taskname");
+						
+				
+						  h.setTaskname(taskname);
+						  h.setTid(tid);
+						
+						  listcompletetask.add(h);
+						  i++;
+				          
+				  }
+			      session.setAttribute("listcompletetask",listcompletetask);
+			      
+			     
+			    
+			  
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilaralready(String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname FROM task,alreadytask where task.id=t_id  and task.taskname like '%"+keyword+"%'  ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<String> listsearchalready=new ArrayList<String>();
+				    
+			      while(rs.next()) {
+			    	  task h=new task();
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					
+					
+					
+				
+				
+					
+			    	  listsearchalready.add(taskname );
+					  i++;
+			          
+			      }
+			      session.setAttribute("listsearchalready", listsearchalready);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilaralreadytask(String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname,task.id FROM task,alreadytask where task.id=t_id  and task.taskname like '%"+keyword+"%' ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+                   List<task> listalreadytask=new ArrayList<task>();
+			 	  
+				  while(rs.next()) {
+				    	  task h=new task();
+				    	  int tid=rs.getInt("id");
+				    	  String taskname =rs.getString("taskname");
+						
+				
+						  h.setTaskname(taskname);
+						  h.setTid(tid);
+						
+						  listalreadytask.add(h);
+						  i++;
+				          
+				  }
+			      session.setAttribute("listalreadytask",listalreadytask);
+			    return i;
 			   
 
 	  }catch(SQLException se){

@@ -493,4 +493,137 @@ public class User {
 	   }//end try
 			return 0;
 	}
+	public int selectsimilar(String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT username FROM user where username like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<String> listsearchuser=new ArrayList<String>();
+				    
+			      while(rs.next()) {
+			    	  user u = new user();
+			    	  
+			    	  String username=rs.getString("username");
+					
+					
+					
+					
+					
+				
+				
+					
+			    	  listsearchuser.add(username);
+					  i++;
+			          
+			      }
+			      session.setAttribute("listsearchuser", listsearchuser);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilaruser(String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT * FROM user where username like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			    
+			      List<user> listalluser=new ArrayList<user>();
+			      int i=0;	
+			      while(rs.next()) {
+			    	  user u = new user();
+			    	  int uid=rs.getInt("id");
+			    	  String username=rs.getString("username");
+			    	  String address=rs.getString("address");
+		              String bankaccount=rs.getString("bankaccount"); 
+		              String card=rs.getString("card"); 
+		              u.setAddress(address);
+		              u.setBankaccount(bankaccount);
+		              u.setCard(card);
+		              u.setUsername(username);
+		              u.setUid(uid);
+		          
+			        
+		              listalluser.add(u);
+		              i++;
+			      }
+			   
+			      session.setAttribute("listalluser",listalluser);
+			      return i;
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
   }

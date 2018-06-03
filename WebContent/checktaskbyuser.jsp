@@ -7,6 +7,74 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查看未接受的任务情况</title>
+<script src="jquery-3.3.1.min.js"></script>
+    <script>  
+    function getMoreContents() {
+    	  //s首先获取用户的输入
+    	  var $content = document.getElementById("keyword");
+    	  var $value=document.getElementById("keyword").value;
+    	  if ($value==""){
+    	      clearContent();
+    	      return;
+    	  }
+    	  
+
+      	$.ajax({
+      		url:"servlet/search",
+              data:{keyword:$value},
+              type:"POST",
+              dataType:"TEXT",
+              success:function(data){
+            	  var json=eval("("+data+")");
+            	 
+            	  clearContent();
+            	  var size = json.length;
+            	  //设置内容
+            	  for(var i=0;i<size;i++){
+            	      var nextNode = json[i];
+            	      var tr = document.createElement("tr");
+            	      var td = document.createElement("td");
+            	      td.setAttribute("border","0");
+            	      td.setAttribute("bgcolor","#FFFAFA");
+            	      td.onmouseover=function () {
+            	          this.className = 'mouseOver';
+            	      };
+            	      td.onmouseout=function () {
+            	          this.className = 'mouseOut';
+            	      };
+            	      td.onmousedown= function(){
+            	    	  var content = document.getElementById("keyword");
+            	    	  var _html = this.innerHTML;
+            	    	  content.value = _html;
+            	    	  }
+            	      var text = document.createTextNode(nextNode);
+            	      td.appendChild(text);
+            	      tr.appendChild(td);
+            	      document.getElementById("content_table_body").appendChild(tr);
+              }
+             
+              }
+      	
+      	
+      	
+      	});
+    	  
+    }
+      	
+    
+    function clearContent() {
+    	  var contentTableBody = document.getElementById("content_table_body");
+    	  var size = contentTableBody.childNodes.length;
+    	  for(var i=size-1;i>=0;i--){
+    	      contentTableBody.removeChild(contentTableBody.childNodes[i]);
+    	  }
+
+    	}
+    	//输入框失去焦点 清空
+    	function keywordBlur() {
+    	  clearContent();
+    	}
+    </script>
 </head>
 <body>
 <%
@@ -37,7 +105,21 @@ List<task> q=null;
   showPage=pageCount;
  }
 %>
+<form action="servlet/searchtask" method="post">
+<input type="text" size="50" id="keyword" name="keyword" onkeyup="getMoreContents()"
+     onblur="keywordBlur()" onfocus="getMoreContents()"/>
+     <input type="submit"  value="查找"  name="submit" width="50px"/> 
+     <%--内容展示区域--%>
+     <div id="popdiv">
+       <table id="content_table" bgcolor="#FFFAFA" border="0" cellspacing="0" cellpadding="0">
+         <tbody id="content_table_body">
+         <%--动态查询出来的数据,显示在此--%>
 
+         </tbody>
+       </table>
+
+     </div>
+</form>
 <%  for(int i = (showPage-1)*pageSize; i <showPage*pageSize && i<size ; i++)
  {
 	task t = (task) q.get(i);

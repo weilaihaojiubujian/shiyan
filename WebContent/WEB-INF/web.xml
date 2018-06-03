@@ -229,7 +229,7 @@
     <servlet-name>addmoney</servlet-name>
     <url-pattern>/servlet/addmoney</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>reducemoney</servlet-name>
@@ -238,5 +238,95 @@
   <servlet-mapping>
     <servlet-name>reducemoney</servlet-name>
     <url-pattern>/servlet/reducemoney</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>search</servlet-name>
+    <servlet-class>servlet.search</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/servlet/search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchtask</servlet-name>
+    <servlet-class>servlet.searchtask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchtask</servlet-name>
+    <url-pattern>/servlet/searchtask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchcomplete</servlet-name>
+    <servlet-class>servlet.searchcomplete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchcomplete</servlet-name>
+    <url-pattern>/servlet/searchcomplete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchcompletetask</servlet-name>
+    <servlet-class>servlet.searchcompletetask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchcompletetask</servlet-name>
+    <url-pattern>/servlet/searchcompletetask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchalluser</servlet-name>
+    <servlet-class>servlet.searchalluser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchalluser</servlet-name>
+    <url-pattern>/servlet/searchalluser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchuser</servlet-name>
+    <servlet-class>servlet.searchuser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchuser</servlet-name>
+    <url-pattern>/servlet/searchuser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkcompletetaskbyuser</servlet-name>
+    <servlet-class>servlet.checkcompletetaskbyuser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkcompletetaskbyuser</servlet-name>
+    <url-pattern>/servlet/checkcompletetaskbyuser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchalready</servlet-name>
+    <servlet-class>servlet.searchalready</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchalready</servlet-name>
+    <url-pattern>/servlet/searchalready</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchalreadytask</servlet-name>
+    <servlet-class>servlet.searchalreadytask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchalreadytask</servlet-name>
+    <url-pattern>/servlet/searchalreadytask</url-pattern>
   </servlet-mapping>
 </web-app>

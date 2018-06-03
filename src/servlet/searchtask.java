@@ -8,21 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.Administrator;
-import dao.User;
-import bean.user;
+import bean.task;
+import dao.Task;
 
 /**
- * Servlet implementation class denlu
+ * Servlet implementation class searchtask
  */
-@WebServlet("/denlu")
-public class denlu extends HttpServlet {
+@WebServlet("/searchtask")
+public class searchtask extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public denlu() {
+    public searchtask() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,40 +33,40 @@ public class denlu extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
-		user u = new user();
-		String user = request.getParameter("user");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		u.setUsername(username);
-		u.setPassword(password);
-		HttpSession session = request.getSession(); 
+		task t=new task();
+		String keyword=request.getParameter("keyword");
+        HttpSession session = request.getSession(); 
+        String username=null;
+	     username=(String) session.getAttribute("username");
+	     int uid=0;
+	     if(username!=null) {
+	        	
+	    		uid=(int)session.getAttribute("uid");
+	        }
+        System.out.println(keyword);
+		Task s=new Task();
 		
-		User h=new User();
-		if(user.equals("”√ªß")) {
-			if(h.selectusername(u.getUsername(),u.getPassword(),session)==1)
-			{
-				session.setAttribute("username",username);
-				session.setAttribute("password",password);
-				response.sendRedirect(request.getContextPath()+"/denlu_success.jsp");
+		if(s.selectsimilartask(keyword,session)!=0)
+		{
+		    
+			if(uid!=0) {
+				response.sendRedirect(request.getContextPath()+"/task.jsp");
 			}
 			else
 			{
-				response.sendRedirect(request.getContextPath()+"/denlu_failure.jsp");
+				response.sendRedirect(request.getContextPath()+"/checktaskbyuser.jsp");
 			}
+			
 		}
 		else
 		{
-			Administrator a=new Administrator();
-			if(a.selectusername(u.getUsername(),u.getPassword(),session)==1)
-			{
 			
-				session.setAttribute("ausername",username);
-				session.setAttribute("apassword",password);
-				response.sendRedirect(request.getContextPath()+"/administratordenlu_success.jsp");
+			if(uid!=0) {
+				response.sendRedirect(request.getContextPath()+"/task_failure.jsp");
 			}
 			else
 			{
-				response.sendRedirect(request.getContextPath()+"/denlu_failure.jsp");
+				response.sendRedirect(request.getContextPath()+"/checktaskbyuser_failure.jsp");
 			}
 			
 		}

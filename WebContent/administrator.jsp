@@ -11,6 +11,6 @@
 <a href="servlet/checkalluser">删除用户</a>
 <a href="servlet/checkalreadytaskbyuser">查看已被人接受的任务</a>
 <a href="servlet/checktaskbyuser">查看未接受的任务</a>
-
+<a href="servlet/checkcompletetaskbyuser">查看已完成的任务</a>
 </body>
 </html>

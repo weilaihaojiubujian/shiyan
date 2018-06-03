@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@page import="bean.task"%>
+         <%@page import="bean.task"%>
  <%@page import="java.util.*"%>
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>任务情况</title>
+<title>Insert title here</title>
 <script src="jquery-3.3.1.min.js"></script>
     <script>  
     function getMoreContents() {
@@ -21,7 +20,7 @@
     	  
 
       	$.ajax({
-      		url:"servlet/search",
+      		url:"servlet/searchcomplete",
               data:{keyword:$value},
               type:"POST",
               dataType:"TEXT",
@@ -83,7 +82,7 @@ int pageSize=4;
 int pageCount;
 int showPage;
 List<task> q=null;
- q=(List<task>)session.getAttribute("listtask");
+ q=(List<task>)session.getAttribute("listcompletetask");
  int size=q.size();
 
  pageCount=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
@@ -106,7 +105,8 @@ List<task> q=null;
   showPage=pageCount;
  }
 %>
-<form action="servlet/searchtask" method="post">
+
+<form action="servlet/searchcompletetask" method="post">
 <input type="text" size="50" id="keyword" name="keyword" onkeyup="getMoreContents()"
      onblur="keywordBlur()" onfocus="getMoreContents()"/>
      <input type="submit"  value="查找"  name="submit" width="50px"/> 
@@ -121,36 +121,35 @@ List<task> q=null;
 
      </div>
 </form>
-<form action="servlet/checktask" method="post">
 <%  for(int i = (showPage-1)*pageSize; i <showPage*pageSize && i<size ; i++)
  {
 	task t = (task) q.get(i);
 	 int tid=t.getTid();
 	 String taskname =t.getTaskname();
-	
+
 	  
- %>
-<input type="radio" value="<%= t%>" name="list"/><% out.println("序号:"+(i+1)+"<br>");
-%><a href="servlet/checktaskinformation?lis=<%=t%>" ><% out.println("任务名:"+taskname+"<br><br><br>");
+ 
+out.println("序号:"+(i+1)+"<br>");%>
+<a href="servlet/checkcompletetaskinformation?list=<%=t%>" ><% out.println("任务名:"+taskname+"<br><br><br>");
 %></a>
+<% 
+} %>
 
-<%} %>
 
-<input type="submit"  value="接受任务"  name="submit"/> 
-</form>
+
 <br>
  第<%=showPage %>页（共<%=pageCount %>页）
  <br>
- <a href="task.jsp?showPage=1">首页</a>
- <a href="task.jsp?showPage=<%=showPage-1%>">上一页</a>
+ <a href="checkcompletetaskbyuser.jsp?showPage=1">首页</a>
+ <a href="checkcompletetaskbyuser.jsp?showPage=<%=showPage-1%>">上一页</a>
 <% //根据pageCount的值显示每一页的数字并附加上相应的超链接
   for(int i=1;i<=pageCount;i++){
  %>
-   <a href="task.jsp?showPage=<%=i%>"><%=i%></a>
+   <a href="checkcompletetaskbyuser.jsp?showPage=<%=i%>"><%=i%></a>
 <% }
  %> 
- <a href="task.jsp?showPage=<%=showPage+1%>">下一页</a>
- <a href="task.jsp?showPage=<%=pageCount%>">末页</a>
+ <a href="checkcompletetaskbyuser.jsp?showPage=<%=showPage+1%>">下一页</a>
+ <a href="checkcompletetaskbyuser.jsp?showPage=<%=pageCount%>">末页</a>
  <form action="" method="get">
   跳转到第<input type="text" name="showPage" size="4">页
   <input type="submit" name="submit" value="跳转">
