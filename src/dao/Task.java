@@ -297,6 +297,75 @@ public class Task {
 	   }//end try
 			return 0;
 	}
+	public int selectreleasetask(int uid,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			     
+			      List<task> listreleasetask=new ArrayList<task>();
+			      int j=0;
+			      sql = "SELECT id,taskname FROM task where  releaseid='"+uid+"' ";
+			      rs = stmt.executeQuery(sql);
+			      
+			    
+			    	  
+				  while(rs.next()) {
+				    	  task h=new task();
+				    	  int tid=rs.getInt("id");
+				    	  String taskname =rs.getString("taskname");
+						
+				
+						  h.setTaskname(taskname);
+						  h.setTid(tid);
+						
+						  listreleasetask.add(h);
+						  j++;
+				          
+				  }
+			      session.setAttribute("listreleasetask",listreleasetask);
+			 
+			     
+			    
+			  
+			      return j;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
 	public int selectallcompletetask(HttpSession session) {
 		Connection conn = null;
 		  Statement stmt = null;
@@ -443,7 +512,7 @@ public class Task {
 			    
 				  
 			    
-			      sql = "SELECT * FROM task where id='"+tid+"'  ";
+			      sql = "SELECT * FROM task where id='"+tid+"' ";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
 			     
@@ -452,7 +521,7 @@ public class Task {
 			    	
 			    	  String taskname =rs.getString("taskname");
 					  String introduce = rs.getString("introduce");
-					
+					 
 					 
 					  double price=rs.getDouble("price");
 				
@@ -466,8 +535,9 @@ public class Task {
 					
 					
 					  i++;
-			          
+					
 			      }
+			      
 			      session.setAttribute("task",h);
 			      return i;
 			    
@@ -534,6 +604,139 @@ public class Task {
 			          
 			      }
 			      session.setAttribute("listsearchtask", listsearchtask);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilarrelease(int uid,String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname FROM task where releaseid='"+uid+"' and taskname like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<String> listsearchreleasetask=new ArrayList<String>();
+				    
+			      while(rs.next()) {
+			    	  task h=new task();
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					
+					
+					
+				
+				
+					
+			    	  listsearchreleasetask.add(taskname );
+					  i++;
+			          
+			      }
+			      session.setAttribute("listsearchreleasetask", listsearchreleasetask);
+			      return i;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			// 释放语句对象
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return 0;
+	}
+	public int selectsimilarreleasetask(int uid,String keyword,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			    
+				  
+			    
+			      sql = "SELECT taskname,id FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'    ";
+			      rs = stmt.executeQuery(sql);
+			      int i=0;
+			      List<task> listreleasetask=new ArrayList<task>();
+				    
+			      while(rs.next()) {
+			    	  task h=new task();
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					  int tid=rs.getInt("id");
+					
+					
+				
+					  h.setTaskname(taskname);
+					  h.setTid(tid);
+				
+					
+					  listreleasetask.add(h);
+					  i++;
+			          
+			      }
+			     
+			      session.setAttribute("listreleasetask", listreleasetask);
 			      return i;
 			    
 			   

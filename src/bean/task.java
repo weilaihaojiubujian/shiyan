@@ -56,5 +56,6 @@ public double getProgress() {
 public void setProgress(double progress) {
 	this.progress = progress;
 }
+
    
 }

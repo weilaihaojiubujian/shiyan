@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="3;url=deleteuser.jsp">
+<meta http-equiv="refresh" content="3;url=servlet/checkalluser">
 <title>删除用户成功</title>
 </head>
 <body>

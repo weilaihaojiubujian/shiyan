@@ -97,6 +97,29 @@ form p > * {
     padding: 0 28px;  
 }  
 </style>
+<script>
+    var a='<%=request.getParameter("b")%>'
+    if(a==1){
+        alert("登陆成功!"+a);
+        window.location.href=("user.jsp");
+    }
+    else if(a==2)
+    {
+    	 alert("请重新登陆!");
+    }
+    else if(a==3)
+    {
+    	 alert("管理员登陆成功!");
+    	 window.location.href=("administrator.jsp");
+    }
+    else if(a==4)
+    {
+    	 alert("管理员请重新登陆!");
+    }
+    
+    
+</script>
+
 </head>
 
 

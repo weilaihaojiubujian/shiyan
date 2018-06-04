@@ -319,7 +319,7 @@
     <servlet-name>searchalready</servlet-name>
     <url-pattern>/servlet/searchalready</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>searchalreadytask</servlet-name>
@@ -328,5 +328,105 @@
   <servlet-mapping>
     <servlet-name>searchalreadytask</servlet-name>
     <url-pattern>/servlet/searchalreadytask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>agreement</servlet-name>
+    <servlet-class>servlet.agreement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>agreement</servlet-name>
+    <url-pattern>/servlet/agreement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkagreementinformation</servlet-name>
+    <servlet-class>servlet.checkagreementinformation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkagreementinformation</servlet-name>
+    <url-pattern>/servlet/checkagreementinformation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkagreement</servlet-name>
+    <servlet-class>servlet.checkagreement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkagreement</servlet-name>
+    <url-pattern>/servlet/checkagreement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchallagreement</servlet-name>
+    <servlet-class>servlet.searchallagreement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchallagreement</servlet-name>
+    <url-pattern>/servlet/searchallagreement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchagreement</servlet-name>
+    <servlet-class>servlet.searchagreement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchagreement</servlet-name>
+    <url-pattern>/servlet/searchagreement</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkagreementbytid</servlet-name>
+    <servlet-class>servlet.checkagreementbytid</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkagreementbytid</servlet-name>
+    <url-pattern>/servlet/checkagreementbytid</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkreleasetask</servlet-name>
+    <servlet-class>servlet.checkreleasetask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkreleasetask</servlet-name>
+    <url-pattern>/servlet/checkreleasetask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchrelease</servlet-name>
+    <servlet-class>servlet.searchrelease</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchrelease</servlet-name>
+    <url-pattern>/servlet/searchrelease</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchreleasetask</servlet-name>
+    <servlet-class>servlet.searchreleasetask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchreleasetask</servlet-name>
+    <url-pattern>/servlet/searchreleasetask</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>checkreleasetaskinformation</servlet-name>
+    <servlet-class>servlet.checkreleasetaskinformation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkreleasetaskinformation</servlet-name>
+    <url-pattern>/servlet/checkreleasetaskinformation</url-pattern>
   </servlet-mapping>
 </web-app>
