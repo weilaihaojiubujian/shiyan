@@ -42,27 +42,19 @@ public class checkagreementinformation extends HttpServlet {
 		System.out.println(list);
 		
         if(!list.equals(1)) {
-    		List<agreement> q=null;
-    		Agreement s=new Agreement();
-    		q=(List<agreement>)session.getAttribute("listagreement");
-    		 for(agreement t:q)
-    		 {
-    			 String h=t.toString();
-    			 if(h.equals(list)) {
-    				
-    				 int aid=t.getAid();
-    				 System.out.println(aid);
-    				
+        	int aid= Integer.parseInt(list);
+    		System.out.println(aid);
+    		Agreement s=new Agreement();		
     			
     	
-    				 if(s.selectagreementintroduce(aid, session)==1)
+    		if(s.selectagreementintroduce(aid, session)==1)
     				 {
     					 
     					 response.sendRedirect(request.getContextPath()+"/agreementinformation.jsp");
-    				 }
+    				}
     				
-    			 }
-    		 }
+    		
+    		 
         }
         else
         {

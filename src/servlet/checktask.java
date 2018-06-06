@@ -40,36 +40,26 @@ public class checktask extends HttpServlet {
 		String list = request.getParameter("list");
 		HttpSession session = request.getSession(); 
 		System.out.println(list);
-		task n=new task();
-		List<task> q=null;
-		Task s=new Task();
-		q=(List<task>)session.getAttribute("listtask");
-		 for(task t:q)
-		 {
-			 String h=t.toString();
-			 if(h.equals(list)) {
-				 int tid=t.getTid();
-				 if(tid!=0)
-				 {
-					 session.setAttribute("tid", tid);
-				 }
+		int tid= Integer.parseInt(list);
+		System.out.println(tid);
+	
 				
 				
 			
-				 int uid=(int)session.getAttribute("uid");
+		int uid=(int)session.getAttribute("uid");
 			
-				 Alreadytask k=new Alreadytask();
-				 Agreement a=new Agreement();
-				 if(k.selectall(uid)==1 && a.selectagreement(tid, session)==1)
+		Alreadytask k=new Alreadytask();
+		Agreement a=new Agreement();
+		if(k.selectall(uid)==1 && a.selectagreement(tid, session)==1)
 				 {
 					 response.sendRedirect(request.getContextPath()+"/signagreement.jsp");
 				 }
-				 else
+		else
 				 {
 					 response.sendRedirect(request.getContextPath()+"/accepttask_failure.jsp");
 				 }
-			 }
-		 }
+			 
+		 
 	}
 
 	/**

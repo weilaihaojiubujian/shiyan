@@ -39,21 +39,16 @@ public class deleteuser extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String list = request.getParameter("list");
 		HttpSession session = request.getSession(); 
-		List<user> q=null;
-	   q=(List<user>)session.getAttribute("listalluser");
-	   for(user t:q)
-		 {
-			 String h=t.toString();
-			 if(h.equals(list)) {
-				 int uid=t.getUid();
-				 User k=new User();
-				 if(k.deleteuser(uid)==1)
+		int uid= Integer.parseInt(list);
+		System.out.println(uid);
+		User k=new User();
+		if(k.deleteuser(uid)==1)
 				 {
 					 response.sendRedirect(request.getContextPath()+"/deleteuser_success.jsp");
 				 }
 			
-			 }
-		 }
+			 
+		
 	}
 
 	/**

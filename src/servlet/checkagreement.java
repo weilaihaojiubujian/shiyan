@@ -42,38 +42,27 @@ public class checkagreement extends HttpServlet {
 		String list = request.getParameter("list");
 		HttpSession session = request.getSession(); 
 		System.out.println(list);
-		agreement n=new agreement();
-		List<agreement> q=null;
-		Agreement s=new Agreement();
-		q=(List<agreement>)session.getAttribute("listagreement");
-		 for(agreement t:q)
-		 {
-			 String h=t.toString();
-			 if(h.equals(list)) {
-
-				  int aid=t.getAid();
-				  System.out.println(aid);
+		int aid= Integer.parseInt(list);
+		System.out.println(aid);
 				
 				
-					int tid=(int)session.getAttribute("tid");
-					int uid=(int)session.getAttribute("uid");
+		int tid=(int)session.getAttribute("tid");
+		int uid=(int)session.getAttribute("uid");
 				
 				
-					Agreement w=new Agreement();
-					if(w.insertsameagreement(aid,tid,session)==1)
+		Agreement w=new Agreement();
+		if(w.insertsameagreement(aid,tid,session)==1)
 					{
 						
 				
 					
 						response.sendRedirect(request.getContextPath()+"/releaseagreement_success.jsp");
 					}
-					else
+		else
 					{
 						response.sendRedirect(request.getContextPath()+"/releaseagreement_failure.jsp");
 					}
-					
-			 }
-		 }
+	
 	}
 
 	/**

@@ -133,7 +133,7 @@ List<user> q=null;
 	 String card = u.getCard();
 	 %>	
 
-<input type="radio" value="<%= u%>" name="list"/>	  
+<input type="radio" value="<%= uid%>" name="list"/>	  
  <% 
 out.println("序号:"+uid+"<br>");
 out.println("用户名:"+username+"<br>");

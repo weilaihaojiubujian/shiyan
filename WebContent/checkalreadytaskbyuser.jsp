@@ -129,7 +129,7 @@ List<task> q=null;
  %>
 
 <% out.println("序号:"+(i+1)+"<br>");
-%><a href="servlet/checkalreadytaskinformation?list=<%=t%>" ><% out.println("任务名:"+taskname+"<br><br><br>");
+%><a href="servlet/checkalreadytaskinformation?list=<%=tid%>" ><% out.println("任务名:"+taskname+"<br><br><br>");
 %></a>
 <%} %>
 

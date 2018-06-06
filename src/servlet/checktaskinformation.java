@@ -39,30 +39,21 @@ public class checktaskinformation extends HttpServlet {
 		String list = request.getParameter("lis");
 		HttpSession session = request.getSession(); 
 		System.out.println(list);
-		task n=new task();
-		List<task> q=null;
+		
 		Task s=new Task();
-		q=(List<task>)session.getAttribute("listtask");
-		 for(task t:q)
-		 {
-			 String h=t.toString();
-			 if(h.equals(list)) {
-				 int tid=t.getTid();
-				 if(tid!=0)
-				 {
-					 session.setAttribute("tid", tid);
-				 }
+		int tid= Integer.parseInt(list);
+		System.out.println(tid);
 				
 				
 			
 	
-				 if(s.selecttid(tid, session)==1)
+		if(s.selecttid(tid, session)==1)
 				 {
 					 response.sendRedirect(request.getContextPath()+"/taskinformation.jsp");
 				 }
 				
-			 }
-		 }
+			 
+		 
 	}
 
 	/**

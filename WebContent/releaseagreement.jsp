@@ -130,8 +130,8 @@ List<agreement> q=null;
 	
 	  
  %>
-<input type="radio" value="<%= t%>" name="list"/><% out.println("序号:"+(i+1)+"<br>");
-%><a href="servlet/checkagreementinformation?lis=<%=t%>" ><% out.println("合同名:"+agreementname+"<br><br><br>");
+<input type="radio" value="<%= aid%>" name="list"/><% out.println("序号:"+(i+1)+"<br>");
+%><a href="servlet/checkagreementinformation?lis=<%=aid%>" ><% out.println("合同名:"+agreementname+"<br><br><br>");
 %></a>
 
 <%} %>

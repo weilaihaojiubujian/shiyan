@@ -130,8 +130,8 @@ List<task> q=null;
 	
 	  
  %>
-<input type="radio" value="<%= t%>" name="list"/><% out.println("序号:"+(i+1)+"<br>");
-%><a href="servlet/checktaskinformation?lis=<%=t%>" ><% out.println("任务名:"+taskname+"<br><br><br>");
+<input type="radio" value="<%= tid%>" name="list"/><% out.println("序号:"+(i+1)+"<br>");
+%><a href="servlet/checktaskinformation?lis=<%=tid%>" ><% out.println("任务名:"+taskname+"<br><br><br>");
 %></a>
 
 <%} %>
