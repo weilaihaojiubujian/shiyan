@@ -42,12 +42,11 @@ public class search extends HttpServlet {
          HttpSession session = request.getSession(); 
  		
  		Task s=new Task();
- 		if(s.selectsimilar(keyword,session)!=0)
- 		{
- 			List<String> listsearchtask=(List<String>) session.getAttribute("listsearchtask");
- 			System.out.println(listsearchtask);
- 			response.getWriter().write(JSONArray.fromObject(listsearchtask).toString());
- 		}
+ 		
+ 		List<String> listsearchtask=(List<String>) s.selectsimilar(keyword,session);
+ 		System.out.println(listsearchtask);
+ 		response.getWriter().write(JSONArray.fromObject(listsearchtask).toString());
+ 		
  	
 	}
 

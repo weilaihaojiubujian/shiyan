@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.task;
 import dao.Task;
+import net.sf.json.JSONArray;
 
 /**
  * Servlet implementation class viewtask
@@ -31,23 +34,22 @@ public class viewtask extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setCharacterEncoding("UTF-8");
+		
+		request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
 		task t=new task();
-		
+		String keyword=request.getParameter("key");
         HttpSession session = request.getSession(); 
-		
+ 		int k=Integer.parseInt(keyword);
+ 		System.out.println(k);
 		Task s=new Task();
-		if(s.selectaccept(session)!=0)
-		{
-		    
-			response.sendRedirect(request.getContextPath()+"/task.jsp");
-		}
-		else
-		{
-			
-			response.sendRedirect(request.getContextPath()+"/task_failure.jsp");
-		}
+		
+		
+		System.out.println("success");
+		List<String> listtask=(List<String>)s.selectaccept1(k,session);
+		System.out.println(listtask);
+		response.getWriter().write(JSONArray.fromObject(listtask).toString());
+		
 		
 		
 	}

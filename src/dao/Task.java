@@ -150,7 +150,80 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	
+	public List<String> selectaccept1(int k,HttpSession session) {
+		Connection conn = null;
+		  Statement stmt = null;
+		  ResultSet rs=null;
+			try {
+				conn = connection.getConnection();
+				 stmt = (Statement) conn.createStatement();
+			      String sql;
+			      int x=(k-1)*4;
+				 int y=4;
+			    
+			      sql = "SELECT taskname,task.id FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) limit "+x+",4 ";
+			      rs = stmt.executeQuery(sql);
+			      
+			      int i=0;
+			      List<String> listtask=new ArrayList<String>();
+			    
+			      while(rs.next()) {
+			    	
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					  int tid=rs.getInt("id");
+					  String t=String.valueOf(tid);
+					
+				
+					
+					
+					  listtask.add(t);
+					  listtask.add(taskname);
+					  i++;
+			          
+			      }
+			      String sql_1 = "SELECT COUNT(*) FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) ";
+			      rs = stmt.executeQuery(sql_1);
+			      rs.next();
+			      int size=rs.getInt("COUNT(*)");
+			      System.out.println(size);
+			      int pageSize=4;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      session.setAttribute("max", max);
+			      return listtask;
+			    
+			   
+
+	  }catch(SQLException se){
+	      //Handle errors for JDBC
+	      se.printStackTrace();
+	   }catch(Exception e){
+	      //Handle errors for Class.forName
+	      e.printStackTrace();
+	   }finally{
+		   
+	      //finally block used to close resources
+		   if (rs!= null) {
+				try {
+					rs.close();
+					rs= null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+			//  Õ∑≈”Ôæ‰∂‘œÛ
+			if (stmt != null) {
+				try {
+					stmt.close();
+					stmt = null;
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+	   }//end try
+			return null;
+	}
 	
 	public int selecttall(int uid,HttpSession session) {
 		Connection conn = null;
@@ -572,7 +645,7 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	public int selectsimilar(String keyword,HttpSession session) {
+	public List<String> selectsimilar(String keyword,HttpSession session) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -603,8 +676,8 @@ public class Task {
 					  i++;
 			          
 			      }
-			      session.setAttribute("listsearchtask", listsearchtask);
-			      return i;
+			      
+			      return listsearchtask;
 			    
 			   
 
@@ -635,7 +708,7 @@ public class Task {
 				}
 			}
 	   }//end try
-			return 0;
+			return null;
 	}
 	public int selectsimilarrelease(int uid,String keyword,HttpSession session) {
 		Connection conn = null;
