@@ -10,6 +10,7 @@
 <title>任务情况</title>
 <script src="jquery-3.3.1.min.js"></script>
     <script>  
+    var k;
     function getMoreContents() {
     	  //s首先获取用户的输入
     	  var $content = document.getElementById("keyword");
@@ -61,6 +62,19 @@
       	});
     	  
     }
+    function call($value) {
+  	
+
+    	if(document.getElementById("14").value==null)
+    	{
+    		
+    		init($value);
+    	}
+    	else{
+    		init1($value);
+    	}
+  	}
+    
    
     function init($value) {
     	clear();
@@ -76,18 +90,18 @@
             	 
             	  var size = json.length;
             	 
-            	  
+            	  k=json[0];
             	  $("#9").hide();
             	  $("#10").hide();
             	  $("#11").hide();
             	  $("#12").hide();
-            	  for(var i=0;i<size;i=i+2){
+            	  for(var i=1;i<size;i=i+2){
             	      var nextNode = json[i];
             	      var lastNode=json[i+1];
             	     
-            	      var x=i+1;
-            	      var y=i+2;
-            	      var z=9+i/2;
+            	      var x=i;
+            	      var y=i+1;
+            	      var z=9+(i-1)/2;
             	      document.getElementById("0").innerHTML=$value;
             	      document.getElementById(""+x+"").innerHTML=nextNode;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
@@ -104,18 +118,77 @@
       	});
     	
     }
-   
+    function init1($value) {
+    	clear();
+    	document.getElementById("14").value=$value;
+    	var $valu=document.getElementById("keyword").value;
+      	$.ajax({
+      		  url:"servlet/searchtask",
+              data:{key:$value,keyvalue:$valu},
+              type:"POST",
+              dataType:"TEXT",
+              success:function(data){
+            	  var json=eval("("+data+")");
+          
+            	 
+            	  var size = json.length;
+            	 
+            	  k=json[0];
+            	  $("#9").hide();
+            	  $("#10").hide();
+            	  $("#11").hide();
+            	  $("#12").hide();
+            	  for(var i=1;i<size;i=i+2){
+            	      var nextNode = json[i];
+            	      var lastNode=json[i+1];
+            	     
+            	      var x=i;
+            	      var y=i+1;
+            	      var z=9+(i-1)/2;
+            	      document.getElementById("0").innerHTML=$value;
+            	      document.getElementById(""+x+"").innerHTML=nextNode;
+            	      document.getElementById(""+y+"").innerHTML=lastNode;
+            	      document.getElementById(""+y+"").href="servlet/checktaskinformation?lis="+nextNode+"";
+            	      document.getElementById(""+z+"").value=nextNode;
+            	      $("#"+""+z+"").show();
+            	     
+              }
+             
+              }
+      	
+      	
+      	
+      	});
+    	
+    }
     function getnum(){
     	var x=document.getElementById("0").innerHTML;
     	var j=1;
-    	if(x==document.getElementById("13").value){
+    	if(x==k){
     		alert("已经是最后一页了");
     		var y=Number(x);
     		return y;
     	}
     	else{
     		var y=Number(j)+Number(x);
-        	alert(y);
+        
+        	return y;
+    	}
+    	
+    	
+    	
+    }
+    function getnum1(){
+    	var x=document.getElementById("0").innerHTML;
+    	var j=1;
+    	if(x==1){
+    		alert("已经第一页了");
+    		var y=Number(x);
+    		return y;
+    	}
+    	else{
+    		var y=Number(x)-Number(j);
+        	
         	return y;
     	}
     	
@@ -141,14 +214,17 @@
     	function keywordBlur() {
     	  clearContent();
     	}
+    	function p(){
+    		call(k);
+    	}
     </script>
 </head>
-<body onload="init(1)">
+<body onload="call(1)">
 
-<form action="servlet/searchtask" method="post">
+
 <input type="text" size="50" id="keyword" name="keyword" onkeyup="getMoreContents()"
      onblur="keywordBlur()" onfocus="getMoreContents()"/>
-     <input type="submit"  value="查找"  name="submit" width="50px"/> 
+     <input type="submit"  value="查找"  name="submit" width="50px" onclick="init1(1)"/> 
      <%--内容展示区域--%>
      <div id="popdiv">
        <table id="content_table" bgcolor="#FFFAFA" border="0" cellspacing="0" cellpadding="0">
@@ -159,7 +235,7 @@
        </table>
 
      </div>
-</form>
+
 <br><br><br>
 <form action="servlet/checktask" method="post">
 
@@ -171,9 +247,11 @@
 </form>
 <br>
 <a id="0"></a><br>
-<button type="button" onclick="init(1)">首页</button>
-<button type="button" onclick="init(2)">2</button>
-<button type="button" onclick="init(getnum())" >下一页</button><br>
-<button type="button" onclick="init(<%=session.getAttribute("max") %>)" id="13" value="<%=session.getAttribute("max") %>">尾页</button><br>
+<button type="button" onclick="call(1)">首页</button>
+<button type="button" onclick="call(getnum1())" >上一页</button>
+<button type="button" onclick="call(getnum())" >下一页</button>
+<button type="button" onclick="p()" id="13" value="">尾页</button><br>
+<label id="14" value=""></label>
+
 </body>
 </html>

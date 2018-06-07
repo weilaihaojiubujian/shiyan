@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import bean.task;
 import dao.Agreement;
 import dao.Task;
+import net.sf.json.JSONArray;
 
 /**
  * Servlet implementation class searchagreement
@@ -32,24 +35,23 @@ public class searchagreement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		request.setCharacterEncoding("UTF-8");
+		
+		request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
 		task t=new task();
-		String keyword=request.getParameter("keyword");
+		String key=request.getParameter("key");
+		int k=Integer.parseInt(key);
+		String keyvalue=request.getParameter("keyvalue");
         HttpSession session = request.getSession(); 
     
 	
-        System.out.println(keyword);
+      
         Agreement s=new Agreement();
 		
-		if(s.selectsimilaragreement(keyword,session)!=0)
-		{
-		    
-			
-				response.sendRedirect(request.getContextPath()+"/releaseagreement.jsp");
-				
-		}
+        List<String> listagreement=s.selectsimilaragreement(keyvalue,k);
+        System.out.println(listagreement);
+		response.getWriter().write(JSONArray.fromObject(listagreement).toString());
 	}
 
 	/**

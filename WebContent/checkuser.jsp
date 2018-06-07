@@ -38,7 +38,8 @@ List<user> q=null;
   showPage=pageCount;
  }
 %>
-用户总数为:<%=size %><br><br><br>
+用户总数为:${count }
+用户工作总数为:<%=size %><br><br><br>
 
 <%  for(int i = (showPage-1)*pageSize; i <showPage*pageSize && i<size ; i++)
  {

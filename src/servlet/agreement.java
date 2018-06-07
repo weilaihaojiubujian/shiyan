@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import bean.task;
 import dao.Agreement;
 import dao.Task;
+import net.sf.json.JSONArray;
 
 /**
  * Servlet implementation class agreement
@@ -32,23 +35,15 @@ public class agreement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setCharacterEncoding("UTF-8");
-		
-		
+		request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        String keyword=request.getParameter("key");
         HttpSession session = request.getSession(); 
-		
+ 		int k=Integer.parseInt(keyword);
         Agreement s=new Agreement();
-		if(s.selectallagreement(session)!=0)
-		{
-		    
-			response.sendRedirect(request.getContextPath()+"/releaseagreement.jsp");
-		}
-		else
-		{
-			
-			response.sendRedirect(request.getContextPath()+"/releaseagreement_failure.jsp");
-		}
+        List<String> listagreement=s.selectallagreement(k);
+        System.out.println(listagreement);
+		response.getWriter().write(JSONArray.fromObject(listagreement).toString());
 		
 	}
 

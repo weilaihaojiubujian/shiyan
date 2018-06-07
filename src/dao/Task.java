@@ -150,7 +150,7 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	public List<String> selectaccept1(int k,HttpSession session) {
+	public List<String> selectaccept1(int k) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -160,13 +160,22 @@ public class Task {
 			      String sql;
 			      int x=(k-1)*4;
 				 int y=4;
-			    
+				 String sql_1 = "SELECT COUNT(*) FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) ";
+			      rs = stmt.executeQuery(sql_1);
+			      rs.next();
+			      int size=rs.getInt("COUNT(*)");
+			      System.out.println(size);
+			      int pageSize=4;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			     
+			      
 			      sql = "SELECT taskname,task.id FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			      
 			      int i=0;
+			      String m=String.valueOf(max);
 			      List<String> listtask=new ArrayList<String>();
-			    
+			      listtask.add(m);
 			      while(rs.next()) {
 			    	
 			    	  String taskname =rs.getString("taskname");
@@ -183,14 +192,7 @@ public class Task {
 					  i++;
 			          
 			      }
-			      String sql_1 = "SELECT COUNT(*) FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) ";
-			      rs = stmt.executeQuery(sql_1);
-			      rs.next();
-			      int size=rs.getInt("COUNT(*)");
-			      System.out.println(size);
-			      int pageSize=4;
-			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
-			      session.setAttribute("max", max);
+			     
 			      return listtask;
 			    
 			   
@@ -370,7 +372,7 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	public int selectreleasetask(int uid,HttpSession session) {
+	public List<String> selectreleasetask(int k,int uid) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -379,34 +381,43 @@ public class Task {
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
 			    
-				  
+				  int x=(k-1)*4;
+				  String sql_1 = "SELECT COUNT(*) FROM task where  releaseid='"+uid+"' ";
+			      rs = stmt.executeQuery(sql_1);
+			      rs.next();
+			      int size=rs.getInt("COUNT(*)");
+			      System.out.println(size);
+			      int pageSize=4;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 			     
-			      List<task> listreleasetask=new ArrayList<task>();
+			    
 			      int j=0;
-			      sql = "SELECT id,taskname FROM task where  releaseid='"+uid+"' ";
+			      sql = "SELECT id,taskname FROM task where  releaseid='"+uid+"' limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
-			      
+			      String m=String.valueOf(max);
 			    
 			    	  
-				  while(rs.next()) {
-				    	  task h=new task();
-				    	  int tid=rs.getInt("id");
-				    	  String taskname =rs.getString("taskname");
-						
+			      int i=0;
+			      List<String> listtask=new ArrayList<String>();
+			      listtask.add(m);
+			      while(rs.next()) {
+			    	
+			    	  String taskname =rs.getString("taskname");
+					
+					
+					  int tid=rs.getInt("id");
+					  String t=String.valueOf(tid);
+					
 				
-						  h.setTaskname(taskname);
-						  h.setTid(tid);
-						
-						  listreleasetask.add(h);
-						  j++;
-				          
-				  }
-			      session.setAttribute("listreleasetask",listreleasetask);
-			 
-			     
+					
+					
+					  listtask.add(t);
+					  listtask.add(taskname);
+					  i++;
+			          
+			      }
 			    
-			  
-			      return j;
+			      return listtask;
 			    
 			   
 
@@ -437,7 +448,7 @@ public class Task {
 				}
 			}
 	   }//end try
-			return 0;
+			return null;
 	}
 	public int selectallcompletetask(HttpSession session) {
 		Connection conn = null;
@@ -775,7 +786,7 @@ public class Task {
 	   }//end try
 			return 0;
 	}
-	public int selectsimilarreleasetask(int uid,String keyword,HttpSession session) {
+	public List<String> selectsimilarreleasetask(int uid,String keyword,int k) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -783,34 +794,40 @@ public class Task {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
+			      int x=(k-1)*4;
+			      String sql_1 = "SELECT COUNT(*) FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'  ";
+			      rs = stmt.executeQuery(sql_1);
+			      rs.next();
+			      int size=rs.getInt("COUNT(*)");
+			      System.out.println(size);
+			      int pageSize=4;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			  
 			    
-				  
-			    
-			      sql = "SELECT taskname,id FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'    ";
+			      sql = "SELECT taskname,id FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
-			      List<task> listreleasetask=new ArrayList<task>();
-				    
+			      List<String> listtask=new ArrayList<String>();
+			      String m=String.valueOf(max);
+			      listtask.add(m);
 			      while(rs.next()) {
-			    	  task h=new task();
+			    	
 			    	  String taskname =rs.getString("taskname");
 					
 					
 					  int tid=rs.getInt("id");
-					
+					  String t=String.valueOf(tid);
 					
 				
-					  h.setTaskname(taskname);
-					  h.setTid(tid);
-				
 					
-					  listreleasetask.add(h);
+					
+					  listtask.add(t);
+					  listtask.add(taskname);
 					  i++;
 			          
 			      }
 			     
-			      session.setAttribute("listreleasetask", listreleasetask);
-			      return i;
+			      return listtask;
 			    
 			   
 
@@ -841,9 +858,9 @@ public class Task {
 				}
 			}
 	   }//end try
-			return 0;
+			return null;
 	}
-	public int selectsimilartask(String keyword,HttpSession session) {
+	public List<String> selectsimilartask(String keyvalue,int key) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -851,34 +868,41 @@ public class Task {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
+			      String sql_1 = "SELECT COUNT(*) FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) and task.taskname like '%"+keyvalue+"%'  ";
+			      rs = stmt.executeQuery(sql_1);
+			      rs.next();
+			      int size=rs.getInt("COUNT(*)");
+			      System.out.println(size);
+			      int pageSize=4;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 			    
 				  
-			    
-			      sql = "SELECT taskname,id FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) and task.taskname like '%"+keyword+"%'    ";
+			     int x=(key-1)*4;
+			      sql = "SELECT taskname,id FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) and task.taskname like '%"+keyvalue+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
-			      List<task> listtask=new ArrayList<task>();
-				    
+			  
+			      String m=String.valueOf(max);  
+			      List<String> listtask=new ArrayList<String>();
+			      listtask.add(m);  
 			      while(rs.next()) {
-			    	  task h=new task();
+			    	
 			    	  String taskname =rs.getString("taskname");
 					
 					
 					  int tid=rs.getInt("id");
-					
+					  String t=String.valueOf(tid);
 					
 				
-					  h.setTaskname(taskname);
-					  h.setTid(tid);
-				
 					
-					  listtask.add(h);
+					
+					  listtask.add(t);
+					  listtask.add(taskname);
 					  i++;
 			          
 			      }
-			     
-			      session.setAttribute("listtask", listtask);
-			      return i;
+			      
+			      return listtask;
 			    
 			   
 
@@ -909,7 +933,7 @@ public class Task {
 				}
 			}
 	   }//end try
-			return 0;
+			return null;
 	}
 	public int selectsimilarcomplete(int uid,String keyword,HttpSession session) {
 		Connection conn = null;

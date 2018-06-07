@@ -272,7 +272,7 @@ public class User {
 		return 0;
 		
 }
-  public int selectalluser(HttpSession session) {
+  public int selectuid(int uid,HttpSession session) {
 	  Connection conn = null;
 	  Statement stmt = null;
 	  ResultSet rs=null;
@@ -281,8 +281,8 @@ public class User {
 			 stmt = (Statement) conn.createStatement();
 		      String sql;
 		     
-		      List<user> listalluser=new ArrayList<user>();
-		      sql = "SELECT * FROM user  ";
+		      List<user> listuser=new ArrayList<user>();
+		      sql = "SELECT * FROM user where id='"+uid+"' ";
 			   rs = stmt.executeQuery(sql);
 		      
 		  
@@ -290,23 +290,22 @@ public class User {
 		      int i=0;	
 		      while(rs.next()) {
 		    	  user u = new user();
-		    	  int uid=rs.getInt("id");
+		    	  
 		    	  String username=rs.getString("username");
 		    	  String address=rs.getString("address");
 	              String bankaccount=rs.getString("bankaccount"); 
 	              String card=rs.getString("card"); 
-	              u.setAddress(address);
-	              u.setBankaccount(bankaccount);
-	              u.setCard(card);
-	              u.setUsername(username);
-	              u.setUid(uid);
-	          
-		        
-	              listalluser.add(u);
+	              double money=rs.getDouble("money");
+	              session.setAttribute("username",username);
+	              session.setAttribute("address",address);
+	              session.setAttribute("bankaccount",bankaccount);
+	              session.setAttribute("card",card);
+	              session.setAttribute("uid",uid);
+	              session.setAttribute("money",money);
 	              i++;
 		      }
 		   
-		      session.setAttribute("listalluser",listalluser);
+		    
 		      return i;
 		   
 
@@ -338,6 +337,77 @@ public class User {
 		}
    }//end try
 		return 0;
+		
+}	
+  public List<String> selectalluser(int k) {
+	  Connection conn = null;
+	  Statement stmt = null;
+	  ResultSet rs=null;
+		try {
+			conn = connection.getConnection();
+			 stmt = (Statement) conn.createStatement();
+		      String sql;
+		      
+		      String sql_1 = "SELECT COUNT(*) FROM user ";
+		      rs = stmt.executeQuery(sql_1);
+		      rs.next();
+		      int size=rs.getInt("COUNT(*)");
+		      System.out.println(size);
+		      int pageSize=4;
+		      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+		      int x=(k-1)*4;
+		      List<user> listalluser=new ArrayList<user>();
+		      sql = "SELECT id,username FROM user limit "+x+",4 ";
+			   rs = stmt.executeQuery(sql);
+			   String m=String.valueOf(max);
+			   List<String> listuser=new ArrayList<String>();
+			   listuser.add(m);
+		  
+		    	
+		      int i=0;	
+		      while(rs.next()) {
+		    	 
+		    	  int uid=rs.getInt("id");
+		    	  String username=rs.getString("username");
+		    	  String u=String.valueOf(uid);
+		        
+		    	  listuser.add(u);
+		    	  listuser.add(username);
+	              i++;
+		      }
+		   
+		 
+		      return listuser;
+		   
+
+  }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+	   
+      //finally block used to close resources
+	   if (rs!= null) {
+			try {
+				rs.close();
+				rs= null;
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		//  Õ∑≈”Ôæ‰∂‘œÛ
+		if (stmt != null) {
+			try {
+				stmt.close();
+				stmt = null;
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+   }//end try
+		return null;
 		
 }
 	public int deleteuser(int uid) {
@@ -559,7 +629,7 @@ public class User {
 	   }//end try
 			return 0;
 	}
-	public int selectsimilaruser(String keyword,HttpSession session) {
+	public  List<String> selectsimilaruser(String keyword,int k) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -567,34 +637,40 @@ public class User {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			    
+			      
+			      String sql_1 = "SELECT COUNT(*) FROM user where username like '%"+keyword+"%' ";
+			      rs = stmt.executeQuery(sql_1);
+			      rs.next();
+			      int size=rs.getInt("COUNT(*)");
+			      System.out.println(size);
+			      int pageSize=4;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*4;
+			      List<user> listalluser=new ArrayList<user>();
 				  
 			    
-			      sql = "SELECT * FROM user where username like '%"+keyword+"%'    ";
+			      sql = "SELECT id,username FROM user where username like '%"+keyword+"%' limit "+x+",4   ";
 			      rs = stmt.executeQuery(sql);
 			    
-			      List<user> listalluser=new ArrayList<user>();
+			      String m=String.valueOf(max);
+				   List<String> listuser=new ArrayList<String>();
+				   listuser.add(m);
+			  
+			    	
 			      int i=0;	
 			      while(rs.next()) {
-			    	  user u = new user();
+			    	 
 			    	  int uid=rs.getInt("id");
 			    	  String username=rs.getString("username");
-			    	  String address=rs.getString("address");
-		              String bankaccount=rs.getString("bankaccount"); 
-		              String card=rs.getString("card"); 
-		              u.setAddress(address);
-		              u.setBankaccount(bankaccount);
-		              u.setCard(card);
-		              u.setUsername(username);
-		              u.setUid(uid);
-		          
+			    	  String u=String.valueOf(uid);
 			        
-		              listalluser.add(u);
+			    	  listuser.add(u);
+			    	  listuser.add(username);
 		              i++;
 			      }
 			   
-			      session.setAttribute("listalluser",listalluser);
-			      return i;
+			 
+			      return listuser;
 			   
 
 	  }catch(SQLException se){
@@ -624,6 +700,6 @@ public class User {
 				}
 			}
 	   }//end try
-			return 0;
+			return null;
 	}
   }

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import bean.task;
 import dao.Task;
 import dao.User;
+import net.sf.json.JSONArray;
 
 /**
  * Servlet implementation class searchuser
@@ -32,19 +35,18 @@ public class searchuser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		String keyword=request.getParameter("keyword");
+        String key=request.getParameter("key");
+		int k=Integer.parseInt(key);
+		String keyvalue=request.getParameter("keyvalue");
         HttpSession session = request.getSession(); 
-        System.out.println(keyword);
+  
         User s=new User();
-		if(s.selectsimilaruser(keyword,session)!=0)
-		{
-		    
-			response.sendRedirect(request.getContextPath()+"/deleteuser.jsp");
-		}
+        List<String> listuser=s.selectsimilaruser(keyvalue,k);
+        System.out.println(listuser);
+		response.getWriter().write(JSONArray.fromObject(listuser).toString());
 		
 	}
 

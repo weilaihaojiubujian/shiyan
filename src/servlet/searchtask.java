@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.task;
 import dao.Task;
+import net.sf.json.JSONArray;
 
 /**
  * Servlet implementation class searchtask
@@ -31,10 +34,14 @@ public class searchtask extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setCharacterEncoding("UTF-8");
+		
+		request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
 		task t=new task();
-		String keyword=request.getParameter("keyword");
+		String key=request.getParameter("key");
+		int k=Integer.parseInt(key);
+		String keyvalue=request.getParameter("keyvalue");
+		
         HttpSession session = request.getSession(); 
         String username=null;
 	     username=(String) session.getAttribute("username");
@@ -43,33 +50,13 @@ public class searchtask extends HttpServlet {
 	        	
 	    		uid=(int)session.getAttribute("uid");
 	        }
-        System.out.println(keyword);
+     
 		Task s=new Task();
+		List<String> listtask=(List<String>)s.selectsimilartask(keyvalue,k);
+		System.out.println(listtask);
 		
-		if(s.selectsimilartask(keyword,session)!=0)
-		{
-		    
-			if(uid!=0) {
-				response.sendRedirect(request.getContextPath()+"/task.jsp");
-			}
-			else
-			{
-				response.sendRedirect(request.getContextPath()+"/checktaskbyuser.jsp");
-			}
-			
-		}
-		else
-		{
-			
-			if(uid!=0) {
-				response.sendRedirect(request.getContextPath()+"/task_failure.jsp");
-			}
-			else
-			{
-				response.sendRedirect(request.getContextPath()+"/checktaskbyuser_failure.jsp");
-			}
-			
-		}
+		response.getWriter().write(JSONArray.fromObject(listtask).toString());
+		
 	}
 
 	/**

@@ -46,7 +46,7 @@ public class viewtask extends HttpServlet {
 		
 		
 		System.out.println("success");
-		List<String> listtask=(List<String>)s.selectaccept1(k,session);
+		List<String> listtask=(List<String>)s.selectaccept1(k);
 		System.out.println(listtask);
 		response.getWriter().write(JSONArray.fromObject(listtask).toString());
 		

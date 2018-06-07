@@ -195,7 +195,7 @@ public class Agreement {
 	   }//end try
 			return 0;
 	  }
-	public int selectallagreement(HttpSession session) {
+	public List<String> selectallagreement(int k) {
 		
 		  Connection conn = null;
 		  Statement stmt = null;
@@ -204,25 +204,34 @@ public class Agreement {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			      sql = "SELECT * FROM agreement  " ;
+			      String sql_1 = "SELECT COUNT(*) FROM agreement ";
+			      rs = stmt.executeQuery(sql_1);
+			      rs.next();
+			      int size=rs.getInt("COUNT(*)");
+			      System.out.println(size);
+			      int pageSize=4;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*4;
+			      sql = "SELECT id,agreementname FROM agreement limit "+x+",4 " ;
 			      rs = stmt.executeQuery(sql);
-			      List<agreement> listagreement=new ArrayList<agreement>();
-			   
+			    
+			      String m=String.valueOf(max);
+			      List<String> listagreement=new ArrayList<String>();
+			      listagreement.add(m);
 			      int i=0;
 			      while(rs.next())
 			      {
-			    	  agreement a=new agreement();
+			    	 
 			    	  i=1;
 			    	  int aid=rs.getInt("id");
 			    	  String agreementname = rs.getString("agreementname");
-					 
-			    	  a.setAid(aid);
-			    	  a.setAgreementname(agreementname);
-			    	  listagreement.add(a);	
+			    	  String ab=String.valueOf(aid);
+			    	  listagreement.add(ab);
+			    	  listagreement.add(agreementname);
 			          i++;
 			      }
-			      session.setAttribute("listagreement",listagreement);	
-			      return i;
+			 
+			      return listagreement;
 			  
 			 
 		      
@@ -253,7 +262,7 @@ public class Agreement {
 				}
 			}//end finally try
 	   }//end try
-			return 0;
+			return null;
 	  }
 	public int selectagreementintroduce(int aid,HttpSession session) {
 		
@@ -442,7 +451,7 @@ public class Agreement {
 	   }//end try
 			return 0;
 	}
-	public int selectsimilaragreement(String keyword,HttpSession session) {
+	public  List<String> selectsimilaragreement(String keyword,int k) {
 		Connection conn = null;
 		  Statement stmt = null;
 		  ResultSet rs=null;
@@ -450,29 +459,36 @@ public class Agreement {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			    
+			      String sql_1 = "SELECT COUNT(*) FROM agreement where  agreementname like '%"+keyword+"%' ";
+			      rs = stmt.executeQuery(sql_1);
+			      rs.next();
+			      int size=rs.getInt("COUNT(*)");
+			      System.out.println(size);
+			      int pageSize=4;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*4;
 				  
 			    
-			      sql = "SELECT * FROM agreement where  agreementname like '%"+keyword+"%'    ";
+			      sql = "SELECT id,agreementname FROM agreement where  agreementname like '%"+keyword+"%' limit "+x+",4   ";
 			      rs = stmt.executeQuery(sql);
 			 
-			      List<agreement> listagreement=new ArrayList<agreement>();
-				   
+			      String m=String.valueOf(max);
+			      List<String> listagreement=new ArrayList<String>();
+			      listagreement.add(m);
 			      int i=0;
 			      while(rs.next())
 			      {
-			    	  agreement a=new agreement();
+			    	 
 			    	  i=1;
 			    	  int aid=rs.getInt("id");
 			    	  String agreementname = rs.getString("agreementname");
-					 
-			    	  a.setAid(aid);
-			    	  a.setAgreementname(agreementname);
-			    	  listagreement.add(a);	
+			    	  String ab=String.valueOf(aid);
+			    	  listagreement.add(ab);
+			    	  listagreement.add(agreementname);
 			          i++;
 			      }
-			      session.setAttribute("listagreement",listagreement);	
-			      return i;
+			 
+			      return listagreement;
 			    
 			   
 
@@ -503,6 +519,6 @@ public class Agreement {
 				}
 			}
 	   }//end try
-			return 0;
+			return null;
 	}
 }
