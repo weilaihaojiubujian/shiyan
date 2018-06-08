@@ -204,7 +204,7 @@ public class User {
 		return 0;
 		
 }
-  public int selectallinformation(HttpSession session) {
+  public List<String> selectallinformation(int k) {
 	  Connection conn = null;
 	  Statement stmt = null;
 	  ResultSet rs=null;
@@ -213,33 +213,38 @@ public class User {
 			 stmt = (Statement) conn.createStatement();
 		      String sql;
 		  
-		      List<user> listuserinformation=new ArrayList<user>();
+		      String sql_1 = "SELECT COUNT(*) FROM user where id in (SELECT uid FROM sign where stop is null and start is not null)";
+		      rs = stmt.executeQuery(sql_1);
+		      rs.next();
+		      int size=rs.getInt("COUNT(*)");
+		      System.out.println(size);
+		      int pageSize=4;
+		      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+		      int x=(k-1)*4;
 		      
-		      sql = "SELECT * FROM user where id in (SELECT uid FROM sign where stop is null and start is not null)  ";
+		      sql = "SELECT id,username FROM user where id in (SELECT uid FROM sign where stop is null and start is not null) limit "+x+",4 ";
 		      rs = stmt.executeQuery(sql);
 		      int j=0;
-		
+		      String m=String.valueOf(max);
+			   List<String> listuser=new ArrayList<String>();
+			   listuser.add(m);
+		  
 		    	  
 		       while(rs.next()) {
-		    	  user u = new user();
+		    	
 		    	  int uid=rs.getInt("id");
 		    	  String username=rs.getString("username");
-		    	  String address=rs.getString("address");
-	              String bankaccount=rs.getString("bankaccount"); 
-	              String card=rs.getString("card"); 
-	              u.setAddress(address);
-	              u.setBankaccount(bankaccount);
-	              u.setCard(card);
-	              u.setUsername(username);
-	              u.setUid(uid);
+		    	  String u=String.valueOf(uid);
+		    	  listuser.add(u);
+		    	  listuser.add(username);
 	          
 		        
-	              listuserinformation.add(u);
 	              j++;
 		          }
-		    
-		      session.setAttribute("listuserinformation",listuserinformation);
-		      return j;
+		       String s=String.valueOf(size);
+		       listuser.add(s);
+		      
+		      return listuser;
 		   
 
   }catch(SQLException se){
@@ -269,7 +274,7 @@ public class User {
 			}
 		}
    }//end try
-		return 0;
+		return null;
 		
 }
   public int selectuid(int uid,HttpSession session) {
@@ -356,7 +361,7 @@ public class User {
 		      int pageSize=4;
 		      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 		      int x=(k-1)*4;
-		      List<user> listalluser=new ArrayList<user>();
+		    
 		      sql = "SELECT id,username FROM user limit "+x+",4 ";
 			   rs = stmt.executeQuery(sql);
 			   String m=String.valueOf(max);

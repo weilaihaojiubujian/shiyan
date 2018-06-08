@@ -9,6 +9,9 @@
 <title>已完成的任务</title>
 <script src="jquery-3.3.1.min.js"></script>
     <script>  
+   
+    
+    var k;
     function getMoreContents() {
     	  //s首先获取用户的输入
     	  var $content = document.getElementById("keyword");
@@ -60,8 +63,131 @@
       	});
     	  
     }
-      	
+    function call($value) {
+  	
+
+    	if(document.getElementById("14").value==null)
+    	{
+    		
+    		init($value);
+    	}
+    	else{
+    		init1($value);
+    	}
+  	}
     
+   
+    function init($value) {
+    	clear();
+    	
+      	$.ajax({
+      		  url:"servlet/completetask",
+              data:{key:$value},
+              type:"POST",
+              dataType:"TEXT",
+              success:function(data){
+            	  var json=eval("("+data+")");
+            
+            	 
+            	  var size = json.length;
+            	 
+            	  k=json[0];
+            	
+            	  for(var i=1;i<size;i=i+2){
+            	      var nextNode = json[i];
+            	      var lastNode=json[i+1];
+            	     
+            	      var x=i;
+            	      var y=i+1;
+            	      var z=9+(i-1)/2;
+            	      document.getElementById("0").innerHTML=$value;
+            	      document.getElementById(""+x+"").innerHTML=nextNode;
+            	      document.getElementById(""+y+"").innerHTML=lastNode;
+            	      document.getElementById(""+y+"").href="servlet/checkcompletetaskinformation?list="+nextNode+"";
+            	    
+            	     
+              }
+             
+              }
+      	
+      	
+      	
+      	});
+    	
+    }
+    function init1($value) {
+    	clear();
+    	document.getElementById("14").value=$value;
+    	var $valu=document.getElementById("keyword").value;
+      	$.ajax({
+      		  url:"servlet/searchcompletetask",
+              data:{key:$value,keyvalue:$valu},
+              type:"POST",
+              dataType:"TEXT",
+              success:function(data){
+            	  var json=eval("("+data+")");
+          
+            	 
+            	  var size = json.length;
+            	 
+            	  k=json[0];
+            	
+            	  for(var i=1;i<size;i=i+2){
+            	      var nextNode = json[i];
+            	      var lastNode=json[i+1];
+            	     
+            	      var x=i;
+            	      var y=i+1;
+            	      var z=9+(i-1)/2;
+            	      document.getElementById("0").innerHTML=$value;
+            	      document.getElementById(""+x+"").innerHTML=nextNode;
+            	      document.getElementById(""+y+"").innerHTML=lastNode;
+            	      document.getElementById(""+y+"").href="servlet/checkcompletetaskinformation?list="+nextNode+"";
+            	      
+            	     
+              }
+             
+              }
+      	
+      	
+      	
+      	});
+    	
+    }
+    function getnum(){
+    	var x=document.getElementById("0").innerHTML;
+    	var j=1;
+    	if(x==k){
+    		alert("已经是最后一页了");
+    		var y=Number(x);
+    		return y;
+    	}
+    	else{
+    		var y=Number(j)+Number(x);
+        
+        	return y;
+    	}
+    	
+    	
+    	
+    }
+    function getnum1(){
+    	var x=document.getElementById("0").innerHTML;
+    	var j=1;
+    	if(x==1){
+    		alert("已经第一页了");
+    		var y=Number(x);
+    		return y;
+    	}
+    	else{
+    		var y=Number(x)-Number(j);
+        	
+        	return y;
+    	}
+    	
+    	
+    	
+    }
     function clearContent() {
     	  var contentTableBody = document.getElementById("content_table_body");
     	  var size = contentTableBody.childNodes.length;
@@ -70,43 +196,25 @@
     	  }
 
     	}
+    function clear() {
+
+  	  for(var i=1-1;i<=8;i++){
+  		document.getElementById(""+i+"").innerHTML="";
+  	  }
+
+  	}
     	//输入框失去焦点 清空
     	function keywordBlur() {
     	  clearContent();
     	}
+    	function p(){
+    		call(k);
+    	}
     </script>
 </head>
-<body>
-<%
-int pageSize=4;
-int pageCount;
-int showPage;
-List<task> q=null;
- q=(List<task>)session.getAttribute("listcompletetask");
- int size=q.size();
+<body onload="call(1)">
 
- pageCount=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
- if(pageCount==0)
- {
-	  pageCount++;
- }
- String integer=request.getParameter("showPage");
- if(integer==null){
-  integer="1";
- }
- try{showPage=Integer.parseInt(integer);
- }catch(NumberFormatException e){
-  showPage=1;
- }
- if(showPage<=1){
-  showPage=1;
- }
- if(showPage>=pageCount){
-  showPage=pageCount;
- }
-%>
 
-<form action="servlet/searchcompletetask" method="post">
 <input type="text" size="50" id="keyword" name="keyword" onkeyup="getMoreContents()"
      onblur="keywordBlur()" onfocus="getMoreContents()"/>
      <input type="submit"  value="查找"  name="submit" width="50px"/> 
@@ -120,39 +228,23 @@ List<task> q=null;
        </table>
 
      </div>
-</form>
-<%  for(int i = (showPage-1)*pageSize; i <showPage*pageSize && i<size ; i++)
- {
-	task t = (task) q.get(i);
-	 int tid=t.getTid();
-	 String taskname =t.getTaskname();
+
+
 
 	  
- 
-out.println("序号:"+(i+1)+"<br>");%>
-<a href="servlet/checkcompletetaskinformation?list=<%=tid%>" ><% out.println("任务名:"+taskname+"<br><br><br>");
-%></a>
-<% 
-} %>
+<a id="1"></a>&emsp;<a href=""  id="2"></a><br>
+<a id="3"></a>&emsp;<a href=""  id="4"></a><br>
+<a id="5"></a>&emsp;<a href=""  id="6"></a><br>
+<a id="7"></a>&emsp;<a href=""  id="8"></a><br>
 
 
 
 <br>
- 第<%=showPage %>页（共<%=pageCount %>页）
- <br>
- <a href="completetask.jsp?showPage=1">首页</a>
- <a href="completetask.jsp?showPage=<%=showPage-1%>">上一页</a>
-<% //根据pageCount的值显示每一页的数字并附加上相应的超链接
-  for(int i=1;i<=pageCount;i++){
- %>
-   <a href="completetask.jsp?showPage=<%=i%>"><%=i%></a>
-<% }
- %> 
- <a href="completetask.jsp?showPage=<%=showPage+1%>">下一页</a>
- <a href="completetask.jsp?showPage=<%=pageCount%>">末页</a>
- <form action="" method="get">
-  跳转到第<input type="text" name="showPage" size="4">页
-  <input type="submit" name="submit" value="跳转">
- </form> 
+第<a id="0"></a>页<br>
+<button type="button" onclick="call(1)">首页</button>
+<button type="button" onclick="call(getnum1())" >上一页</button>
+<button type="button" onclick="call(getnum())" >下一页</button>
+<button type="button" onclick="p()" id="13" value="">尾页</button><br>
+<label id="14" value=""></label>
 </body>
 </html>

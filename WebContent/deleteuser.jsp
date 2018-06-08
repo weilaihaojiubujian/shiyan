@@ -103,7 +103,7 @@
             	      var y=i+1;
             	      var z=9+(i-1)/2;
             	      document.getElementById("0").innerHTML=$value;
-            	      document.getElementById(""+x+"").innerHTML=nextNode;
+            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i+1)/2;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
             	      document.getElementById(""+y+"").href="servlet/checkuserinformation?lis="+nextNode+"";
             	      document.getElementById(""+z+"").value=nextNode;
@@ -146,7 +146,7 @@
             	      var y=i+1;
             	      var z=9+(i-1)/2;
             	      document.getElementById("0").innerHTML=$value;
-            	      document.getElementById(""+x+"").innerHTML=nextNode;
+            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i+1)/2;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
             	      document.getElementById(""+y+"").href="servlet/checkuserinformation?lis="+nextNode+"";
             	      document.getElementById(""+z+"").value=nextNode;
@@ -249,7 +249,7 @@
 
  <br>
 <br>
-<a id="0"></a><br>
+第<a id="0"></a>页<br>
 <button type="button" onclick="call(1)">首页</button>
 <button type="button" onclick="call(getnum1())" >上一页</button>
 <button type="button" onclick="call(getnum())" >下一页</button>

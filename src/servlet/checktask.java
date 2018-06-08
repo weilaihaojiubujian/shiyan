@@ -45,7 +45,7 @@ public class checktask extends HttpServlet {
 	
 				
 				
-			
+		session.setAttribute("tid", tid);	
 		int uid=(int)session.getAttribute("uid");
 			
 		Alreadytask k=new Alreadytask();

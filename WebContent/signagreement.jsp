@@ -8,8 +8,10 @@
 </head>
 <body>
 合同：<%
+int aid=(int)session.getAttribute("aid");
 String agreementname=(String)session.getAttribute("agreementname");
 String agreementintroduce=(String)session.getAttribute("agreementintroduce");
+out.print("合同序号:"+aid+"<br>");
 out.print("合同名:"+agreementname+"<br>");
 out.print("合同内容:"+agreementintroduce+"<br>");
 %>

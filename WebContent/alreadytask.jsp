@@ -12,9 +12,9 @@
 <body>
 已接受的任务:
 <%
-List<task> q=null;
-q=(List<task>)session.getAttribute("alreadytask");
-for(task t:q){
+
+task t=(task)session.getAttribute("alreadytask");
+
 	int tid=t.getTid();
 	String taskname =t.getTaskname();
 	 String introduce = t.getIntroduce();
@@ -29,7 +29,7 @@ for(task t:q){
 	 out.println("发布日期:"+date+"<br>");
 
 	 out.println("任务完成程度:"+progress+"<br>"); 	 
-}
+
 
 %>
 

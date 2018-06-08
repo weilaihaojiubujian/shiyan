@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.task;
 import dao.Task;
+import net.sf.json.JSONArray;
 
 /**
  * Servlet implementation class searchalreadytask
@@ -31,24 +34,19 @@ public class searchalreadytask extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
 		task t=new task();
-		String keyword=request.getParameter("keyword");
+		String key=request.getParameter("key");
+	    int k=Integer.parseInt(key);
+	    String keyvalue=request.getParameter("keyvalue");
         HttpSession session = request.getSession(); 
-        System.out.println(keyword);
+
 		Task s=new Task();
-		if(s.selectsimilaralreadytask(keyword,session)!=0)
-		{
-		    
-			response.sendRedirect(request.getContextPath()+"/checkalreadytaskbyuser.jsp");
-		}
-		else
-		{
-			
-			response.sendRedirect(request.getContextPath()+"/checkalreadytaskbyuser_failure.jsp");
-		}
+		List<String> listalreadytask=s.selectsimilaralreadytask(keyvalue,k);
+		System.out.println(listalreadytask);
+		
+		response.getWriter().write(JSONArray.fromObject(listalreadytask).toString());
 		
 	}
 

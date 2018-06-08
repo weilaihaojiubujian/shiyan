@@ -89,10 +89,7 @@
           	 var size = json.length;
         	 
        	     k=json[0];
-       	     $("#9").hide();
-       	     $("#10").hide();
-       	     $("#11").hide();
-       	     $("#12").hide();
+       	   
        	     for(var i=1;i<size;i=i+2){
        	          var nextNode = json[i];
        	          var lastNode=json[i+1];
@@ -101,11 +98,10 @@
        	          var y=i+1;
        	          var z=9+(i-1)/2;
           	      document.getElementById("0").innerHTML=$value;
-          	      document.getElementById(""+x+"").innerHTML=nextNode;
+          	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i+1)/2;
           	      document.getElementById(""+y+"").innerHTML=lastNode;
           	      document.getElementById(""+y+"").href="servlet/checkreleasetaskinformation?list="+nextNode+"";
-          	      document.getElementById(""+z+"").value=nextNode;
-          	      $("#"+""+z+"").show();
+          	    
           	     
             }
            
@@ -132,10 +128,7 @@
           	  var size = json.length;
          	 
         	  k=json[0];
-        	  $("#9").hide();
-        	  $("#10").hide();
-        	  $("#11").hide();
-        	  $("#12").hide();
+        	
         	  for(var i=1;i<size;i=i+2){
         	      var nextNode = json[i];
         	      var lastNode=json[i+1];
@@ -144,11 +137,10 @@
         	      var y=i+1;
         	      var z=9+(i-1)/2;
           	      document.getElementById("0").innerHTML=$value;
-          	      document.getElementById(""+x+"").innerHTML=nextNode;
+          	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i+1)/2;
           	      document.getElementById(""+y+"").innerHTML=lastNode;
           	      document.getElementById(""+y+"").href="servlet/checkreleasetaskinformation?list="+nextNode+"";
-          	      document.getElementById(""+z+"").value=nextNode;
-          	      $("#"+""+z+"").show();
+          	    
           	     
             }
            
@@ -239,14 +231,14 @@
 <br><br><br>
 
 
-<input type="radio" value="" name="list" id="9" /><a id="1"></a><a href=""  id="2"></a><br>
-<input type="radio" value="" name="list"id="10"  /><a id="3"></a><a href=""  id="4"></a><br>
-<input type="radio" value="" name="list" id="11" /><a id="5"></a><a href=""  id="6"></a><br>
-<input type="radio" value="" name="list"id="12" /><a id="7"></a><a href=""  id="8"></a><br>
+<a id="1"></a><a href=""  id="2"></a><br>
+<a id="3"></a><a href=""  id="4"></a><br>
+<a id="5"></a><a href=""  id="6"></a><br>
+<a id="7"></a><a href=""  id="8"></a><br>
 
 
 <br>
-<a id="0"></a><br>
+第<a id="0"></a>页<br>
 <button type="button" onclick="call(1)">首页</button>
 <button type="button" onclick="call(getnum1())" >上一页</button>
 <button type="button" onclick="call(getnum())" >下一页</button>

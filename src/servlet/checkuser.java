@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.Sign;
 import dao.User;
+import net.sf.json.JSONArray;
 
 /**
  * Servlet implementation class checkuser
@@ -31,20 +34,15 @@ public class checkuser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        String keyword=request.getParameter("key");
 		HttpSession session = request.getSession(); 
-		
+		int k=Integer.parseInt(keyword);
 		User h=new User();
-		if( h.selectallinformation(session)!=0)
-		{
-			
-			response.sendRedirect(request.getContextPath()+"/checkuser.jsp");
-		}
-		else
-		{
-			response.sendRedirect(request.getContextPath()+"/checkuser_failure.jsp");
-		}
+		List<String> listuser= h.selectallinformation(k);
+		System.out.println(listuser);
+		response.getWriter().write(JSONArray.fromObject(listuser).toString());
 	}
 
 	/**

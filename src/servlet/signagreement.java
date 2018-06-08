@@ -44,7 +44,9 @@ public class signagreement extends HttpServlet {
 		
 		int tid=(int)session.getAttribute("tid");
 		int uid=(int)session.getAttribute("uid");
-	
+		System.out.println(aid);
+		System.out.println(tid);
+		System.out.println(uid);
 		Signagreement a=new Signagreement();
 		Alreadytask k=new Alreadytask();
 		Task s=new Task();
