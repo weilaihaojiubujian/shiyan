@@ -8,7 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>任务情况</title>
+<link rel="stylesheet" href="a.css" type="text/css" />
 <script src="jquery-3.3.1.min.js"></script>
+
     <script>  
     var k;
     function getMoreContents() {
@@ -218,6 +220,7 @@
     		call(k);
     	}
     </script>
+    
 </head>
 <body onload="call(1)">
 
@@ -239,18 +242,48 @@
 <br><br><br>
 <form action="servlet/checktask" method="post">
 
-<input type="radio" value="" name="list" id="9" /><a id="1"></a><a href=""  id="2"></a><br>
-<input type="radio" value="" name="list"id="10"  /><a id="3"></a><a href=""  id="4"></a><br>
-<input type="radio" value="" name="list" id="11" /><a id="5"></a><a href=""  id="6"></a><br>
-<input type="radio" value="" name="list"id="12" /><a id="7"></a><a href=""  id="8"></a><br>
-<input type="submit"  value="接受任务"  name="submit"/> 
+<table align="center" valign="center" border="1px">
+   <tr>
+       <td></td>
+       <td>序号</td>
+       <td>任务名</td>
+  </tr>
+ 
+   <tr>
+     <td><input type="radio" value="" name="list" id="9" /></td>
+       <td><label id="1"></label></td>
+       <td><a href=""  id="2"></a></td>
+  </tr>
+
+  <tr>
+     <td><input type="radio" value="" name="list"id="10"  /></td>
+       <td><label id="3"></label></td>
+       <td><a href=""  id="4"></a></td>
+  </tr>
+
+  <tr>
+   <td><input type="radio" value="" name="list" id="11" /></td>
+       <td><label id="5"></label></td>
+       <td><a href=""  id="6"></a></td>
+  </tr>
+
+  <tr>
+   <td><input type="radio" value="" name="list"id="12" /></td>
+       <td><label id="7"></label></td>
+       <td><a href=""  id="8"></a></td>
+  </tr>
+
+
+
+</table>
+<input id="qs" type="submit"  value="接受任务"  name="submit" /> 
 </form>
 <br>
-第<a id="0"></a>页<br>
-<button type="button" onclick="call(1)">首页</button>
-<button type="button" onclick="call(getnum1())" >上一页</button>
-<button type="button" onclick="call(getnum())" >下一页</button>
-<button type="button" onclick="p()" id="13" value="">尾页</button><br>
+第<label id="0"></label>页<br>
+<button id="qw" type="button" onclick="call(1)">首页</button>
+<button id="qa" type="button" onclick="call(getnum1())" >上一页</button>
+<button id="qz" type="button" onclick="call(getnum())" >下一页</button>
+<button id="qe" type="button" onclick="p()"  value="">尾页</button><br>
 <label id="14" value=""></label>
 
 </body>

@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,8 +29,12 @@ public class Task {
 				  String introduce = t.getIntroduce();
 				
 				  double price=t.getPrice();
-				  java.util.Date da =t.getDate();
-				  long q = da.getTime();
+				  java.util.Date dat = new java.util.Date();
+			      SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+			      java.util.Date d=dateFormat.parse(dateFormat.format(dat)); 
+			      
+				
+				  long q = d.getTime();
 				  java.sql.Date date = new java.sql.Date(q);
 			      sql = "SELECT * FROM task where taskname='"+taskname+"' and introduce='"+introduce+"'and price='"+price+"' and releaseid='"+uid+"' ";
 			      rs = stmt.executeQuery(sql);

@@ -22,17 +22,14 @@
       <td><label for="price">可获金额:</label></td>
       <td><input type="number"  name="price" id="price" value="" /></td>
       </tr> 
-      <tr>
-      <td><label for="date">发布日期:</label></td>
-      <td><input type="text"  name="date" id="date" value="" /></td>
-      </tr>
+    
        
      </table>    
   
            <input type="submit"  value="发布任务"  name="submit""/> 
              
     
- </table>
+
 </form> 
 </body>
 </html>

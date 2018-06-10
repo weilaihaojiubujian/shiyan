@@ -141,7 +141,7 @@ public class User {
    }//end try
 		return 0;
   }
-  public int selectall(String name,String pass,HttpSession session) {
+  public int selectall(int uid,HttpSession session) {
 	  Connection conn = null;
 	  Statement stmt = null;
 	  ResultSet rs=null;
@@ -149,15 +149,19 @@ public class User {
 			conn = connection.getConnection();
 			 stmt = (Statement) conn.createStatement();
 		      String sql;
-		      sql = "SELECT * FROM user where username='"+name+"' and password='"+pass+"'  ";
+		      sql = "SELECT * FROM user where id='"+uid+"'   ";
 		      rs = stmt.executeQuery(sql);
 		      user u = new user();
 		      int i=0;
 		      if(rs.next()) {
+		    	  String username=rs.getString("username");
+		    	  String password=rs.getString("password");
 		    	  String address=rs.getString("address");
 	              String bankaccount=rs.getString("bankaccount"); 
 	              String card=rs.getString("card"); 
 	              double money=rs.getDouble("money");
+	              session.setAttribute("username",username);
+	              session.setAttribute("password",password);
 	              session.setAttribute("address",address);
 	              session.setAttribute("bankaccount",bankaccount);
 	              session.setAttribute("card",card);

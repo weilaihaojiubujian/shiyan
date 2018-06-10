@@ -43,14 +43,10 @@ public class releasetask extends HttpServlet {
 		String taskname = request.getParameter("taskname");
 		String introduce = request.getParameter("introduce");
 		String p = request.getParameter("price");
-		String d = request.getParameter("date");
+		
 		
 		double price=Double.parseDouble(p);
-		Date date = null;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		date = dateFormat.parse(d); 
-	
-		t.setDate(date);
+
 		t.setIntroduce(introduce);
 		t.setPrice(price);
 		t.setTaskname(taskname);
@@ -66,7 +62,7 @@ public class releasetask extends HttpServlet {
 				session.setAttribute("taskname",taskname);
 				session.setAttribute("introduce",introduce);
 				session.setAttribute("price",price);
-				session.setAttribute("date",date);
+			
 			
 				response.sendRedirect(request.getContextPath()+"/releasetask_success.jsp");
 			}
@@ -80,9 +76,9 @@ public class releasetask extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/releasetask_failure1.jsp");
 		}
 		
-		 }catch (ParseException e) {
-            e.printStackTrace();
-        }
+		 }catch(Exception e) {
+			 
+		 }
 		
 	}
 

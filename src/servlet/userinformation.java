@@ -35,12 +35,10 @@ public class userinformation extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		user u = new user();
 		HttpSession session = request.getSession(); 
-		String username =(String) session.getAttribute("username");
-		String password =(String) session.getAttribute("password");
-		u.setUsername(username);
-		u.setPassword(password);
+		int uid=(int) session.getAttribute("uid");
+	
 		User h=new User();
-		if(h.selectall(u.getUsername(),u.getPassword(),session)==0) {
+		if(h.selectall(uid,session)==0) {
 			response.sendRedirect(request.getContextPath()+"/userinformation.jsp");
 		}
 	}
