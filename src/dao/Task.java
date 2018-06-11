@@ -16,11 +16,14 @@ import com.mysql.jdbc.Statement;
 import bean.task;
 
 public class Task {
+	 private static Connection conn = null;
+	 private static Statement stmt = null;
+	 private static  ResultSet rs=null;
 
+	 
+	 //用户发布任务
 	public int inserttask(task t,int uid,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -67,104 +70,23 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
-	public int selectaccept(HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
-			try {
-				conn = connection.getConnection();
-				 stmt = (Statement) conn.createStatement();
-			      String sql;
-			    
-				  
-			    
-			      sql = "SELECT * FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask)";
-			      rs = stmt.executeQuery(sql);
-			      int i=0;
-			      List<task> listtask=new ArrayList<task>();
-			    
-			      while(rs.next()) {
-			    	  task h=new task();
-			    	  String taskname =rs.getString("taskname");
-					
-					
-					  int tid=rs.getInt("id");
-					
-					
-				
-					  h.setTaskname(taskname);
-					  h.setTid(tid);
-				
-					
-					  listtask.add(h);
-					  i++;
-			          
-			      }
-			      session.setAttribute("listtask", listtask);
-			      return i;
-			    
-			   
-
-	  }catch(SQLException se){
-	      //Handle errors for JDBC
-	      se.printStackTrace();
-	   }catch(Exception e){
-	      //Handle errors for Class.forName
-	      e.printStackTrace();
-	   }finally{
-		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-	   }//end try
-			return 0;
-	}
+	
+	
+	
+	//用户或管理员查看未接受的任务
 	public List<String> selectaccept1(int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
 			      int x=(k-1)*4;
-				 int y=4;
+				
 				 String sql_1 = "SELECT COUNT(*) FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) ";
 			      rs = stmt.executeQuery(sql_1);
 			      rs.next();
@@ -176,8 +98,7 @@ public class Task {
 			      
 			      sql = "SELECT taskname,task.id FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
-			      
-			      int i=0;
+			    
 			      String m=String.valueOf(max);
 			      List<String> listtask=new ArrayList<String>();
 			      listtask.add(m);
@@ -194,7 +115,7 @@ public class Task {
 					
 					  listtask.add(t);
 					  listtask.add(taskname);
-					  i++;
+				
 			          
 			      }
 			     
@@ -210,32 +131,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
 	
+	//查看已接受任务的信息
 	public int selecttall(int uid,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -244,7 +148,7 @@ public class Task {
 			     
 			      sql = "SELECT task.*,progress FROM task,alreadytask where task.id=t_id and u_id='"+uid+"'  ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			    
 			      task h=new task();
 			      if(rs.next()) {
 			    	
@@ -268,7 +172,7 @@ public class Task {
 					 
 					  session.setAttribute("tid", tid);
 					  session.setAttribute("alreadytask", h);
-			          i=1;
+			       
 			          return 1;
 			      }
 			      else
@@ -287,37 +191,21 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
+	
+	//用户查看第几页的已完成任务
 	public List<String> selectcompletetask(int uid,int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
 			      int x=(k-1)*4;
-					 int y=4;
+					
 					 String sql_1 = "SELECT COUNT(*) FROM task,completetask where task.id=t_id and u_id='"+uid+"' ";
 				      rs = stmt.executeQuery(sql_1);
 				      rs.next();
@@ -329,7 +217,7 @@ public class Task {
 			     
 			      
 			      List<String> listcompletetask=new ArrayList<String>();
-			      int j=0;
+			     
 			      sql = "SELECT task.id,task.taskname FROM task,completetask where task.id=t_id and u_id='"+uid+"' limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			      String m=String.valueOf(max);
@@ -337,7 +225,7 @@ public class Task {
 			    
 			    	  
 				  while(rs.next()) {
-				    	  task h=new task();
+				    	  
 				    	  int tid=rs.getInt("id");
 				    	  String taskname =rs.getString("taskname");
 				    	  String t=String.valueOf(tid);
@@ -346,7 +234,7 @@ public class Task {
 						
 				    	  listcompletetask.add(t);
 				    	  listcompletetask.add(taskname);
-						  j++;
+						
 				          
 				  }
 			    
@@ -365,31 +253,16 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
+	
+	
+	//用户查看第几页的发布的任务
 	public List<String> selectreleasetask(int k,int uid) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+		
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -405,13 +278,12 @@ public class Task {
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 			     
 			    
-			      int j=0;
+			     
 			      sql = "SELECT id,taskname FROM task where  releaseid='"+uid+"' limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			      String m=String.valueOf(max);
 			    
-			    	  
-			      int i=0;
+			   
 			      List<String> listtask=new ArrayList<String>();
 			      listtask.add(m);
 			      while(rs.next()) {
@@ -427,7 +299,7 @@ public class Task {
 					
 					  listtask.add(t);
 					  listtask.add(taskname);
-					  i++;
+					
 			          
 			      }
 			    
@@ -443,31 +315,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
+	
+	//管理员查看第几页的已完成任务
 	public List<String> selectallcompletetask(int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -482,7 +338,7 @@ public class Task {
 			      int pageSize=4;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 			     
-			      int j=0;
+			    
 			      sql = "SELECT task.id,task.taskname FROM task,completetask where task.id=t_id limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			      
@@ -499,7 +355,7 @@ public class Task {
 							
 				    	  listcompletetask.add(t);
 				    	  listcompletetask.add(taskname);
-						  j++;
+						
 				          
 				  }
 			  
@@ -519,31 +375,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
+	
+	//管理员查看第几页的已完成的任务
 	public List<String> selectalreadytask(int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -561,12 +401,12 @@ public class Task {
 			    
 			      sql = "SELECT id,taskname FROM task where id in (SELECT t_id FROM alreadytask ) limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			    
 			      String m=String.valueOf(max);
 			      List<String> listalreadytask=new ArrayList<String>();
 			      listalreadytask.add(m);
 			      while(rs.next()) {
-			    	  task h=new task();
+			    	 
 			    	  String taskname =rs.getString("taskname");
 				
 					
@@ -580,7 +420,7 @@ public class Task {
 						
 					  listalreadytask.add(t);
 					  listalreadytask.add(taskname);
-					  i++;
+					
 			          
 			      }
 			      
@@ -596,31 +436,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
+	
+	//用户查看任务的信息
 	public int selecttid(int tid,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -667,31 +491,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
-	public List<String> selectsimilar(String keyword,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
+	//管理员查看相似的未接受的任务名
+	public List<String> selectsimilar(String keyword) {
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -701,11 +509,11 @@ public class Task {
 			    
 			      sql = "SELECT taskname FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) and task.taskname like '%"+keyword+"%'    ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			      
 			      List<String> listsearchtask=new ArrayList<String>();
 				    
 			      while(rs.next()) {
-			    	  task h=new task();
+			    	 
 			    	  String taskname =rs.getString("taskname");
 					
 					
@@ -716,7 +524,7 @@ public class Task {
 				
 					
 					  listsearchtask.add(taskname );
-					  i++;
+				
 			          
 			      }
 			      
@@ -732,31 +540,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
-	public int selectsimilarrelease(int uid,String keyword,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
+	//用户查看自己相似的发布的任务
+	public List<String> selectsimilarrelease(int uid,String keyword) {
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -766,26 +558,20 @@ public class Task {
 			    
 			      sql = "SELECT taskname FROM task where releaseid='"+uid+"' and taskname like '%"+keyword+"%'    ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			
 			      List<String> listsearchreleasetask=new ArrayList<String>();
 				    
 			      while(rs.next()) {
-			    	  task h=new task();
+			    	 
 			    	  String taskname =rs.getString("taskname");
-					
-					
-					
-					
-					
-				
 				
 					
 			    	  listsearchreleasetask.add(taskname );
-					  i++;
+				
 			          
 			      }
-			      session.setAttribute("listsearchreleasetask", listsearchreleasetask);
-			      return i;
+			      
+			      return listsearchreleasetask;
 			    
 			   
 
@@ -797,31 +583,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
-			return 0;
+			return null;
 	}
+	
+	//用户查看相似的第几页的发布的任务
 	public List<String> selectsimilarreleasetask(int uid,String keyword,int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+		
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -838,7 +608,7 @@ public class Task {
 			    
 			      sql = "SELECT taskname,id FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			     
 			      List<String> listtask=new ArrayList<String>();
 			      String m=String.valueOf(max);
 			      listtask.add(m);
@@ -855,7 +625,7 @@ public class Task {
 					
 					  listtask.add(t);
 					  listtask.add(taskname);
-					  i++;
+				
 			          
 			      }
 			     
@@ -871,31 +641,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
+	
+	//管理员查看相似的第几页的未接受的任务
 	public List<String> selectsimilartask(String keyvalue,int key) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -912,7 +666,7 @@ public class Task {
 			     int x=(key-1)*4;
 			      sql = "SELECT taskname,id FROM task where task.id!=all(SELECT t_id FROM alreadytask) and id!=all(SELECT t_id FROM completetask) and task.taskname like '%"+keyvalue+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			    
 			  
 			      String m=String.valueOf(max);  
 			      List<String> listtask=new ArrayList<String>();
@@ -930,7 +684,7 @@ public class Task {
 					
 					  listtask.add(t);
 					  listtask.add(taskname);
-					  i++;
+					
 			          
 			      }
 			      
@@ -946,31 +700,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
-	public int selectsimilarcomplete(int uid,String keyword,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
+	//用户查看相似的已完成任务名
+	public List<String> selectsimilarcomplete(int uid,String keyword) {
+		
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -980,26 +718,21 @@ public class Task {
 			    
 			      sql = "SELECT taskname FROM task,completetask where task.id=t_id and u_id='"+uid+"' and task.taskname like '%"+keyword+"%'    ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			     
 			      List<String> listsearchcompletetask=new ArrayList<String>();
 				    
 			      while(rs.next()) {
-			    	  task h=new task();
+			    	
 			    	  String taskname =rs.getString("taskname");
-					
-					
-					
-					
-					
-				
+		
 				
 					
 			    	  listsearchcompletetask.add(taskname );
-					  i++;
+				
 			          
 			      }
-			      session.setAttribute("listsearchcompletetask", listsearchcompletetask);
-			      return i;
+			     
+			      return listsearchcompletetask;
 			    
 			   
 
@@ -1011,31 +744,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
-			return 0;
+			return null;
 	}
-	public int selectallsimilarcomplete(String keyword,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
+	//管理员查看相似的已完成的任务名
+	public  List<String> selectallsimilarcomplete(String keyword) {
+
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -1045,26 +762,19 @@ public class Task {
 			    
 			      sql = "SELECT taskname FROM task,completetask where task.id=t_id  and task.taskname like '%"+keyword+"%'    ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			   
 			      List<String> listsearchcompletetask=new ArrayList<String>();
 				    
 			      while(rs.next()) {
-			    	  task h=new task();
+			    	
 			    	  String taskname =rs.getString("taskname");
 					
+			listsearchcompletetask.add(taskname );
 					
-					
-					
-					
-				
-				
-					
-			    	  listsearchcompletetask.add(taskname );
-					  i++;
 			          
 			      }
-			      session.setAttribute("listsearchcompletetask", listsearchcompletetask);
-			      return i;
+			     
+			      return listsearchcompletetask;
 			    
 			   
 
@@ -1076,31 +786,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
-			return 0;
+			return null;
 	}
+	
+	//用户查看自己的相似的第几页的已完成任务
 	public List<String> selectsimilarcompletetask(int uid,String keyword,int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -1119,12 +813,12 @@ public class Task {
 			    
 			      sql = "SELECT taskname,task.id  FROM task,completetask where task.id=t_id and u_id='"+uid+"' and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			   
 			      List<String> listcompletetask=new ArrayList<String>();
 			      String m=String.valueOf(max);
 			      listcompletetask.add(m);
 				  while(rs.next()) {
-				    	  task h=new task();
+				    	
 				    	  int tid=rs.getInt("id");
 				    	  String taskname =rs.getString("taskname");
 						
@@ -1134,7 +828,7 @@ public class Task {
 							
 				    	  listcompletetask.add(t);
 				    	  listcompletetask.add(taskname);
-						  i++;
+					
 				          
 				  }
 			      
@@ -1154,31 +848,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
+	
+	//管理员查看自己的相似的第几页的已完成任务
 	public  List<String> selectallsimilarcompletetask(String keyword,int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+		
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -1195,13 +873,13 @@ public class Task {
 			    
 			      sql = "SELECT taskname,task.id  FROM task,completetask where task.id=t_id  and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			  
 			      List<String> listcompletetask=new ArrayList<String>();
 			      String m=String.valueOf(max);
 			      listcompletetask.add(m);  
 			 	  
 				  while(rs.next()) {
-				    	  task h=new task();
+				    	 
 				    	  int tid=rs.getInt("id");
 				    	  String taskname =rs.getString("taskname");
 						
@@ -1211,7 +889,7 @@ public class Task {
 							
 				    	  listcompletetask.add(t);
 				    	  listcompletetask.add(taskname);
-						  i++;
+						
 				          
 				  }
 			      
@@ -1230,32 +908,15 @@ public class Task {
 	      //Handle errors for Class.forName
 	      e.printStackTrace();
 	   }finally{
-		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}
-	public int selectsimilaralready(String keyword,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
+	//管理员通过搜索框查看相似的任务名
+	public List<String> selectsimilaralready(String keyword) {
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -1265,26 +926,20 @@ public class Task {
 			    
 			      sql = "SELECT taskname FROM task,alreadytask where task.id=t_id  and task.taskname like '%"+keyword+"%'  ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			     
 			      List<String> listsearchalready=new ArrayList<String>();
 				    
 			      while(rs.next()) {
-			    	  task h=new task();
+			    	
 			    	  String taskname =rs.getString("taskname");
-					
-					
-					
-					
-					
-				
-				
+		
 					
 			    	  listsearchalready.add(taskname );
-					  i++;
+				
 			          
 			      }
-			      session.setAttribute("listsearchalready", listsearchalready);
-			      return i;
+			      
+			      return listsearchalready;
 			    
 			   
 
@@ -1296,31 +951,15 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
-			return 0;
+			return null;
 	}
+	
+	//管理员查看相似的第几页的已接受任务
 	public List<String> selectsimilaralreadytask(String keyword,int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -1338,12 +977,12 @@ public class Task {
 			    
 			      sql = "SELECT taskname,task.id FROM task,alreadytask where task.id=t_id  and task.taskname like '%"+keyword+"%' limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
+			     
 			      String m=String.valueOf(max);
 			      List<String> listalreadytask=new ArrayList<String>();
 			      listalreadytask.add(m);
 				  while(rs.next()) {
-				    	  task h=new task();
+				    	
 				    	  int tid=rs.getInt("id");
 				    	  String taskname =rs.getString("taskname");
 						
@@ -1355,7 +994,7 @@ public class Task {
 							
 						  listalreadytask.add(t);
 						  listalreadytask.add(taskname);
-						  i++;
+						
 				          
 				  }
 			      
@@ -1370,24 +1009,8 @@ public class Task {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}

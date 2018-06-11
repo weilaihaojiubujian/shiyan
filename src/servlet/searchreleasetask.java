@@ -50,7 +50,7 @@ public class searchreleasetask extends HttpServlet {
 	     
 	    List<String> listtask=(List<String>)s.selectsimilarreleasetask(uid,keyvalue,k);
 	    System.out.println(listtask);
-		System.out.println(session.getAttribute("max"));
+		
 		response.getWriter().write(JSONArray.fromObject(listtask).toString());
 		
 	}

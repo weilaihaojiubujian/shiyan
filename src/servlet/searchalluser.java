@@ -43,12 +43,11 @@ public class searchalluser extends HttpServlet {
          HttpSession session = request.getSession(); 
  		
          User s=new User();
- 		if(s.selectsimilar(keyword,session)!=0)
- 		{
- 			List<String> listsearchuser=(List<String>) session.getAttribute("listsearchuser");
- 			System.out.println(listsearchuser);
- 			response.getWriter().write(JSONArray.fromObject(listsearchuser).toString());
- 		}
+ 		
+ 		List<String> listsearchuser=(List<String>)s.selectsimilar(keyword);
+ 		System.out.println(listsearchuser);
+ 		response.getWriter().write(JSONArray.fromObject(listsearchuser).toString());
+ 		
 		
 	}
 

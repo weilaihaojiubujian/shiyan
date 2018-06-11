@@ -8,11 +8,14 @@ import java.text.SimpleDateFormat;
 import com.mysql.jdbc.Statement;
 
 public class Signagreement {
+	 private static Connection conn = null;
+	 private static Statement stmt = null;
+	 private static  ResultSet rs=null;
 
+	 
+	 //用户签订合同
 	public int insertsignagreement (int uid,int aid) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -38,24 +41,8 @@ public class Signagreement {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}

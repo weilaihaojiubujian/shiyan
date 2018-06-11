@@ -43,12 +43,11 @@ public class searchrelease extends HttpServlet {
  		
          int uid=(int) session.getAttribute("uid");
  		Task s=new Task();
- 		if(s.selectsimilarrelease(uid,keyword,session)!=0)
- 		{
- 			List<String> listsearchreleasetask=(List<String>) session.getAttribute("listsearchreleasetask");
- 			System.out.println(listsearchreleasetask);
- 			response.getWriter().write(JSONArray.fromObject(listsearchreleasetask).toString());
- 		}
+ 		
+ 		List<String> listsearchreleasetask=(List<String>) s.selectsimilarrelease(uid,keyword);
+ 		System.out.println(listsearchreleasetask);
+ 		response.getWriter().write(JSONArray.fromObject(listsearchreleasetask).toString());
+ 		
 		
 	}
 

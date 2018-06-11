@@ -18,10 +18,14 @@ import bean.user;
 
 
 public class User {
+	 private static Connection conn = null;
+	 private static Statement stmt = null;
+	 private static  ResultSet rs=null;
+	 
+	 
+	 //用户注册验证
   public int insertuser(user u) {
-	  Connection conn = null;
-	  Statement stmt = null;
-	  ResultSet rs=null;
+
 		try {
 			String name=u.getUsername();
 			String pass=u.getPassword();
@@ -57,33 +61,19 @@ public class User {
       e.printStackTrace();
    }finally{
 	   
-      //finally block used to close resources
-	   if (rs!= null) {
-			try {
-				rs.close();
-				rs= null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		// 释放语句对象
-		if (stmt != null) {
-			try {
-				stmt.close();
-				stmt = null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
+	   Catch c=new Catch();
+	   c.close(rs, stmt);
+	  
+		
    }//end try
 		return 0;
 		
 }
-  public int selectusername(String name,String pass,HttpSession session) {
+  
+  //用户登录验证
+  public int selectusername(String name,String pass,HttpSession session)  {
 	
-	  Connection conn = null;
-	  Statement stmt = null;
-	  ResultSet rs =null;	
+
 		try {
 			conn = connection.getConnection();
 			 stmt = (Statement) conn.createStatement();
@@ -101,6 +91,7 @@ public class User {
 		    	  System.out.println("登陆成功");
 		    	  session.setAttribute("uid", uid);	
 		    	  session.setAttribute("money",money);   
+		    	  
 		          return i;
 		      }
 		      else
@@ -110,7 +101,7 @@ public class User {
 					 return i;
 				}
 		  
-		 
+		       
 	      
   }catch(SQLException se){
       //Handle errors for JDBC
@@ -120,38 +111,25 @@ public class User {
       e.printStackTrace();
    }finally{
 	   
-      //finally block used to close resources
-	   if (rs!= null) {
-			try {
-				rs.close();
-				rs= null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		// 释放语句对象
-		if (stmt != null) {
-			try {
-				stmt.close();
-				stmt = null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}//end finally try
+	   Catch c=new Catch();
+	   c.close(rs, stmt);
+	   
+
    }//end try
 		return 0;
   }
+  
+  //用户查看自己的信息
   public int selectall(int uid,HttpSession session) {
-	  Connection conn = null;
-	  Statement stmt = null;
-	  ResultSet rs=null;
+	
 		try {
 			conn = connection.getConnection();
+			 System.out.println(conn);
 			 stmt = (Statement) conn.createStatement();
 		      String sql;
 		      sql = "SELECT * FROM user where id='"+uid+"'   ";
 		      rs = stmt.executeQuery(sql);
-		      user u = new user();
+		      
 		      int i=0;
 		      if(rs.next()) {
 		    	  String username=rs.getString("username");
@@ -186,32 +164,16 @@ public class User {
       e.printStackTrace();
    }finally{
 	   
-      //finally block used to close resources
-	   if (rs!= null) {
-			try {
-				rs.close();
-				rs= null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		// 释放语句对象
-		if (stmt != null) {
-			try {
-				stmt.close();
-				stmt = null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
+	   Catch c=new Catch();
+	   c.close(rs, stmt);
+	 
    }//end try
 		return 0;
 		
 }
+  //管理员查看所有用户
   public List<String> selectallinformation(int k) {
-	  Connection conn = null;
-	  Statement stmt = null;
-	  ResultSet rs=null;
+	
 		try {
 			conn = connection.getConnection();
 			 stmt = (Statement) conn.createStatement();
@@ -228,7 +190,7 @@ public class User {
 		      
 		      sql = "SELECT id,username FROM user where id in (SELECT uid FROM sign where stop is null and start is not null) limit "+x+",4 ";
 		      rs = stmt.executeQuery(sql);
-		      int j=0;
+		   
 		      String m=String.valueOf(max);
 			   List<String> listuser=new ArrayList<String>();
 			   listuser.add(m);
@@ -243,7 +205,7 @@ public class User {
 		    	  listuser.add(username);
 	          
 		        
-	              j++;
+	           
 		          }
 		       String s=String.valueOf(size);
 		       listuser.add(s);
@@ -259,38 +221,22 @@ public class User {
       e.printStackTrace();
    }finally{
 	   
-      //finally block used to close resources
-	   if (rs!= null) {
-			try {
-				rs.close();
-				rs= null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		// 释放语句对象
-		if (stmt != null) {
-			try {
-				stmt.close();
-				stmt = null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
+	   Catch c=new Catch();
+	   c.close(rs, stmt);
    }//end try
 		return null;
 		
 }
+  
+  //查看用户信息
   public int selectuid(int uid,HttpSession session) {
-	  Connection conn = null;
-	  Statement stmt = null;
-	  ResultSet rs=null;
+	 
 		try {
 			conn = connection.getConnection();
 			 stmt = (Statement) conn.createStatement();
 		      String sql;
 		     
-		      List<user> listuser=new ArrayList<user>();
+		     
 		      sql = "SELECT * FROM user where id='"+uid+"' ";
 			   rs = stmt.executeQuery(sql);
 		      
@@ -298,7 +244,7 @@ public class User {
 		    	
 		      int i=0;	
 		      while(rs.next()) {
-		    	  user u = new user();
+		    	 
 		    	  
 		    	  String username=rs.getString("username");
 		    	  String address=rs.getString("address");
@@ -326,32 +272,16 @@ public class User {
       e.printStackTrace();
    }finally{
 	   
-      //finally block used to close resources
-	   if (rs!= null) {
-			try {
-				rs.close();
-				rs= null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		// 释放语句对象
-		if (stmt != null) {
-			try {
-				stmt.close();
-				stmt = null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
+	   Catch c=new Catch();
+	   c.close(rs, stmt);
    }//end try
 		return 0;
 		
 }	
+  
+  //管理员显示第几页的用户
   public List<String> selectalluser(int k) {
-	  Connection conn = null;
-	  Statement stmt = null;
-	  ResultSet rs=null;
+	
 		try {
 			conn = connection.getConnection();
 			 stmt = (Statement) conn.createStatement();
@@ -373,7 +303,7 @@ public class User {
 			   listuser.add(m);
 		  
 		    	
-		      int i=0;	
+		 
 		      while(rs.next()) {
 		    	 
 		    	  int uid=rs.getInt("id");
@@ -382,7 +312,7 @@ public class User {
 		        
 		    	  listuser.add(u);
 		    	  listuser.add(username);
-	              i++;
+	           
 		      }
 		   
 		 
@@ -397,36 +327,20 @@ public class User {
       e.printStackTrace();
    }finally{
 	   
-      //finally block used to close resources
-	   if (rs!= null) {
-			try {
-				rs.close();
-				rs= null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		// 释放语句对象
-		if (stmt != null) {
-			try {
-				stmt.close();
-				stmt = null;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
+	   Catch c=new Catch();
+	   c.close(rs, stmt);
    }//end try
 		return null;
 		
 }
+  
+  //管理员删除用户
 	public int deleteuser(int uid) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
-			      String sql;
+			    
 			    
 			     
 			    
@@ -449,31 +363,15 @@ public class User {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
+	
+	//用户充值
 	public int updateaddmoney(int uid,double addmoney,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -500,31 +398,15 @@ public class User {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
+	
+	//用户提现
 	public int updatereducemoney(int uid,double money,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -551,31 +433,15 @@ public class User {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
-	public int selectsimilar(String keyword,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
+	
+	public List<String> selectsimilar(String keyword) {
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -585,11 +451,11 @@ public class User {
 			    
 			      sql = "SELECT username FROM user where username like '%"+keyword+"%'    ";
 			      rs = stmt.executeQuery(sql);
-			      int i=0;
-			      List<String> listsearchuser=new ArrayList<String>();
+			 
+			      List<String> listuser=new ArrayList<String>();
 				    
 			      while(rs.next()) {
-			    	  user u = new user();
+			    	
 			    	  
 			    	  String username=rs.getString("username");
 					
@@ -600,12 +466,12 @@ public class User {
 				
 				
 					
-			    	  listsearchuser.add(username);
-					  i++;
+			    	  listuser.add(username);
+				
 			          
 			      }
-			      session.setAttribute("listsearchuser", listsearchuser);
-			      return i;
+			      
+			      return listuser;
 			    
 			   
 
@@ -617,31 +483,15 @@ public class User {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
-			return 0;
+			return null;
 	}
+	
+	//管理员通过搜索框得到的用户
 	public  List<String> selectsimilaruser(String keyword,int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+		
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -655,7 +505,7 @@ public class User {
 			      int pageSize=4;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 			      int x=(k-1)*4;
-			      List<user> listalluser=new ArrayList<user>();
+			    
 				  
 			    
 			      sql = "SELECT id,username FROM user where username like '%"+keyword+"%' limit "+x+",4   ";
@@ -666,7 +516,7 @@ public class User {
 				   listuser.add(m);
 			  
 			    	
-			      int i=0;	
+			     
 			      while(rs.next()) {
 			    	 
 			    	  int uid=rs.getInt("id");
@@ -675,7 +525,7 @@ public class User {
 			        
 			    	  listuser.add(u);
 			    	  listuser.add(username);
-		              i++;
+		         
 			      }
 			   
 			 
@@ -689,25 +539,8 @@ public class User {
 	      //Handle errors for Class.forName
 	      e.printStackTrace();
 	   }finally{
-		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}

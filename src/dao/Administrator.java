@@ -9,12 +9,15 @@ import javax.servlet.http.HttpSession;
 import com.mysql.jdbc.Statement;
 
 public class Administrator {
+	private static Connection conn = null;
+	 private static Statement stmt = null;
+	 private static  ResultSet rs=null;
 
+	 
+	 //管理员的登陆验证
 	public int selectusername(String name,String pass,HttpSession session) {
 		
-		  Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs =null;	
+		 
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -50,24 +53,8 @@ public class Administrator {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}//end finally try
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	  }

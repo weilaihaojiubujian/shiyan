@@ -43,7 +43,7 @@ public class search extends HttpServlet {
  		
  		Task s=new Task();
  		
- 		List<String> listsearchtask=(List<String>) s.selectsimilar(keyword,session);
+ 		List<String> listsearchtask=(List<String>) s.selectsimilar(keyword);
  		System.out.println(listsearchtask);
  		response.getWriter().write(JSONArray.fromObject(listsearchtask).toString());
  		

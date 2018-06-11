@@ -15,11 +15,13 @@ import bean.task;
 import bean.user;
 
 public class Sign {
-
+	private static Connection conn = null;
+	 private static Statement stmt = null;
+	 private static  ResultSet rs=null;
+	 
+	 //开始签到，开始时间
 	public int insertbeginsignin(int tid,int uid) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -54,31 +56,16 @@ public class Sign {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
+	
+	
+	//结束签到，更新结束时间
 	public int updateendsignin(int tid,int uid) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -107,24 +94,8 @@ public class Sign {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}

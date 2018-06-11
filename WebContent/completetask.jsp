@@ -217,7 +217,7 @@
 
 <input type="text" size="50" id="keyword" name="keyword" onkeyup="getMoreContents()"
      onblur="keywordBlur()" onfocus="getMoreContents()"/>
-     <input type="submit"  value="查找"  name="submit" width="50px"/> 
+     <input type="submit"  value="查找"  name="submit" width="50px" onclick="init1(1)"/> 
      <%--内容展示区域--%>
      <div id="popdiv">
        <table id="content_table" bgcolor="#FFFAFA" border="0" cellspacing="0" cellpadding="0">

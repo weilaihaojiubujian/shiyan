@@ -42,12 +42,11 @@ public class searchalready extends HttpServlet {
          HttpSession session = request.getSession(); 
  		
  		Task s=new Task();
- 		if(s.selectsimilaralready(keyword,session)!=0)
- 		{
- 			List<String> listsearchalready=(List<String>) session.getAttribute("listsearchalready");
- 			System.out.println(listsearchalready);
- 			response.getWriter().write(JSONArray.fromObject(listsearchalready).toString());
- 		}
+ 	
+ 		List<String> listsearchalready=(List<String>) s.selectsimilaralready(keyword);
+ 		System.out.println(listsearchalready);
+ 		response.getWriter().write(JSONArray.fromObject(listsearchalready).toString());
+ 		
 	}
 
 	/**

@@ -14,7 +14,12 @@ import bean.agreement;
 import bean.task;
 
 public class Agreement {
+	 private static Connection conn = null;
+	 private static Statement stmt = null;
+	 private static  ResultSet rs=null;
 
+	 
+	 //用户发表合同
 	public int insertagreement(agreement a,int tid) {
 		Connection conn = null;
 		  Statement stmt = null;
@@ -48,31 +53,15 @@ public class Agreement {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
+	
+	//用户选择别的合同
 	public int insertsameagreement(int aid,int tid,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+		 
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -106,32 +95,17 @@ public class Agreement {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
+	
+	
+	//用户查看任务的合同
 	public int selectagreement(int tid,HttpSession session) {
 		
-		  Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs =null;	
+	 
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -174,32 +148,16 @@ public class Agreement {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}//end finally try
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	  }
+	
+	//查看所有的合同
 	public List<String> selectallagreement(int k) {
 		
-		  Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs =null;	
+		  
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -218,17 +176,17 @@ public class Agreement {
 			      String m=String.valueOf(max);
 			      List<String> listagreement=new ArrayList<String>();
 			      listagreement.add(m);
-			      int i=0;
+			 
 			      while(rs.next())
 			      {
 			    	 
-			    	  i=1;
+			    	 
 			    	  int aid=rs.getInt("id");
 			    	  String agreementname = rs.getString("agreementname");
 			    	  String ab=String.valueOf(aid);
 			    	  listagreement.add(ab);
 			    	  listagreement.add(agreementname);
-			          i++;
+			          
 			      }
 			 
 			      return listagreement;
@@ -243,32 +201,17 @@ public class Agreement {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}//end finally try
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	  }
+	
+	
+	//用户查看合同的信息
 	public int selectagreementintroduce(int aid,HttpSession session) {
 		
-		  Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs =null;	
+		 
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -303,33 +246,17 @@ public class Agreement {
 	      //Handle errors for Class.forName
 	      e.printStackTrace();
 	   }finally{
-		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}//end finally try
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	  }
+	
+	
+	//查看具体的合同信息
 	public int selectoneagreementintroduce(int tid,HttpSession session) {
 		
-		  Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs =null;	
+	 
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -365,31 +292,15 @@ public class Agreement {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}//end finally try
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	  }
+	
+	//用户查看相似的合同名
 	public int selectsimilar(String keyword,HttpSession session) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+		 
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -430,31 +341,15 @@ public class Agreement {
 	      e.printStackTrace();
 	   }finally{
 		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return 0;
 	}
+	
+	//用户查看所有的合同
 	public  List<String> selectsimilaragreement(String keyword,int k) {
-		Connection conn = null;
-		  Statement stmt = null;
-		  ResultSet rs=null;
+		 
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
@@ -475,17 +370,17 @@ public class Agreement {
 			      String m=String.valueOf(max);
 			      List<String> listagreement=new ArrayList<String>();
 			      listagreement.add(m);
-			      int i=0;
+			   
 			      while(rs.next())
 			      {
 			    	 
-			    	  i=1;
+			    	  
 			    	  int aid=rs.getInt("id");
 			    	  String agreementname = rs.getString("agreementname");
 			    	  String ab=String.valueOf(aid);
 			    	  listagreement.add(ab);
 			    	  listagreement.add(agreementname);
-			          i++;
+			        
 			      }
 			 
 			      return listagreement;
@@ -499,25 +394,8 @@ public class Agreement {
 	      //Handle errors for Class.forName
 	      e.printStackTrace();
 	   }finally{
-		   
-	      //finally block used to close resources
-		   if (rs!= null) {
-				try {
-					rs.close();
-					rs= null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-			// 释放语句对象
-			if (stmt != null) {
-				try {
-					stmt.close();
-					stmt = null;
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
+		   Catch c=new Catch();
+		   c.close(rs, stmt);
 	   }//end try
 			return null;
 	}

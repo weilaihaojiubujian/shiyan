@@ -40,9 +40,23 @@ public class connection {
 		if(conn==null)
 		{
 			conn = (Connection) DriverManager.getConnection(url, username, password);
+			System.out.println("数据库连接正常！");
 			return conn;
 		}
+		System.out.println("数据库正常连接！");
 		return conn;
+	}
+	
+	public static void close() throws Exception
+	{
+		if (conn!=null){
+            try {
+            	conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            conn=null;
+        }
 	}
 	
 	public static void main(String[] args) {

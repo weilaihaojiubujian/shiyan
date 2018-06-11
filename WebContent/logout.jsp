@@ -5,8 +5,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<script language="javascript">  
+// 这个脚本是 ie6和ie7 通用的脚本  
+function custom_close(){  
+if   
+(confirm("您确定要关闭本页吗？")){  
+window.opener=null;  
+window.open('','_self');  
+window.close();  
+}  
+else{}  
+}  
+</script>    
+
 </head>
-<body>
+<body onload="custom_close()">
 
 
 <%  
