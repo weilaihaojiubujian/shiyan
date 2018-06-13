@@ -12,7 +12,7 @@ function check(){
 	  var value=document.getElementById('reducemoney').value;
 	 
 	  if(value<0){
-		  alert("充值的钱不能为负数,请重新输入")
+		  alert("提现的钱不能为负数,请重新输入")
 		  reducemoney.focus();
 		 
 	  }

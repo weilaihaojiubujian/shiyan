@@ -25,6 +25,7 @@
 
    <li><a href="servlet/userinformation">查看用户的信息</a></li>
     <li><a href="addmoney.jsp">充值</a></li>
+    <li><a href="reducemoney.jsp">提现</a></li>
    <li> <a href="logout.jsp">退出系统</a> </li>
 </ul>
 

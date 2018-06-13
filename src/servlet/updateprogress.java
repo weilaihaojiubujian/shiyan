@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.Alreadytask;
-import dao.Completetask;
+
 import dao.Task;
 
 /**
@@ -44,9 +44,9 @@ public class updateprogress extends HttpServlet {
 		int uid=(int)session.getAttribute("uid");
 		if(progress==100)
 		{
-			Completetask c=new Completetask();
+		
 			Task t=new Task();
-			if(c.insertcompletetask( tid, uid)==1 && x.delete(tid, uid)==1 ) {
+			if(x.updateprogress(progress, tid, uid)==1 ) {
 				response.sendRedirect(request.getContextPath()+"/updateprogress_success.jsp");
 			}
 			else {

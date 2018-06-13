@@ -98,7 +98,7 @@ public class Alreadytask {
 			    
 			     
 			    
-			      sql = "SELECT * FROM alreadytask where u_id='"+uid+"' ";
+			      sql = "SELECT * FROM alreadytask where u_id='"+uid+"' and progress<100 ";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
 			
