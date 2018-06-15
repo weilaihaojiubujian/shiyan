@@ -66,7 +66,7 @@
     function call($value) {
   	
 
-    	if(document.getElementById("14").value==null)
+    	if(document.getElementById("22").value==null)
     	{
     		
     		init($value);
@@ -92,19 +92,37 @@
             	  var size = json.length;
             	 
             	  k=json[0];
-            	
-            	  for(var i=1;i<size;i=i+2){
+            	  for(i=1;i<=20;i++){
+            		  $("#"+""+i+"").hide();
+            	  }
+            	  for(var i=1;i<size-1;i=i+5){
             	      var nextNode = json[i];
             	      var lastNode=json[i+1];
-            	     
+            	      var thirdNode=json[i+2];
+            	      var fourNode=json[i+3];
+            	      var fifthNode=json[i+4];
+            	    
             	      var x=i;
             	      var y=i+1;
             	      var z=9+(i-1)/2;
+            	      var n=i+2;
+            	      var m=i+3;
+            	      var c=i+4;
             	      document.getElementById("0").innerHTML=$value;
-            	      document.getElementById(""+x+"").innerHTML=nextNode;
+            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i-1)/5+1;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
             	      document.getElementById(""+y+"").href="servlet/checkcompletetaskinformation?list="+nextNode+"";
+            	      document.getElementById(""+n+"").innerHTML=thirdNode;
+            	      document.getElementById(""+m+"").innerHTML=fourNode;
+            	      document.getElementById(""+c+"").innerHTML=fifthNode;
             	    
+            	      document.getElementById(""+c+"").href="servlet/checkuserinformation?lis="+fifthNode+"";
+            	      $("#"+""+x+"").show();
+            	      $("#"+""+y+"").show();
+            	      $("#"+""+n+"").show();
+            	      $("#"+""+m+"").show();
+            	      $("#"+""+c+"").show();
+             
             	     
               }
              
@@ -117,7 +135,7 @@
     }
     function init1($value) {
     	clear();
-    	document.getElementById("14").value=$value;
+    	document.getElementById("22").value=$value;
     	var $valu=document.getElementById("keyword").value;
       	$.ajax({
       		  url:"servlet/searchcompletetask",
@@ -131,19 +149,36 @@
             	  var size = json.length;
             	 
             	  k=json[0];
-            	
-            	  for(var i=1;i<size;i=i+2){
+            	  for(i=1;i<=20;i++){
+            		  $("#"+""+i+"").hide();
+            	  }
+            	  for(var i=1;i<size-1;i=i+5){
             	      var nextNode = json[i];
             	      var lastNode=json[i+1];
-            	     
+            	      var thirdNode=json[i+2];
+            	      var fourNode=json[i+3];
+            	      var fifthNode=json[i+4];
+            	    
             	      var x=i;
             	      var y=i+1;
             	      var z=9+(i-1)/2;
+            	      var n=i+2;
+            	      var m=i+3;
+            	      var c=i+4;
             	      document.getElementById("0").innerHTML=$value;
-            	      document.getElementById(""+x+"").innerHTML=nextNode;
+            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i-1)/5+1;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
             	      document.getElementById(""+y+"").href="servlet/checkcompletetaskinformation?list="+nextNode+"";
-            	      
+            	      document.getElementById(""+n+"").innerHTML=thirdNode;
+            	      document.getElementById(""+m+"").innerHTML=fourNode;
+            	      document.getElementById(""+c+"").innerHTML=fifthNode;
+            	    
+            	      document.getElementById(""+c+"").href="servlet/checkuserinformation?lis="+fifthNode+"";
+            	      $("#"+""+x+"").show();
+            	      $("#"+""+y+"").show();
+            	      $("#"+""+n+"").show();
+            	      $("#"+""+m+"").show();
+            	      $("#"+""+c+"").show();
             	     
               }
              
@@ -232,19 +267,23 @@
 
 
 	  
-<a id="1"></a>&emsp;<a href=""  id="2"></a><br>
-<a id="3"></a>&emsp;<a href=""  id="4"></a><br>
-<a id="5"></a>&emsp;<a href=""  id="6"></a><br>
-<a id="7"></a>&emsp;<a href=""  id="8"></a><br>
+
+<a id="1"></a>&emsp;&emsp;<a href=""  id="2"></a>&emsp;&emsp;<a id="3"></a>&emsp;&emsp;<a id="4"></a>&emsp;&emsp;<a id="5"></a><br>
+<a id="6"></a>&emsp;&emsp;<a href=""  id="7"></a>&emsp;&emsp;<a id="8"></a>&emsp;&emsp;<a id="9"></a>&emsp;&emsp;<a id="10"></a><br>
+<a id="11"></a>&emsp;&emsp;<a href=""  id="12"></a>&emsp;&emsp;<a id="13"></a>&emsp;&emsp;<a id="14"></a>&emsp;&emsp;<a id="15"></a><br>
+<a id="16"></a>&emsp;&emsp;<a href=""  id="17"></a>&emsp;&emsp;<a id="18"></a>&emsp;&emsp;<a id="19"></a>&emsp;&emsp;<a id="20"></a><br>
 
 
 
+
+
+ <br>
 <br>
 第<a id="0"></a>页<br>
 <button type="button" onclick="call(1)">首页</button>
 <button type="button" onclick="call(getnum1())" >上一页</button>
 <button type="button" onclick="call(getnum())" >下一页</button>
-<button type="button" onclick="p()" id="13" value="">尾页</button><br>
-<label id="14" value=""></label>
+<button type="button" onclick="p()" id="21" value="">尾页</button><br>
+<label id="22" value=""></label>
 </body>
 </html>

@@ -188,7 +188,7 @@ public class User {
 		      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 		      int x=(k-1)*4;
 		      
-		      sql = "SELECT id,username FROM user where id in (SELECT uid FROM sign where stop is null and start is not null) limit "+x+",4 ";
+		      sql = "SELECT id,username,address,bankaccount,card,money FROM user where id in (SELECT uid FROM sign where stop is null and start is not null) limit "+x+",4 ";
 		      rs = stmt.executeQuery(sql);
 		   
 		      String m=String.valueOf(max);
@@ -201,10 +201,17 @@ public class User {
 		    	  int uid=rs.getInt("id");
 		    	  String username=rs.getString("username");
 		    	  String u=String.valueOf(uid);
+		    	  String address=rs.getString("address");
+		    	  String bankaccount=rs.getString("bankaccount");
+		    	  String card=rs.getString("card");
+		    	  double money=rs.getDouble("money");
+		    	  String mo=String.valueOf(money);
 		    	  listuser.add(u);
 		    	  listuser.add(username);
-	          
-		        
+		    	  listuser.add(address);
+		    	  listuser.add(bankaccount);
+		    	  listuser.add(card);
+		    	  listuser.add(mo);
 	           
 		          }
 		       String s=String.valueOf(size);
@@ -296,7 +303,7 @@ public class User {
 		      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 		      int x=(k-1)*4;
 		    
-		      sql = "SELECT id,username FROM user limit "+x+",4 ";
+		      sql = "SELECT id,username,address,bankaccount,card,money FROM user limit "+x+",4 ";
 			   rs = stmt.executeQuery(sql);
 			   String m=String.valueOf(max);
 			   List<String> listuser=new ArrayList<String>();
@@ -309,9 +316,17 @@ public class User {
 		    	  int uid=rs.getInt("id");
 		    	  String username=rs.getString("username");
 		    	  String u=String.valueOf(uid);
-		        
+		    	  String address=rs.getString("address");
+		    	  String bankaccount=rs.getString("bankaccount");
+		    	  String card=rs.getString("card");
+		    	  double money=rs.getDouble("money");
+		    	  String mo=String.valueOf(money);
 		    	  listuser.add(u);
 		    	  listuser.add(username);
+		    	  listuser.add(address);
+		    	  listuser.add(bankaccount);
+		    	  listuser.add(card);
+		    	  listuser.add(mo);
 	           
 		      }
 		   
@@ -508,7 +523,7 @@ public class User {
 			    
 				  
 			    
-			      sql = "SELECT id,username FROM user where username like '%"+keyword+"%' limit "+x+",4   ";
+			      sql = "SELECT id,username,address,bankaccount,card,money FROM user where username like '%"+keyword+"%' limit "+x+",4   ";
 			      rs = stmt.executeQuery(sql);
 			    
 			      String m=String.valueOf(max);
@@ -522,9 +537,17 @@ public class User {
 			    	  int uid=rs.getInt("id");
 			    	  String username=rs.getString("username");
 			    	  String u=String.valueOf(uid);
-			        
+			    	  String address=rs.getString("address");
+			    	  String bankaccount=rs.getString("bankaccount");
+			    	  String card=rs.getString("card");
+			    	  double money=rs.getDouble("money");
+			    	  String mo=String.valueOf(money);
 			    	  listuser.add(u);
 			    	  listuser.add(username);
+			    	  listuser.add(address);
+			    	  listuser.add(bankaccount);
+			    	  listuser.add(card);
+			    	  listuser.add(mo);
 		         
 			      }
 			   

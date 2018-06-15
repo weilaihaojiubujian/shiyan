@@ -96,7 +96,7 @@ public class Task {
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 			     
 			      
-			      sql = "SELECT taskname,task.id FROM task where task.id!=all(SELECT t_id FROM alreadytask)  limit "+x+",4 ";
+			      sql = "SELECT taskname,task.id,price,date,releaseid FROM task where task.id!=all(SELECT t_id FROM alreadytask)  limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			    
 			      String m=String.valueOf(max);
@@ -113,9 +113,20 @@ public class Task {
 				
 					
 					
+					 
+					  double price=rs.getDouble("price");
+					  String p=String.valueOf(price);	
+					  java.util.Date date=rs.getDate("date");	
+					  String d=String.valueOf(date);	
+					  int releaseid=rs.getInt("releaseid");
+					  String r=String.valueOf(releaseid);
+						 
 					  listtask.add(t);
 					  listtask.add(taskname);
-				
+					  listtask.add(p);
+					  listtask.add(d);
+					  listtask.add(r);
+							
 			          
 			      }
 			     
@@ -218,7 +229,7 @@ public class Task {
 			      
 			      List<String> listcompletetask=new ArrayList<String>();
 			     
-			      sql = "SELECT task.id,task.taskname FROM task,alreadytask where progress=100 and task.id=t_id and u_id='"+uid+"' limit "+x+",4 ";
+			      sql = "SELECT task.id,task.taskname,price,date,releaseid FROM task,alreadytask where progress=100 and task.id=t_id and u_id='"+uid+"' limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			      String m=String.valueOf(max);
 			      listcompletetask.add(m);
@@ -231,10 +242,19 @@ public class Task {
 				    	  String t=String.valueOf(tid);
 				
 						
-						
-				    	  listcompletetask.add(t);
-				    	  listcompletetask.add(taskname);
-						
+				    	  
+						  double price=rs.getDouble("price");
+						  String p=String.valueOf(price);	
+						  java.util.Date date=rs.getDate("date");	
+						  String d=String.valueOf(date);	
+						  int releaseid=rs.getInt("releaseid");
+						  String r=String.valueOf(releaseid);
+							 
+						  listcompletetask.add(t);
+						  listcompletetask.add(taskname);
+						  listcompletetask.add(p);
+						  listcompletetask.add(d);
+						  listcompletetask.add(r);
 				          
 				  }
 			    
@@ -279,7 +299,7 @@ public class Task {
 			     
 			    
 			     
-			      sql = "SELECT id,taskname FROM task where  releaseid='"+uid+"' limit "+x+",4 ";
+			      sql = "SELECT id,taskname,price,date,releaseid FROM task where  releaseid='"+uid+"' limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			      String m=String.valueOf(max);
 			    
@@ -294,12 +314,20 @@ public class Task {
 					  int tid=rs.getInt("id");
 					  String t=String.valueOf(tid);
 					
-				
-					
-					
+
+						 
+					  double price=rs.getDouble("price");
+					  String p=String.valueOf(price);	
+					  java.util.Date date=rs.getDate("date");	
+					  String d=String.valueOf(date);	
+					  int releaseid=rs.getInt("releaseid");
+					  String r=String.valueOf(releaseid);
+						 
 					  listtask.add(t);
 					  listtask.add(taskname);
-					
+					  listtask.add(p);
+					  listtask.add(d);
+					  listtask.add(r);
 			          
 			      }
 			    
@@ -339,7 +367,7 @@ public class Task {
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 			     
 			    
-			      sql = "SELECT task.id,task.taskname FROM task,alreadytask where progress=100 and task.id=t_id limit "+x+",4 ";
+			      sql = "SELECT task.id,task.taskname,price,date,releaseid,u_id FROM task,alreadytask where progress=100 and task.id=t_id limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			      
 			      List<String> listcompletetask=new ArrayList<String>();
@@ -352,11 +380,22 @@ public class Task {
 				    	  String t=String.valueOf(tid);
 							
 							
-							
-				    	  listcompletetask.add(t);
-				    	  listcompletetask.add(taskname);
 						
-				          
+				    	  
+						  double price=rs.getDouble("price");
+						  String p=String.valueOf(price);	
+						  java.util.Date date=rs.getDate("date");	
+						  String d=String.valueOf(date);	
+						  int releaseid=rs.getInt("releaseid");
+						  String r=String.valueOf(releaseid);
+						  int uid=rs.getInt("u_id");
+						  String u=String.valueOf(uid); 
+						  listcompletetask.add(t);
+						  listcompletetask.add(taskname);
+						  listcompletetask.add(p);
+						  listcompletetask.add(d);
+						  listcompletetask.add(r);
+						  listcompletetask.add(u);
 				  }
 			  
 			 
@@ -399,7 +438,7 @@ public class Task {
 				 int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 				  
 			    
-			      sql = "SELECT id,taskname FROM task where id in (SELECT t_id FROM alreadytask where progress<100) limit "+x+",4 ";
+			      sql = "SELECT t_id,taskname,price,date,releaseid,progress,u_id FROM task,alreadytask where task.id=t_id and progress<100 limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			    
 			      String m=String.valueOf(max);
@@ -408,20 +447,25 @@ public class Task {
 			      while(rs.next()) {
 			    	 
 			    	  String taskname =rs.getString("taskname");
-				
-					
-					  int tid=rs.getInt("id");
-					 
-				
+					  int tid=rs.getInt("t_id");
 					  String t=String.valueOf(tid);
-						
-						
-						
-						
+					 double price=rs.getDouble("price");
+					 String p=String.valueOf(price);	
+					 java.util.Date date=rs.getDate("date");	
+					 String d=String.valueOf(date);	
+					 int releaseid=rs.getInt("releaseid");
+					 String r=String.valueOf(releaseid);
+					 double progress=rs.getDouble("progress");
+					 String pro=String.valueOf(progress);
+					 int uid=rs.getInt("u_id");
+					  String u=String.valueOf(uid);
 					  listalreadytask.add(t);
 					  listalreadytask.add(taskname);
-					
-			          
+					  listalreadytask.add(p);
+					  listalreadytask.add(d);
+					  listalreadytask.add(r);
+					  listalreadytask.add(pro);
+					  listalreadytask.add(u);
 			      }
 			      
 			      return listalreadytask;
@@ -452,7 +496,7 @@ public class Task {
 			    
 				  
 			    
-			      sql = "SELECT * FROM task where id='"+tid+"' ";
+			      sql = "SELECT taskname,introduce FROM task where id='"+tid+"' ";
 			      rs = stmt.executeQuery(sql);
 			      int i=0;
 			     
@@ -462,14 +506,11 @@ public class Task {
 			    	  String taskname =rs.getString("taskname");
 					  String introduce = rs.getString("introduce");
 					 
-					 
-					  double price=rs.getDouble("price");
-				
-					  java.util.Date date=rs.getDate("date");
 					
-					  h.setDate(date);
+					
+					
 					  h.setIntroduce(introduce);
-					  h.setPrice(price);
+				
 					  h.setTaskname(taskname);
 					  h.setTid(tid);
 					
@@ -606,7 +647,7 @@ public class Task {
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 			  
 			    
-			      sql = "SELECT taskname,id FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
+			      sql = "SELECT taskname,id,price,date,releaseid FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
 			     
 			      List<String> listtask=new ArrayList<String>();
@@ -620,12 +661,19 @@ public class Task {
 					  int tid=rs.getInt("id");
 					  String t=String.valueOf(tid);
 					
-				
-					
-					
+					  
+					  double price=rs.getDouble("price");
+					  String p=String.valueOf(price);	
+					  java.util.Date date=rs.getDate("date");	
+					  String d=String.valueOf(date);	
+					  int releaseid=rs.getInt("releaseid");
+					  String r=String.valueOf(releaseid);
+						 
 					  listtask.add(t);
 					  listtask.add(taskname);
-				
+					  listtask.add(p);
+					  listtask.add(d);
+					  listtask.add(r);
 			          
 			      }
 			     
@@ -664,7 +712,7 @@ public class Task {
 			    
 				  
 			     int x=(key-1)*4;
-			      sql = "SELECT taskname,id FROM task where task.id!=all(SELECT t_id FROM alreadytask)  and task.taskname like '%"+keyvalue+"%'  limit "+x+",4  ";
+			      sql = "SELECT taskname,id,price,date,releaseid FROM task where task.id!=all(SELECT t_id FROM alreadytask)  and task.taskname like '%"+keyvalue+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
 			    
 			  
@@ -679,12 +727,19 @@ public class Task {
 					  int tid=rs.getInt("id");
 					  String t=String.valueOf(tid);
 					
-				
-					
-					
+
+					  double price=rs.getDouble("price");
+					  String p=String.valueOf(price);	
+					  java.util.Date date=rs.getDate("date");	
+					  String d=String.valueOf(date);	
+					  int releaseid=rs.getInt("releaseid");
+					  String r=String.valueOf(releaseid);
+						 
 					  listtask.add(t);
 					  listtask.add(taskname);
-					
+					  listtask.add(p);
+					  listtask.add(d);
+					  listtask.add(r);
 			          
 			      }
 			      
@@ -811,7 +866,7 @@ public class Task {
 			     int x=(k-1)*4;
 				  
 			    
-			      sql = "SELECT taskname,task.id  FROM task,alreadytask where task.id=t_id and u_id='"+uid+"' and progress=100 and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
+			      sql = "SELECT taskname,task.id,price,date,releaseid  FROM task,alreadytask where task.id=t_id and u_id='"+uid+"' and progress=100 and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
 			   
 			      List<String> listcompletetask=new ArrayList<String>();
@@ -823,12 +878,18 @@ public class Task {
 				    	  String taskname =rs.getString("taskname");
 						
 				    	  String t=String.valueOf(tid);
-							
-							
-							
-				    	  listcompletetask.add(t);
-				    	  listcompletetask.add(taskname);
-					
+				    	  double price=rs.getDouble("price");
+						  String p=String.valueOf(price);	
+						  java.util.Date date=rs.getDate("date");	
+						  String d=String.valueOf(date);	
+						  int releaseid=rs.getInt("releaseid");
+						  String r=String.valueOf(releaseid);
+							 
+						  listcompletetask.add(t);
+						  listcompletetask.add(taskname);
+						  listcompletetask.add(p);
+						  listcompletetask.add(d);
+						  listcompletetask.add(r);
 				          
 				  }
 			      
@@ -871,7 +932,7 @@ public class Task {
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 				  
 			    
-			      sql = "SELECT taskname,task.id  FROM task,alreadytask where task.id=t_id  and progress=100 and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
+			      sql = "SELECT taskname,task.id,price,date,releaseid,u_id  FROM task,alreadytask where task.id=t_id  and progress=100 and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
 			      rs = stmt.executeQuery(sql);
 			  
 			      List<String> listcompletetask=new ArrayList<String>();
@@ -887,8 +948,20 @@ public class Task {
 							
 							
 							
-				    	  listcompletetask.add(t);
-				    	  listcompletetask.add(taskname);
+				    	  double price=rs.getDouble("price");
+						  String p=String.valueOf(price);	
+						  java.util.Date date=rs.getDate("date");	
+						  String d=String.valueOf(date);	
+						  int releaseid=rs.getInt("releaseid");
+						  String r=String.valueOf(releaseid);
+						  int uid=rs.getInt("u_id");
+						  String u=String.valueOf(uid); 
+						  listcompletetask.add(t);
+						  listcompletetask.add(taskname);
+						  listcompletetask.add(p);
+						  listcompletetask.add(d);
+						  listcompletetask.add(r);
+						  listcompletetask.add(u);
 						
 				          
 				  }
@@ -975,7 +1048,7 @@ public class Task {
 				 int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
 				  
 			    
-			      sql = "SELECT taskname,task.id FROM task,alreadytask where task.id=t_id and progress<100 and task.taskname like '%"+keyword+"%' limit "+x+",4 ";
+			      sql = "SELECT taskname,task.id,,price,date,releaseid,progress,u_id FROM task,alreadytask where task.id=t_id and progress<100 and task.taskname like '%"+keyword+"%' limit "+x+",4 ";
 			      rs = stmt.executeQuery(sql);
 			     
 			      String m=String.valueOf(max);
@@ -983,17 +1056,26 @@ public class Task {
 			      listalreadytask.add(m);
 				  while(rs.next()) {
 				    	
-				    	  int tid=rs.getInt("id");
-				    	  String taskname =rs.getString("taskname");
-						
-
-						  String t=String.valueOf(tid);
-							
-							
-							
-							
-						  listalreadytask.add(t);
-						  listalreadytask.add(taskname);
+					  String taskname =rs.getString("taskname");
+					  int tid=rs.getInt("id");
+					  String t=String.valueOf(tid);
+					 double price=rs.getDouble("price");
+					 String p=String.valueOf(price);	
+					 java.util.Date date=rs.getDate("date");	
+					 String d=String.valueOf(date);	
+					 int releaseid=rs.getInt("releaseid");
+					 String r=String.valueOf(releaseid);
+					 double progress=rs.getDouble("progress");
+					 String pro=String.valueOf(progress);
+					 int uid=rs.getInt("u_id");
+					  String u=String.valueOf(uid);
+					  listalreadytask.add(t);
+					  listalreadytask.add(taskname);
+					  listalreadytask.add(p);
+					  listalreadytask.add(d);
+					  listalreadytask.add(r);
+					  listalreadytask.add(pro);
+					  listalreadytask.add(u);
 						
 				          
 				  }

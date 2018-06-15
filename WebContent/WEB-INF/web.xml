@@ -435,7 +435,7 @@
     <servlet-name>checkreleasetaskinformation</servlet-name>
     <url-pattern>/servlet/checkreleasetaskinformation</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>checkuserinformation</servlet-name>
@@ -444,5 +444,15 @@
   <servlet-mapping>
     <servlet-name>checkuserinformation</servlet-name>
     <url-pattern>/servlet/checkuserinformation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>searchcompletetaskbyuser</servlet-name>
+    <servlet-class>servlet.searchcompletetaskbyuser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchcompletetaskbyuser</servlet-name>
+    <url-pattern>/servlet/searchcompletetaskbyuser</url-pattern>
   </servlet-mapping>
 </web-app>

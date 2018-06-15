@@ -8,23 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 import dao.Task;
 import net.sf.json.JSONArray;
 
 /**
- * Servlet implementation class searchcompletetask
+ * Servlet implementation class searchcompletetaskbyuser
  */
-@WebServlet("/searchcompletetask")
-public class searchcompletetask extends HttpServlet {
+@WebServlet("/searchcompletetaskbyuser")
+public class searchcompletetaskbyuser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public searchcompletetask() {
+    public searchcompletetaskbyuser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,31 +37,13 @@ public class searchcompletetask extends HttpServlet {
         String key=request.getParameter("key");
 		int k=Integer.parseInt(key);
 		String keyvalue=request.getParameter("keyvalue");
-		HttpSession session = request.getSession(); 
-	    String username=null;
-	     username=(String) session.getAttribute("username");
-	     int uid=0;
-	     if(username!=null) {
-	        	
-	    		uid=(int)session.getAttribute("uid");
-	        }
-	       
-	
-		
-	
-
-		   Task s=new Task();
-			List<String> listcompletetask=s.selectsimilarcompletetask(uid,keyvalue,k);
-				
-			System.out.println(listcompletetask);
-			System.out.println("12");
-			System.out.println(uid);
-			response.getWriter().write(JSONArray.fromObject(listcompletetask).toString());
+	    Task s=new Task();
+		List<String> listcompletetask=s.selectallsimilarcompletetask(keyvalue,k);
+			 
+		System.out.println("2");		
+		System.out.println(listcompletetask);
 			
-	  
-	  
-
-		
+		response.getWriter().write(JSONArray.fromObject(listcompletetask).toString());
 	}
 
 	/**

@@ -67,7 +67,7 @@
     function call($value) {
   	
 
-    	if(document.getElementById("14").value==null)
+    	if(document.getElementById("25").value==null)
     	{
     		
     		init($value);
@@ -93,23 +93,44 @@
             	  var size = json.length;
             	 
             	  k=json[0];
-            	  $("#9").hide();
-            	  $("#10").hide();
-            	  $("#11").hide();
-            	  $("#12").hide();
-            	  for(var i=1;i<size;i=i+2){
-            	      var nextNode = json[i];
+            	  
+            	  for(i=1;i<=24;i++){
+            		  $("#"+""+i+"").hide();
+            	  }
+            	  
+            	  
+            	 
+            	  for(var i=1;i<size;i=i+5){
+            		  var nextNode = json[i];
             	      var lastNode=json[i+1];
-            	     
+            	      var thirdNode=json[i+2];
+            	      var fourNode=json[i+3];
+            	      var fifthNode=json[i+4];
+            	   
             	      var x=i;
             	      var y=i+1;
-            	      var z=9+(i-1)/2;
+            	      var z=21+(i-1)/5;
+            	      var n=i+2;
+            	      var m=i+3;
+            	      var c=i+4;
+            	     
             	      document.getElementById("0").innerHTML=$value;
-            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i+1)/2;
+            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i-1)/5+1;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
             	      document.getElementById(""+y+"").href="servlet/checktaskinformation?lis="+nextNode+"";
             	      document.getElementById(""+z+"").value=nextNode;
+            	      document.getElementById(""+n+"").innerHTML=thirdNode;
+            	      document.getElementById(""+m+"").innerHTML=fourNode;
+            	      document.getElementById(""+c+"").innerHTML=fifthNode;
+            	    
+            	      document.getElementById(""+c+"").href="servlet/checkuserinformation?lis="+fifthNode+"";
             	      $("#"+""+z+"").show();
+            	      $("#"+""+x+"").show();
+            	      $("#"+""+y+"").show();
+            	      $("#"+""+n+"").show();
+            	      $("#"+""+m+"").show();
+            	      $("#"+""+c+"").show();
+            	     
             	     
               }
              
@@ -122,7 +143,7 @@
     }
     function init1($value) {
     	clear();
-    	document.getElementById("14").value=$value;
+    	document.getElementById("25").value=$value;
     	var $valu=document.getElementById("keyword").value;
       	$.ajax({
       		  url:"servlet/searchtask",
@@ -136,23 +157,41 @@
             	  var size = json.length;
             	 
             	  k=json[0];
-            	  $("#9").hide();
-            	  $("#10").hide();
-            	  $("#11").hide();
-            	  $("#12").hide();
-            	  for(var i=1;i<size;i=i+2){
-            	      var nextNode = json[i];
+            	  for(i=1;i<=24;i++){
+            		  $("#"+""+i+"").hide();
+            	  }
+            	  for(var i=1;i<size;i=i+5){
+            		  var nextNode = json[i];
             	      var lastNode=json[i+1];
-            	     
+            	      var thirdNode=json[i+2];
+            	      var fourNode=json[i+3];
+            	      var fifthNode=json[i+4];
+            	  
             	      var x=i;
             	      var y=i+1;
-            	      var z=9+(i-1)/2;
+            	      var z=21+(i-1)/5;
+            	      var n=i+2;
+            	      var m=i+3;
+            	      var c=i+4;
+            	      var v=i+5;
             	      document.getElementById("0").innerHTML=$value;
-            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i+1)/2;
+            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i-1)/5+1;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
             	      document.getElementById(""+y+"").href="servlet/checktaskinformation?lis="+nextNode+"";
             	      document.getElementById(""+z+"").value=nextNode;
+            	      document.getElementById(""+n+"").innerHTML=thirdNode;
+            	      document.getElementById(""+m+"").innerHTML=fourNode;
+            	      document.getElementById(""+c+"").innerHTML=fifthNode;
+            	    
+            	      document.getElementById(""+c+"").href="servlet/checkuserinformation?lis="+fifthNode+"";
+            	     
+             
             	      $("#"+""+z+"").show();
+            	      $("#"+""+x+"").show();
+            	      $("#"+""+y+"").show();
+            	      $("#"+""+n+"").show();
+            	      $("#"+""+m+"").show();
+            	      $("#"+""+c+"").show();
             	     
               }
              
@@ -241,39 +280,48 @@
 
 <br><br><br>
 <form action="servlet/checktask" method="post">
-
 <table align="center" valign="center" border="1px">
-   <tr>
-       <td></td>
-       <td>序号</td>
-       <td>任务名</td>
-  </tr>
- 
-   <tr>
-     <td><input type="radio" value="" name="list" id="9" /></td>
-       <td><label id="1"></label></td>
-       <td><a href=""  id="2"></a></td>
-  </tr>
+<tr>
+<td></td>
+<td>序号</td>
+<td>任务名</td>
+<td>金额</td>
+<td>发布日期</td>
+<td>发布人id</td>
+</td>
+<tr>
+<td> <input type="radio" value="" name="list" id="21" /></td>
+<td><a id="1"></a></td>
+<td><a href=""  id="2"></a></td>
+<td><a id="3"></a></td>
+<td><a id="4"></a></td>
+<td> <a id="5"></a><br></td>
+</tr>
 
-  <tr>
-     <td><input type="radio" value="" name="list"id="10"  /></td>
-       <td><label id="3"></label></td>
-       <td><a href=""  id="4"></a></td>
-  </tr>
-
-  <tr>
-   <td><input type="radio" value="" name="list" id="11" /></td>
-       <td><label id="5"></label></td>
-       <td><a href=""  id="6"></a></td>
-  </tr>
-
-  <tr>
-   <td><input type="radio" value="" name="list"id="12" /></td>
-       <td><label id="7"></label></td>
-       <td><a href=""  id="8"></a></td>
-  </tr>
-
-
+<tr>
+<td> <input type="radio" value="" name="list" id="22" /></td>
+<td><a id="6"></a></td>
+<td><a href=""  id="7"></a></td>
+<td><a id="8"></a></td>
+<td><a id="9"></a></td>
+<td> <a id="10"></a><br></td>
+</tr>
+<tr>
+<td> <input type="radio" value="" name="list" id="23" /></td>
+<td><a id="11"></a></td>
+<td><a href=""  id="12"></a></td>
+<td><a id="13"></a></td>
+<td><a id="14"></a></td>
+<td> <a id="15"></a><br></td>
+</tr>
+<tr>
+<td> <input type="radio" value="" name="list" id="24" /></td>
+<td><a id="16"></a></td>
+<td><a href=""  id="17"></a></td>
+<td><a id="18"></a></td>
+<td><a id="19"></a></td>
+<td> <a id="20"></a><br></td>
+</tr>
 
 </table>
 <input id="qs" type="submit"  value="接受任务"  name="submit" /> 
@@ -284,7 +332,7 @@
 <button id="qa" type="button" onclick="call(getnum1())" >上一页</button>
 <button id="qz" type="button" onclick="call(getnum())" >下一页</button>
 <button id="qe" type="button" onclick="p()"  value="">尾页</button><br>
-<label id="14" value=""></label>
+<label id="25" value=""></label>
 
 </body>
 </html>
