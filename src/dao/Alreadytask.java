@@ -128,40 +128,5 @@ public class Alreadytask {
 			return 0;
 	}
 	
-	//用户完成任务，从已接受任务中删除
-	public int delete(int tid,int uid) {
-		
-			try {
-				conn = connection.getConnection();
-				 stmt = (Statement) conn.createStatement();
-			      String sql;
-			    
-			     
-			    
-			      sql = "DELETE FROM alreadytask where u_id='"+uid+"' and t_id='"+tid+"' ";
-			      stmt.executeUpdate(sql); 
-			      int i=0;
-			
-			    
-			    	 
-			      i=1;
-			      return i;
-			   
-			     
-			    
-			   
-
-	  }catch(SQLException se){
-	      //Handle errors for JDBC
-	      se.printStackTrace();
-	   }catch(Exception e){
-	      //Handle errors for Class.forName
-	      e.printStackTrace();
-	   }finally{
-		   
-		   Catch c=new Catch();
-		   c.close(rs, stmt);
-	   }//end try
-			return 0;
-	}
+	
 }
