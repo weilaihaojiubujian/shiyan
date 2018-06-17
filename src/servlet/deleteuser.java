@@ -37,12 +37,13 @@ public class deleteuser extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
-		String list = request.getParameter("list");
+		String []list =request.getParameterValues("list");
 		HttpSession session = request.getSession(); 
-		int uid= Integer.parseInt(list);
-		System.out.println(uid);
+		
+		
+		
 		User k=new User();
-		if(k.deleteuser(uid)==1)
+		if(k.deleteuser(list)==1)
 				 {
 					 response.sendRedirect(request.getContextPath()+"/deleteuser_success.jsp");
 				 }

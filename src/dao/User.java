@@ -184,11 +184,11 @@ public class User {
 		      rs.next();
 		      int size=rs.getInt("COUNT(*)");
 		      System.out.println(size);
-		      int pageSize=4;
+		      int pageSize=15;
 		      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
-		      int x=(k-1)*4;
+		      int x=(k-1)*15;
 		      
-		      sql = "SELECT id,username,address,bankaccount,card,money FROM user where id in (SELECT uid FROM sign where stop is null and start is not null) limit "+x+",4 ";
+		      sql = "SELECT id,username,address,bankaccount,card,money FROM user where id in (SELECT uid FROM sign where stop is null and start is not null) limit "+x+",15 ";
 		      rs = stmt.executeQuery(sql);
 		   
 		      String m=String.valueOf(max);
@@ -299,11 +299,11 @@ public class User {
 		      rs.next();
 		      int size=rs.getInt("COUNT(*)");
 		      System.out.println(size);
-		      int pageSize=4;
+		      int pageSize=15;
 		      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
-		      int x=(k-1)*4;
+		      int x=(k-1)*15;
 		    
-		      sql = "SELECT id,username,address,bankaccount,card,money FROM user limit "+x+",4 ";
+		      sql = "SELECT id,username,address,bankaccount,card,money FROM user limit "+x+",15 ";
 			   rs = stmt.executeQuery(sql);
 			   String m=String.valueOf(max);
 			   List<String> listuser=new ArrayList<String>();
@@ -350,18 +350,23 @@ public class User {
 }
   
   //管理员删除用户
-	public int deleteuser(int uid) {
+	public int deleteuser(String []list) {
 	
 			try {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
-			    
+			    int uid;
+			    for(int i=0;i<list.length;i++)
+				{
+					uid= Integer.parseInt(list[i]);
+					 String sql_2="DELETE  FROM user WHERE id='"+uid+"' ";
+	                  
+			          stmt.executeUpdate(sql_2); 
+				}
 			    
 			     
 			    
-		          String sql_2="DELETE  FROM user WHERE id='"+uid+"' ";
-                  
-		          stmt.executeUpdate(sql_2); 
+		         
 			      int i=1;
 			      return i;
 			
@@ -517,13 +522,13 @@ public class User {
 			      rs.next();
 			      int size=rs.getInt("COUNT(*)");
 			      System.out.println(size);
-			      int pageSize=4;
+			      int pageSize=15;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
-			      int x=(k-1)*4;
+			      int x=(k-1)*15;
 			    
 				  
 			    
-			      sql = "SELECT id,username,address,bankaccount,card,money FROM user where username like '%"+keyword+"%' limit "+x+",4   ";
+			      sql = "SELECT id,username,address,bankaccount,card,money FROM user where username like '%"+keyword+"%' limit "+x+",15   ";
 			      rs = stmt.executeQuery(sql);
 			    
 			      String m=String.valueOf(max);

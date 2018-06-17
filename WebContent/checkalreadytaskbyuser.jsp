@@ -65,7 +65,7 @@
     function call($value) {
   	
 
-    	if(document.getElementById("30").value==null)
+    	if(document.getElementById("107").value==null)
     	{
     		
     		init($value);
@@ -91,7 +91,7 @@
             	  var size = json.length;
             	 
             	  k=json[0];
-            	  for(i=1;i<=28;i++){
+            	  for(i=1;i<=105;i++){
             		  $("#"+""+i+"").hide();
             	  }
             	  for(var i=1;i<size-1;i=i+7){
@@ -104,14 +104,14 @@
             	      var sevenNode=json[i+6];
             	      var x=i;
             	      var y=i+1;
-            	      var z=9+(i-1)/2;
+            	     
             	      var n=i+2;
             	      var m=i+3;
             	      var c=i+4;
             	      var v=i+5;
             	      var b=i+6;
             	      document.getElementById("0").innerHTML=$value;
-            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i-1)/7+1;
+            	      document.getElementById(""+x+"").innerHTML=($value-1)*15+(i-1)/7+1;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
             	      document.getElementById(""+y+"").href="servlet/checkalreadytaskinformation?list="+nextNode+"";
             	      document.getElementById(""+n+"").innerHTML=thirdNode;
@@ -140,7 +140,7 @@
     }
     function init1($value) {
     	clear();
-    	document.getElementById("30").value=$value;
+    	document.getElementById("107").value=$value;
     	var $valu=document.getElementById("keyword").value;
       	$.ajax({
       		  url:"servlet/searchalreadytask",
@@ -154,7 +154,7 @@
             	  var size = json.length;
             	 
             	  k=json[0];
-            	  for(i=1;i<=28;i++){
+            	  for(i=1;i<=105;i++){
             		  $("#"+""+i+"").hide();
             	  }
             	  for(var i=1;i<size-1;i=i+7){
@@ -167,14 +167,14 @@
             	      var sevenNode=json[i+6];
             	      var x=i;
             	      var y=i+1;
-            	      var z=9+(i-1)/2;
+            	    
             	      var n=i+2;
             	      var m=i+3;
             	      var c=i+4;
             	      var v=i+5;
             	      var b=i+6;
             	      document.getElementById("0").innerHTML=$value;
-            	      document.getElementById(""+x+"").innerHTML=($value-1)*4+(i-1)/7+1;
+            	      document.getElementById(""+x+"").innerHTML=($value-1)*15+(i-1)/7+1;
             	      document.getElementById(""+y+"").innerHTML=lastNode;
             	      document.getElementById(""+y+"").href="servlet/checkalreadytaskinformation?list="+nextNode+"";
             	      document.getElementById(""+n+"").innerHTML=thirdNode;
@@ -278,11 +278,10 @@
      </div>
 
 
-<a id="1"></a>&emsp;&emsp;<a href=""  id="2"></a>&emsp;&emsp;<a id="3"></a>&emsp;&emsp;<a id="4"></a>&emsp;&emsp;<a id="5"></a>&emsp;&emsp;<a id="6"></a>&emsp;&emsp;<a id="7"></a><br>
-<a id="8"></a>&emsp;&emsp;<a href=""  id="9"></a>&emsp;&emsp;<a id="10"></a>&emsp;&emsp;<a id="11"></a>&emsp;&emsp;<a id="12"></a>&emsp;&emsp;<a id="13"></a>&emsp;&emsp;<a id="14"></a><br>
-<a id="15"></a>&emsp;&emsp;<a href=""  id="16"></a>&emsp;&emsp;<a id="17"></a>&emsp;&emsp;<a id="18"></a>&emsp;&emsp;<a id="19"></a>&emsp;&emsp;<a id="20"></a>&emsp;&emsp;<a id="21"></a><br>
-<a id="22"></a>&emsp;&emsp;<a href=""  id="23"></a>&emsp;&emsp;<a id="24"></a>&emsp;&emsp;<a id="25"></a>&emsp;&emsp;<a id="26"></a>&emsp;&emsp;<a id="27"></a>&emsp;&emsp;<a id="28"></a><br>
+<%for(int i=1;i<105;i=i+7) {%>
+<a id="<%=i%>"></a>&emsp;&emsp;<a href=""  id="<%=i+1%>"></a>&emsp;&emsp;<a id="<%=i+2%>"></a>&emsp;&emsp;<a id="<%=i+3%>"></a>&emsp;&emsp;<a id="<%=i+4%>"></a>&emsp;&emsp;<a id="<%=i+5%>"></a>&emsp;&emsp;<a id="<%=i+6%>"></a><br>
 
+<%} %>
 
 
 
@@ -293,7 +292,7 @@
 <button type="button" onclick="call(1)">首页</button>
 <button type="button" onclick="call(getnum1())" >上一页</button>
 <button type="button" onclick="call(getnum())" >下一页</button>
-<button type="button" onclick="p()" id="29" value="">尾页</button><br>
-<label id="30" value=""></label>
+<button type="button" onclick="p()" id="106" value="">尾页</button><br>
+<label id="107" value=""></label>
 </body>
 </html>

@@ -85,18 +85,19 @@ public class Task {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			      int x=(k-1)*4;
+			    
 				
 				 String sql_1 = "SELECT COUNT(*) FROM task where task.id!=all(SELECT t_id FROM alreadytask)  ";
 			      rs = stmt.executeQuery(sql_1);
 			      rs.next();
 			      int size=rs.getInt("COUNT(*)");
 			      System.out.println(size);
-			      int pageSize=4;
+			      int pageSize=15;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*15;
 			     
 			      
-			      sql = "SELECT taskname,task.id,price,date,releaseid FROM task where task.id!=all(SELECT t_id FROM alreadytask)  limit "+x+",4 ";
+			      sql = "SELECT taskname,task.id,price,date,releaseid FROM task where task.id!=all(SELECT t_id FROM alreadytask)  limit "+x+",15 ";
 			      rs = stmt.executeQuery(sql);
 			    
 			      String m=String.valueOf(max);
@@ -215,21 +216,22 @@ public class Task {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			      int x=(k-1)*4;
+			      
 					
 					 String sql_1 = "SELECT COUNT(*) FROM task,alreadytask where progress=100 and task.id=t_id and u_id='"+uid+"' ";
 				      rs = stmt.executeQuery(sql_1);
 				      rs.next();
 				      int size=rs.getInt("COUNT(*)");
 				      System.out.println(size);
-				      int pageSize=4;
+				      int pageSize=15;
 				      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+				      int x=(k-1)*15;
 				  
 			     
 			      
 			      List<String> listcompletetask=new ArrayList<String>();
 			     
-			      sql = "SELECT task.id,task.taskname,price,date,releaseid FROM task,alreadytask where progress=100 and task.id=t_id and u_id='"+uid+"' limit "+x+",4 ";
+			      sql = "SELECT task.id,task.taskname,price,date,releaseid FROM task,alreadytask where progress=100 and task.id=t_id and u_id='"+uid+"' limit "+x+",15 ";
 			      rs = stmt.executeQuery(sql);
 			      String m=String.valueOf(max);
 			      listcompletetask.add(m);
@@ -288,18 +290,19 @@ public class Task {
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
 			    
-				  int x=(k-1)*4;
+				 
 				  String sql_1 = "SELECT COUNT(*) FROM task where  releaseid='"+uid+"' ";
 			      rs = stmt.executeQuery(sql_1);
 			      rs.next();
 			      int size=rs.getInt("COUNT(*)");
 			      System.out.println(size);
-			      int pageSize=4;
+			      int pageSize=15;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*15;
 			     
 			    
 			     
-			      sql = "SELECT id,taskname,price,date,releaseid FROM task where  releaseid='"+uid+"' limit "+x+",4 ";
+			      sql = "SELECT id,taskname,price,date,releaseid FROM task where  releaseid='"+uid+"' limit "+x+",15 ";
 			      rs = stmt.executeQuery(sql);
 			      String m=String.valueOf(max);
 			    
@@ -357,17 +360,18 @@ public class Task {
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
 
-				  int x=(k-1)*4;
+				
 				  String sql_1 = "SELECT COUNT(*) FROM task,alreadytask where progress=100 and task.id=t_id ";
 			      rs = stmt.executeQuery(sql_1);
 			      rs.next();
 			      int size=rs.getInt("COUNT(*)");
 			      System.out.println(size);
-			      int pageSize=4;
+			      int pageSize=15;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*15;
 			     
 			    
-			      sql = "SELECT task.id,task.taskname,price,date,releaseid,u_id FROM task,alreadytask where progress=100 and task.id=t_id limit "+x+",4 ";
+			      sql = "SELECT task.id,task.taskname,price,date,releaseid,u_id FROM task,alreadytask where progress=100 and task.id=t_id limit "+x+",15 ";
 			      rs = stmt.executeQuery(sql);
 			      
 			      List<String> listcompletetask=new ArrayList<String>();
@@ -427,18 +431,19 @@ public class Task {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			      int x=(k-1)*4;
+			    
 				
 				 String sql_1 = "SELECT COUNT(*) FROM task where id in (SELECT t_id FROM alreadytask where progress<100 ) ";
 				 rs = stmt.executeQuery(sql_1);
 				 rs.next();
 				 int size=rs.getInt("COUNT(*)");
 				 System.out.println(size);
-				 int pageSize=4;
-				 int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+				 int pageSize=15;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*15;
 				  
 			    
-			      sql = "SELECT t_id,taskname,price,date,releaseid,progress,u_id FROM task,alreadytask where task.id=t_id and progress<100 limit "+x+",4 ";
+			      sql = "SELECT t_id,taskname,price,date,releaseid,progress,u_id FROM task,alreadytask where task.id=t_id and progress<100 limit "+x+",15 ";
 			      rs = stmt.executeQuery(sql);
 			    
 			      String m=String.valueOf(max);
@@ -637,17 +642,18 @@ public class Task {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			      int x=(k-1)*4;
+			    
 			      String sql_1 = "SELECT COUNT(*) FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'  ";
 			      rs = stmt.executeQuery(sql_1);
 			      rs.next();
 			      int size=rs.getInt("COUNT(*)");
 			      System.out.println(size);
-			      int pageSize=4;
+			      int pageSize=15;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*15;
 			  
 			    
-			      sql = "SELECT taskname,id,price,date,releaseid FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
+			      sql = "SELECT taskname,id,price,date,releaseid FROM task where  releaseid='"+uid+"' and task.taskname like '%"+keyword+"%'  limit "+x+",15  ";
 			      rs = stmt.executeQuery(sql);
 			     
 			      List<String> listtask=new ArrayList<String>();
@@ -696,7 +702,7 @@ public class Task {
 	}
 	
 	//管理员查看相似的第几页的未接受的任务
-	public List<String> selectsimilartask(String keyvalue,int key) {
+	public List<String> selectsimilartask(String keyvalue,int k) {
 	
 			try {
 				conn = connection.getConnection();
@@ -707,12 +713,10 @@ public class Task {
 			      rs.next();
 			      int size=rs.getInt("COUNT(*)");
 			      System.out.println(size);
-			      int pageSize=4;
+			      int pageSize=15;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
-			    
-				  
-			     int x=(key-1)*4;
-			      sql = "SELECT taskname,id,price,date,releaseid FROM task where task.id!=all(SELECT t_id FROM alreadytask)  and task.taskname like '%"+keyvalue+"%'  limit "+x+",4  ";
+			      int x=(k-1)*15;
+			      sql = "SELECT taskname,id,price,date,releaseid FROM task where task.id!=all(SELECT t_id FROM alreadytask)  and task.taskname like '%"+keyvalue+"%'  limit "+x+",15  ";
 			      rs = stmt.executeQuery(sql);
 			    
 			  
@@ -859,14 +863,12 @@ public class Task {
 			      rs.next();
 			      int size=rs.getInt("COUNT(*)");
 			      System.out.println(size);
-			      int pageSize=4;
+			      int pageSize=15;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
-			    
-				  
-			     int x=(k-1)*4;
+			      int x=(k-1)*15;
 				  
 			    
-			      sql = "SELECT taskname,task.id,price,date,releaseid  FROM task,alreadytask where task.id=t_id and u_id='"+uid+"' and progress=100 and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
+			      sql = "SELECT taskname,task.id,price,date,releaseid  FROM task,alreadytask where task.id=t_id and u_id='"+uid+"' and progress=100 and task.taskname like '%"+keyword+"%'  limit "+x+",15  ";
 			      rs = stmt.executeQuery(sql);
 			   
 			      List<String> listcompletetask=new ArrayList<String>();
@@ -922,17 +924,18 @@ public class Task {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			      int x=(k-1)*4;
+			    
 				  String sql_1 = "SELECT COUNT(*) FROM task,alreadytask where task.id=t_id  and progress=100 and task.taskname like '%"+keyword+"%' ";
 			      rs = stmt.executeQuery(sql_1);
 			      rs.next();
 			      int size=rs.getInt("COUNT(*)");
 			      System.out.println(size);
-			      int pageSize=4;
+			      int pageSize=15;
 			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*15;
 				  
 			    
-			      sql = "SELECT taskname,task.id,price,date,releaseid,u_id  FROM task,alreadytask where task.id=t_id  and progress=100 and task.taskname like '%"+keyword+"%'  limit "+x+",4  ";
+			      sql = "SELECT taskname,task.id,price,date,releaseid,u_id  FROM task,alreadytask where task.id=t_id  and progress=100 and task.taskname like '%"+keyword+"%'  limit "+x+",15  ";
 			      rs = stmt.executeQuery(sql);
 			  
 			      List<String> listcompletetask=new ArrayList<String>();
@@ -1037,18 +1040,19 @@ public class Task {
 				conn = connection.getConnection();
 				 stmt = (Statement) conn.createStatement();
 			      String sql;
-			      int x=(k-1)*4;
+			    
 					
 				 String sql_1 = "SELECT COUNT(*) FROM task,alreadytask where task.id=t_id and progress<100 and task.taskname like '%"+keyword+"%' ";
 				 rs = stmt.executeQuery(sql_1);
 				 rs.next();
 				 int size=rs.getInt("COUNT(*)");
 				 System.out.println(size);
-				 int pageSize=4;
-				 int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+				 int pageSize=15;
+			      int max=(size%pageSize==0)?(size/pageSize):(size/pageSize+1);
+			      int x=(k-1)*15;
 				  
 			    
-			      sql = "SELECT taskname,task.id,,price,date,releaseid,progress,u_id FROM task,alreadytask where task.id=t_id and progress<100 and task.taskname like '%"+keyword+"%' limit "+x+",4 ";
+			      sql = "SELECT taskname,task.id,,price,date,releaseid,progress,u_id FROM task,alreadytask where task.id=t_id and progress<100 and task.taskname like '%"+keyword+"%' limit "+x+",15 ";
 			      rs = stmt.executeQuery(sql);
 			     
 			      String m=String.valueOf(max);
