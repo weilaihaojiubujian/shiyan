@@ -245,6 +245,9 @@
     		call(k);
     	}
     </script>
+     <link href="css/table.css" type="text/css" rel="stylesheet">
+    <link type="text/css" href="css/button.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/checkTaskByUser.css">
 </head>
 <body onload="call(1)">
 
@@ -266,25 +269,43 @@
 <br><br><br>
 
 
+<table>
+    <tr>
+        <th>任务序号</th>
+        <th>任务名</th>
+        <th>价格</th>
+        <th>发布日期</th>
+        <th>发布人序号</th>
+    </tr>
+    <%
+        for (int i = 1; i < 75; i = i + 5) {
+    %>
+
+    <tr>
+        <td><a id="<%=i%>"></a></td>
+        <td><a href="" id="<%=i+1%>"></a></td>
+        <td><a id="<%=i+2%>"></a></td>
+        <td><a id="<%=i+3%>"></a></td>
+        <td><a id="<%=i+4%>"></a></td>
+    </tr>
 
 
-<%for(int i=1;i<75;i=i+5) {%>
-<a id="<%=i%>"></a>&emsp;&emsp;<a href=""  id="<%=i+1%>"></a>&emsp;&emsp;<a id="<%=i+2%>"></a>&emsp;&emsp;<a id="<%=i+3%>"></a>&emsp;&emsp;<a id="<%=i+4%>"></a><br>
+    <%
+        }
+    %>
+</table>
 
-<%} %>
-
-
-
-
-
- <br>
 <br>
-第<a id="0"></a>页<br>
-<button type="button" onclick="call(1)">首页</button>
-<button type="button" onclick="call(getnum1())" >上一页</button>
-<button type="button" onclick="call(getnum())" >下一页</button>
-<button type="button" onclick="p()" id="76" value="">尾页</button><br>
-<label id="77" value=""></label>
+<br>
+<div>
+    第<a id="0"></a>页<br>
+    <button type="button" class="button" onclick="call(1)">首页</button>
+    <button type="button" class="button" onclick="call(getnum1())">上一页</button>
+    <button type="button" class="button" onclick="call(getnum())">下一页</button>
+    <button type="button" class="button" onclick="p()" id="76" value="">尾页</button>
+    <br>
+    <label id="77" value=""></label>
+</div>
 
 </body>
 </html>

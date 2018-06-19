@@ -1,0 +1,74 @@
+body {
+    background-image: url("../img/login-bg.png");
+    height: 100%;
+    width: 100%;
+}
+
+div {
+    position: absolute;
+    width: 700px;
+    height: 500px;
+    left: 600px;
+    top: 300px;
+}
+
+#loginForm_img {
+    position: absolute;
+
+}
+
+form {
+    position: absolute;
+    align-content: center;
+    padding: 0px;
+    right: 30%;
+    top: 15%;
+}
+
+.text {
+    font-size: 12px;
+    height: 20px;
+}
+
+label {
+    font-family: 华文行楷;
+    font-size: 25px;
+    text-shadow: 5px 5px 5px #FF0000;
+
+}
+
+.button{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+    border-radius: 20px;
+}
+.button:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+#title_img {
+    position: absolute;
+    left: 600px;
+    top: 180px;
+    width: 882px;
+    height: 123.3px;
+}
+span{
+    position: absolute;
+    right: -120px;
+    font-weight: bold;
+}

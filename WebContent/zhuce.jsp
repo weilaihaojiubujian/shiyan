@@ -1,147 +1,81 @@
-
 <%@ page language="java" import="java.util.*,java.net.*" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 
-    
+
 <!DOCTYPE html>
 <html>
 <%
-request.setCharacterEncoding("utf-8");
+    request.setCharacterEncoding("utf-8");
 %>
 <head>
-<meta charset="utf-8">
-<title>系统注册</title>
-<style type="text/css">
-
-body {  
-    background: url(12.jpg);  
-    background-size: 100%;  
-    background-repeat: no-repeat;  
-}  
-  
-#login_frame {  
-    width: 400px;  
-    height: 260px;  
-    padding: 13px;  
-  
-    position: absolute;  
-    left: 50%;  
-    top: 50%;  
-    margin-left: -200px;  
-    margin-top: -200px;  
-  
-    background-color: rgba(240, 255, 255, 0.5);  
-  
-    border-radius: 10px;  
-    text-align: center;  
-}  
-  
-form p > * {  
-    display: inline-block;  
-    vertical-align: middle;  
-}  
-  
-
-.label_input {  
-    font-size: 14px;  
-    font-family: 宋体;  
-  
-    width: 65px;  
-    height: 28px;  
-    line-height: 28px;  
-    text-align: center;  
-  
-    color: white;  
-    background-color: #3CD8FF;  
-    border-top-left-radius: 5px;  
-    border-bottom-left-radius: 5px;  
-}  
-  
-.text_field {  
-    width: 278px;  
-    height: 28px;  
-    border-top-right-radius: 5px;  
-    border-bottom-right-radius: 5px;  
-    border: 0;  
-}  
-  
-#btn_login {  
-    font-size: 14px;  
-    font-family: 宋体;  
-  
-    width: 120px;  
-    height: 28px;  
-    line-height: 28px;  
-    text-align: center;  
-  
-    color: white;  
-    background-color: #3BD9FF;  
-    border-radius: 6px;  
-    border: 0;  
-  
-  
-}  
-  
-#forget_pwd {  
-    font-size: 20px;  
-    color: black;  
-    text-decoration: none;  
-    position: relative;  
-    
-    top: 5px;  
-  	text-align:center;
-}  
-  
-#forget_pwd:hover {  
-    color: blue;  
-    text-decoration: underline;  
-}  
-  
-
-</style>
+    <meta charset="utf-8">
+    <title>系统注册</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/register.js"></script>
+    <link href="css/register.css" rel="stylesheet" type="text/css">
+    <script>
+        var a=<%=request.getParameter("a")%>;
+        if(a==1){
+            alert("恭喜你,注册成功!");
+            window.location.href=("/denlu.jsp");
+        }else if(a==0)  {
+            alert("用户名重复,请重新输入!");
+        }
+    </script>
 </head>
+
 
 
 <body>
 <%@page import="java.sql.*" %>
 
 
+<div id="registerDiv">
+    <img id="register_img" src="img/register.png">
+    <div id="registerFormDiv">
 
-<div id="login_frame">  
-  
-    
-  
- 
-  <form  action="servlet/zhuce"method="post">
-     <table>
-     <tr>
-      <td><label for="username">用户名:</label></td>
-      <td><input type="text"  name="username" id="username" value="" /></td>
-      </tr>
-      <tr>
-      <td><label for="password">密码:</label></td>
-      <td><input type="password"  name="password" id="password" value="" /></td>
-      </tr>  
-       <tr>
-      <td><label for="address">地址:</label></td>
-      <td><input type="text"  name="address" id="address" value="" /></td>
-      </tr> 
-      <tr>
-      <td><label for="bankaccount">银行账户:</label></td>
-      <td><input type="text"  name="bankaccount" id="bankaccount" value="" /></td>
-      </tr>
-       <tr>
-      <td><label for="card">身份证:</label></td>
-      <td><input type="text"  name="card" id="card" value="" /></td>
-      </tr>
-     </table>    
-   <div id="login_control">  
-           <input type="submit" id="btn_login" value="注册" onclick="login()" name="submit""/> 
-             
-        </div>  
- </table>
-</form> 
-       
-</div>  
+        <form>
+            <label for="username">&nbsp;&nbsp;用户名:</label>
+            <input class="text" type="text" name="username" id="username" value="">
+            <span id="uspan"></span>
+            <br>
+            <br>
+            <label for="password">&nbsp;&nbsp;密&nbsp;&nbsp;码:</label>
+            <input class="text" type="password" name="password" id="password" value="">
+            <span id="psdspan"></span>
+            <br>
+            <br>
+
+            <label for="password">确认密码:</label>
+            <input class="text" type="password" name="password" id="confirm" value="">
+            <span id="confirmSpan"></span>
+            <br>
+            <br>
+
+            <label for="address">&nbsp;&nbsp;地&nbsp;&nbsp;址:</label>
+            <input class="text" type="text" name="address" id="address" value="">
+            <span id="addspan"></span>
+            <br>
+            <br>
+
+            <label for="bankaccount" id="bank_label">银行账户:</label>
+            <input class="text" type="text" name="bankaccount" id="bankaccount" value="">
+            <span id="bkspan"></span>
+            <br>
+            <br>
+
+            <label for="card">&nbsp;&nbsp;身份证:</label>
+            <input class="text" type="text" name="card" id="card" value="">
+            <span id="cspan"></span>
+            <br>
+            <br>
+
+            <input type="submit" id="button-submit" value="确认信息,注册" name="submit" class="button">
+            <%--<br>--%>
+            <%--<br>--%>
+            <input type="button" id="backToLogin" value="已有账号，返回登录！" class="button" onclick="backLogin()">
+        </form>
+    </div>
+</div>
 </body>
 </html>

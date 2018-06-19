@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>任务情况</title>
-<link rel="stylesheet" href="a.css" type="text/css" />
+
 <script src="jquery-3.3.1.min.js"></script>
 
     <script>  
@@ -259,7 +259,9 @@
     		call(k);
     	}
     </script>
-    
+    <link type="text/css" rel="stylesheet" href="css/table.css">
+    <link type="text/css" rel="stylesheet" href="css/task.css">
+    <link type="text/css" rel="stylesheet" href="css/button.css">
 </head>
 <body onload="call(1)">
 
@@ -280,37 +282,45 @@
 
 <br><br><br>
 <form action="servlet/checktask" method="post">
-<table align="center" valign="center" border="1px">
-<tr>
-<td></td>
-<td>序号</td>
-<td>任务名</td>
-<td>金额</td>
-<td>发布日期</td>
-<td>发布人id</td>
-</td>
-<tr>
-<%for(int i=1;i<75;i=i+5) {%>
-<td> <input type="radio" value="" name="list" id="<%=76+(i-1)/5 %>" /></td>
-<td><a id="<%=i%>"></a></td>
-<td><a href=""  id="<%=i+1%>"></a></td>
-<td><a id="<%=i+2%>"></a></td>
-<td><a id="<%=i+3%>"></a></td>
-<td> <a id="<%=i+4%>"></a><br></td>
-</tr>
-<%} %>
+    <table align="center" valign="center" border="1px">
+        <tr>
+            <th>序号</th>
+            <th>任务名</th>
+            <th>金额</th>
+            <th>发布日期</th>
+            <th>发布人id</th>
+            <th></th>
+        </tr>
+        <tr>
+            <%
+                for (int i = 1; i < 75; i = i + 5) {
+            %>
+            <td><a id="<%=i%>"></a></td>
+            <td><a href="" id="<%=i+1%>"></a></td>
+            <td><a id="<%=i+2%>"></a></td>
+            <td><a id="<%=i+3%>"></a></td>
+            <td><a id="<%=i+4%>"></a><br></td>
+            <td><input type="radio" value="" name="list" id="<%=76+(i-1)/5 %>"/></td>
+        </tr>
+        <%
+            }
+        %>
 
 
-</table>
-<input id="qs" type="submit"  value="接受任务"  name="submit" /> 
+    </table>
+    <div>
+    <input id="qs"  type="submit" value="接受任务" class="button" onclick="return confirmOper();" name="submit"/>
+    </div>
 </form>
 <br>
+<div>
 第<label id="0"></label>页<br>
-<button id="qw" type="button" onclick="call(1)">首页</button>
-<button id="qa" type="button" onclick="call(getnum1())" >上一页</button>
-<button id="qz" type="button" onclick="call(getnum())" >下一页</button>
-<button id="qe" type="button" onclick="p()"  value="">尾页</button><br>
+<button id="qw" class="button" type="button" onclick="call(1)">首页</button>
+<button id="qa" class="button" type="button" onclick="call(getnum1())">上一页</button>
+<button id="qz" class="button" type="button" onclick="call(getnum())">下一页</button>
+<button id="qe" class="button" type="button" onclick="p()" value="">尾页</button>
+<br>
 <label id="91" value=""></label>
-
+</div>
 </body>
 </html>

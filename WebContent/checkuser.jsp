@@ -143,6 +143,9 @@
     		call(k);
     	}
     </script>
+    <link type="text/css" rel="stylesheet" href="css/table.css">
+    <link type="text/css" href="css/checkUser.css" rel="stylesheet">
+    <link type="text/css" href="css/button.css" rel="stylesheet">
 </head>
 <body>
 
@@ -155,21 +158,44 @@
 
 <br><br>
 
-<%for(int i=1;i<90;i=i+6) {%>
-<a id="<%=i%>"></a>&emsp;&emsp;<a href=""  id="<%=i+1%>"></a>&emsp;&emsp;<a id="<%=i+2%>"></a>&emsp;&emsp;<a id="<%=i+3%>"></a>&emsp;&emsp;<a id="<%=i+4%>"></a>&emsp;&emsp;<a id="<%=i+5%>"></a><br>
+<table>
+    <tr>
+        <th>用户序号</th>
+        <th>用户名</th>
+        <th>地址</th>
+        <th>银行账号</th>
+        <th>身份证号</th>
+        <th>余额</th>
+    </tr>
+    <%
+        for (int i = 1; i < 90; i = i + 6) {
+    %>
 
-<%} %>
+    <tr>
+        <td><a id="<%=i%>"></a></td>
+        <td><a href="" id="<%=i+1%>"></a></td>
+        <td><a id="<%=i+2%>"></a></td>
+        <td><a id="<%=i+3%>"></a></td>
+        <td><a id="<%=i+4%>"></a></td>
+        <td><a id="<%=i+5%>"></a></td>
+    </tr>
 
+    <%
+        }
+    %>
+</table>
 
-
-
- <br>
 <br>
-第<a id="0"></a>页<br>
-<button type="button" onclick="call(1)">首页</button>
-<button type="button" onclick="call(getnum1())" >上一页</button>
-<button type="button" onclick="call(getnum())" >下一页</button>
-<button type="button" onclick="p()" id="91" value="">尾页</button><br>
-<label id="92" value=""></label>
+<br>
+
+<div id="divButton">
+    现在是第<a id="0"></a>页<br>
+    <button type="button" class="button" onclick="call(1)">首页</button>
+    <button type="button" class="button" onclick="call(getnum1())">上一页</button>
+    <button type="button" class="button" onclick="call(getnum())">下一页</button>
+    <button type="button" class="button" onclick="p()" id="91" value="">尾页</button>
+    <br>
+    <label id="92" value=""></label>
+</div>
 </body>
 </html>

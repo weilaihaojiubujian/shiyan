@@ -5,12 +5,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>管理员</title>
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
 </head>
 <body>
-<a href="checkuser.jsp">查看在线用户</a>
-<a href="deleteuser.jsp">删除用户</a>
-<a href="checkalreadytaskbyuser.jsp">查看已被人接受的任务</a>
-<a href="checktaskbyuser.jsp">查看未接受的任务</a>
-<a href="checkcompletetaskbyuser.jsp">查看已完成的任务</a>
+<div id="contanier">
+    <div id="heading"></div>
+    <div id="content">
+        <div id="left_content">
+            <ul>
+                <li><i><a href="checkuser.jsp" target="content_frame">查看在线用户</a></i></li>
+                <li><i><a href="deleteuser.jsp" target="content_frame">删除用户</a></i></li>
+                <li><i><a href="checkalreadytaskbyuser.jsp" target="content_frame">查看已被人接受的任务</a></i></li>
+                <li><i><a href="checktaskbyuser.jsp" target="content_frame">查看未接受的任务</a></i></li>
+                <li><i><a href="checkcompletetaskbyuser.jsp" target="content_frame">查看已完成的任务</a></i></li>
+                <li><i><a href="table.jsp" target="content_frame">表格</a></i></li>
+                <li><i></i></li>
+                <li><i></i></li>
+                <li><i></i></li>
+                <li><i></i></li>
+                <li><i></i></li>
+                <li><i></i></li>
+                <li><i></i></li>
+                <li><i></i></li>
+                <li><i></i></li>
+            </ul>
+        </div>
+        <div id="right_content">
+            <iframe name="content_frame"></iframe>
+        </div>
+    </div>
+    <div id="footing"></div>
+</div>
 </body>
 </html>

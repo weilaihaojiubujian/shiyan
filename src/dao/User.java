@@ -88,10 +88,11 @@ public class User {
 		    	  i=1;
 		    	  int uid=rs.getInt("id");
 		    	  double money=rs.getDouble("money");
+		    	
 		    	  System.out.println("µÇÂ½³É¹¦");
-		    	  session.setAttribute("uid", uid);	
-		    	  session.setAttribute("money",money);   
-		    	  
+		    	
+			      session.setAttribute("uid",uid);
+			      session.setAttribute("money",money);
 		          return i;
 		      }
 		      else

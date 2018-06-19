@@ -1,0 +1,86 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+#contanier{
+    width: 1920px;
+    height: 920px;
+}
+#heading{
+    width: 1920px;
+    height: 100px;
+    background-image: url("../img/header_admin.png");
+    position: absolute;
+}
+#content{
+    position: absolute;
+    top: 100px;
+    width: 1920px;
+    height: 800px;
+}
+#left_content{
+    position: absolute;
+    width: 20%;
+    height: 100%;
+}
+#right_content{
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    left: 20%;
+}
+#footing{
+    position: absolute;
+    top: 900px;
+    width: 100%;
+    height: 50px;
+    background-image: url("../img/fonting.png");
+}
+
+a {
+    color: #000000;
+}
+
+ul {
+    /*margin: 2em auto;*/
+    margin: 0px;
+    padding: 0px;
+    width: 384px;
+    background: #c3fffe;
+    list-style: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+ul > li {
+    margin: 0px;
+    color: #ffffff;
+    background: #fdf9ff;
+    padding: 1em;
+    /*border-bottom: 0.5em solid #2c3e50;*/
+    /*margin-top: 0.25em;*/
+    border-left: 0.5em groove #e74c3c;
+    cursor: pointer;
+    transition: 0.4s all;
+}
+
+i {
+    margin: 0px;
+    padding-right: 0.5em;
+}
+
+.active {
+    margin: 0px;
+    border-left: 0.5em groove #1abc9c;
+}
+
+li:hover {
+    margin: 0px;
+    background: #2c3e50;
+    border-left: 0.5em groove #3498db;
+}
+iframe{
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    border: 0px;
+}

@@ -252,6 +252,9 @@
     		call(k);
     	}
     </script>
+    <link rel="stylesheet" type="text/css" href="css/table.css">
+    <link rel="stylesheet" type="text/css" href="css/button.css">
+    <link rel="stylesheet" type="text/css" href="css/deleteUser.css">
 </head>
 <body onload="call(1)">
 
@@ -270,24 +273,51 @@
 
      </div>
 <br><br>
-
 <form action="servlet/deleteuser" method="post">
-<%for(int i=1;i<90;i=i+6) {%>
-<input type="checkbox" value="" name="list" id="<%=91+(i-1)/6 %>" /><a id="<%=i%>"></a>&emsp;&emsp;<a href=""  id="<%=i+1%>"></a>&emsp;&emsp;<a id="<%=i+2%>"></a>&emsp;&emsp;<a id="<%=i+3%>"></a>&emsp;&emsp;<a id="<%=i+4%>"></a>&emsp;&emsp;<a id="<%=i+5%>"></a><br>
+    <table>
+        <tr>
+            <th>用户序号</th>
+            <th>用户名</th>
+            <th>地址</th>
+            <th>银行账号</th>
+            <th>身份证</th>
+            <th>余额</th>
+            <th></th>
+        </tr>
+        <%
+            for (int i = 1; i < 90; i = i + 6) {
+        %>
 
-<%} %>
-<input type="submit"  value="删除用户"  name="submit"/> 
+        <tr>
+            <td><a id="<%=i%>"></a></td>
+            <td><a href="" id="<%=i+1%>"></a></td>
+            <td><a id="<%=i+2%>"></a></td>
+            <td><a id="<%=i+3%>"></a></td>
+            <td><a id="<%=i+4%>"></a></td>
+            <td><a id="<%=i+5%>"></a></td>
+            <td><input type="checkbox" value="" name="list" id="<%=91+(i-1)/6 %>"/></td>
+        </tr>
+
+        <%
+            }
+        %>
+    </table>
+    <div>
+    <input type="submit" id="deleteButton" value="删除用户" name="submit" onclick="return confirmOper()"/>
+    </div>
 </form>
 
 
-
- <br>
 <br>
-第<a id="0"></a>页<br>
-<button type="button" onclick="call(1)">首页</button>
-<button type="button" onclick="call(getnum1())" >上一页</button>
-<button type="button" onclick="call(getnum())" >下一页</button>
-<button type="button" onclick="p()" id="106" value="">尾页</button><br>
-<label id="107" value=""></label>
+<br>
+<div>
+    第<a id="0"></a>页<br>
+    <button type="button" class="button" onclick="call(1)">首页</button>
+    <button type="button" class="button" onclick="call(getnum1())">上一页</button>
+    <button type="button" class="button" onclick="call(getnum())">下一页</button>
+    <button type="button" class="button" onclick="p()" id="106" value="">尾页</button>
+    <br>
+    <label id="107" value=""></label>
+</div>
  </body>
 </html>

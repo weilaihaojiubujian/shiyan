@@ -1,0 +1,69 @@
+body{
+    background-image: url("../img/login-bg.png");
+}
+#registerDiv{
+    position: absolute;
+    left: 600px;
+    top: 200px;
+    width: 600px;
+    height: 400px;
+}
+#registerFormDiv{
+    background-image: url("../img/loginForm.png");
+    width: 695px;
+    height: 479px;
+}
+form{
+    position: absolute;
+    left: 50px;
+    text-align: left;
+    top: 180px;
+}
+#register_img{
+    display: table-cell;
+    vertical-align: center;
+    text-align: center;
+}
+label{
+    font-family: 华文行楷;
+    font-size: 25px;
+    font-style: inherit;
+    text-shadow: gray;
+    padding: 4px;
+}
+.text {
+    font-size: 12px;
+    height: 20px;
+    width: 300px;
+}
+.button{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    /*-webkit-transition-duration: 0.4s; !* Safari *!*/
+    transition-duration: 1.0s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+    border-radius: 20px;
+
+}
+.button:hover {
+    background-color: #008CBA;
+    color: white;
+}
+#button-submit{
+}
+span{
+    position: absolute;
+    right: -150px;
+    /*color: #FF0000;*/
+    /*color:yellow;*/
+}
