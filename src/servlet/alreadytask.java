@@ -42,7 +42,7 @@ public class alreadytask extends HttpServlet {
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath()+"/selectalreadytask_failure.jsp");
+			response.sendRedirect(request.getContextPath()+"/user.jsp?a=4");
 		}
 		
 		

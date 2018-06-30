@@ -42,17 +42,17 @@ public class updateprogress extends HttpServlet {
 		double progress1=(double)session.getAttribute("progress");
 		int tid=(int)session.getAttribute("tid");
 		int uid=(int)session.getAttribute("uid");
-	
+	    int a;
 		if(progress<=progress1) {
-			response.sendRedirect(request.getContextPath()+"/updateprogress_failure1.jsp");
+			response.sendRedirect(request.getContextPath()+"/updateprogress.jsp?a=0");
 		}
 		else
 		{
 			if(x.updateprogress(progress, tid, uid)==1) {
-				response.sendRedirect(request.getContextPath()+"/updateprogress_success.jsp");
+				response.sendRedirect(request.getContextPath()+"/updateprogress.jsp?a=1");
 			}
 			else {
-				response.sendRedirect(request.getContextPath()+"/updateprogress_failure.jsp");
+				response.sendRedirect(request.getContextPath()+"/updateprogress.jsp?a=2");
 			}
 		}
 		

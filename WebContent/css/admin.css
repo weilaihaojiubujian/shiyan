@@ -54,11 +54,12 @@ ul {
 ul > li {
     margin: 0px;
     color: #ffffff;
-    background: #fdf9ff;
+    background-image: url("../img/bgLeft.jpg");
     padding: 1em;
     /*border-bottom: 0.5em solid #2c3e50;*/
     /*margin-top: 0.25em;*/
-    border-left: 0.5em groove #e74c3c;
+    /*border-left: 0.5em groove #e74c3c;*/
+    border: 0px;
     cursor: pointer;
     transition: 0.4s all;
 }

@@ -44,15 +44,15 @@ public class zhuce extends HttpServlet {
 		u.setAddress(address);
 		u.setBankaccount(bankaccount);
 		u.setCard(card);
-		
+		int a;
 		User h=new User();
 		if(h.insertuser(u)==0)
 		{
-			response.sendRedirect(request.getContextPath()+"/zhuce_success.jsp");
+			response.sendRedirect(request.getContextPath()+"/zhuce.jsp?a=1");
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath()+"/zhuce_failure.jsp");
+			response.sendRedirect(request.getContextPath()+"/zhuce.jsp?a=0");
 		}
 	}
 

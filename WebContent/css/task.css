@@ -1,13 +1,18 @@
 div{
     text-align: center;
 }
+body{
+    background-image: url("../img/bgAll.jpg");
+}
 h1{
     font-style: oblique;
     font-family: 华文行楷;
     text-align: center;
     font-size: 50px;
-    color: #1abc9c;
-    text-shadow: 5px 5px 5px #e6ff88;
+    /*color: #b7aeff;*/
+    color: gray;
+    text-shadow: 5px 5px 5px black;
+    /*text-shadow: 5px 5px 5px #e6ff88;*/
 }
 #keyword{
     height: 30px;

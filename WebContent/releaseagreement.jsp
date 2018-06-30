@@ -219,6 +219,16 @@
 		call(k);
 	}
     </script>
+     <script>
+        var a=<%=request.getParameter("b")%>;
+        if(a==1){
+            alert("恭喜你,发布合同成功!");
+            parent.location.href=("user.jsp");
+        }else if(a==0)  {
+            alert("发布合同失败，请重新发布!");
+        }
+       
+    </script>
 </head>
 <body onload="call(1)">
 <a href="agreement.jsp">自己发布合同</a><br><br><br>

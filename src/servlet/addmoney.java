@@ -38,12 +38,13 @@ public class addmoney extends HttpServlet {
 		int uid=(int)session.getAttribute("uid");
 		double money=(double)session.getAttribute("money");
 		addmoney+=money;
+		int b;
 		User u=new User();
 		if(u.updateaddmoney(uid,addmoney,session)==1) {
-			response.sendRedirect(request.getContextPath()+"/addmoney_success.jsp");
+			response.sendRedirect(request.getContextPath()+"/userinformation.jsp?b=2");
 		}
 		else {
-			response.sendRedirect(request.getContextPath()+"/addmoney_failure.jsp");
+			response.sendRedirect(request.getContextPath()+"/userinformation.jsp?b=3");
 		}
 		
 	}

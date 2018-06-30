@@ -7,7 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>已接受的任务</title>
-
+  <link type="text/css" rel="stylesheet" href="css/table.css">
+    <link type="text/css" rel="stylesheet" href="css/alreadyTask.css">
+     
 </head>
 <body>
 已接受的任务:
@@ -22,17 +24,132 @@ task t=(task)session.getAttribute("alreadytask");
 	 int accept=t.getAccept();
 	 java.util.Date date=t.getDate();
 	 double progress=t.getProgress();
-	 out.println("序号:"+tid+"<br>");
-	 out.println("任务名:"+taskname+"<br>");
-	 out.println("任务介绍:"+introduce+"<br>");
-	 out.println("可获金额:"+price+"<br>");
-	 out.println("发布日期:"+date+"<br>");
-
-	 out.println("任务完成程度:"+progress+"<br>"); 	 
 
 
 %>
-
-<a href="signin.jsp">签到</a>
+<table>
+    <tr>
+        <th>任务序号</th>
+        <th>任务名</th>
+        <th>任务介绍</th>
+        <th>金额</th>
+        <th>发布日期</th>
+        <th>任务完成程度</th>
+        <th>签到</th>
+    </tr>
+    <tr>
+        <td>
+            <%=tid%>
+        </td>
+        <td>
+            <%=taskname%>
+        </td>
+        <td>
+            <%=introduce%>
+        </td>
+        <td>
+            <%=price%>
+        </td>
+        <td>
+            <%=date%>
+        </td>
+        <td>
+            <%=progress%>
+        </td>
+        <td>
+            <a href="signin.jsp">签到</a>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 </body>
 </html>

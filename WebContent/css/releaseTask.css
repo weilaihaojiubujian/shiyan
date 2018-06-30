@@ -1,7 +1,9 @@
-div{
-    text-align: center;
+.text{
+    width: 800px;
+    height: 20px;
+    border-radius: 20px;
 }
-#deleteButton{
+#fabu{
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -18,7 +20,7 @@ div{
     border: 2px solid #008CBA;
     border-radius: 20px;
 }
-#deleteButton:hover {
+#fabu:hover {
     background-color: red;
     color: white;
 }
@@ -29,10 +31,6 @@ h1{
     font-size: 50px;
     color: gray;
     text-shadow: 5px 5px 5px black;
-}
-#search_text{
-    height: 30px;
-    border-radius: 20px;
 }
 body{
     background-image: url("../img/bgAll.jpg");

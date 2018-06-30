@@ -36,11 +36,12 @@ public class endsignin extends HttpServlet {
 		int uid=(int)session.getAttribute("uid");
 		int tid=(int)session.getAttribute("tid");
 		Sign a=new Sign();
+		int b;
 		if(a.updateendsignin(tid, uid)==1) {
-			response.sendRedirect(request.getContextPath()+"/endsignin_success.jsp");
+			response.sendRedirect(request.getContextPath()+"/signin.jsp?b=2");
 		}
 		else {
-			response.sendRedirect(request.getContextPath()+"/endsignin_failure.jsp");
+			response.sendRedirect(request.getContextPath()+"/signin.jsp?b=3");
 		}
 	}
 

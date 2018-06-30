@@ -39,11 +39,12 @@ public class reducemoney extends HttpServlet {
 		double money=(double)session.getAttribute("money");
 		money-=reducemoney;
 		User u=new User();
+		int b;
 		if(u.updatereducemoney(uid,money,session)==1) {
-			response.sendRedirect(request.getContextPath()+"/reducemoney_success.jsp");
+			response.sendRedirect(request.getContextPath()+"/userinformation.jsp?b=1");
 		}
 		else {
-			response.sendRedirect(request.getContextPath()+"/reducemoney_failure.jsp");
+			response.sendRedirect(request.getContextPath()+"/userinformation.jsp?b=0");
 		}
 	}
 

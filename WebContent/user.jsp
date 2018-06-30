@@ -6,6 +6,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>用户</title>
     <link href="css/admin.css" type="text/css" rel="stylesheet">
+    <script>
+        var a=<%=request.getParameter("a")%>
+        if(a!=""){
+            if(a==1){
+                alert("发布任务成功1");
+                parent.location.reload()
+            }else if(a==2){
+                alert("数据库操作失败2");
+                parent.location.reload()
+            }else if(a==3){
+                alert("余额不足3");
+                parent.location.reload()
+            }
+            else if(a==4){
+                alert("没有已接受任务，请去接受任务吧");
+                parent.location.reload()
+            }
+
+        }
+
+    </script>
 </head>
 <body>
 <div id="contanier">
@@ -20,7 +41,7 @@
                 <li><a href="completetask.jsp" target="content_frame">查看已完成的任务</a></li>
                 <li><a href="releasetaskbyuser.jsp" target="content_frame">查看发布的任务</a></li>
                 <li><a href="servlet/userinformation" target="content_frame">查看用户的信息</a></li>
-                <li><a href="addmoney.jsp" target="content_frame">充值</a></li>
+             
                 <li><a href="logout.jsp" target="content_frame">退出系统</a></li>
                 <li><a></a></li>
                 <li><a></a></li>

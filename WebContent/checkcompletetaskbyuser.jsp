@@ -23,7 +23,7 @@
     	  
 
       	$.ajax({
-      		url:"servlet/searchcomplete",
+      		url:"servlet/searchcompleteby",
               data:{keyword:$value},
               type:"POST",
               dataType:"TEXT",

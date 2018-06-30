@@ -55,6 +55,7 @@ public class releasetask extends HttpServlet {
 		int uid=(int)session.getAttribute("uid");
 		Task s=new Task();
 		User u=new User();
+		int a;
 		if(money>=price)
 		{
 			if(s.inserttask(t,uid,session)==0 &&u.updatereducemoney(uid,money-price,session)==1)
@@ -64,16 +65,16 @@ public class releasetask extends HttpServlet {
 				session.setAttribute("price",price);
 			
 			
-				response.sendRedirect(request.getContextPath()+"/releasetask_success.jsp");
+				response.sendRedirect(request.getContextPath()+"/releasetask.jsp?a=1");
 			}
 			else
 			{
-				response.sendRedirect(request.getContextPath()+"/releasetask_failure.jsp");
+				response.sendRedirect(request.getContextPath()+"/releasetask.jsp?a=0");
 			}
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath()+"/releasetask_failure1.jsp");
+			response.sendRedirect(request.getContextPath()+"/releasetask.jsp?a=2");
 		}
 		
 		 }catch(Exception e) {

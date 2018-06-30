@@ -17,7 +17,7 @@
         var a=<%=request.getParameter("a")%>;
         if(a==1){
             alert("恭喜你,注册成功!");
-            window.location.href=("/denlu.jsp");
+            window.location.href=("denlu.jsp");
         }else if(a==0)  {
             alert("用户名重复,请重新输入!");
         }
@@ -34,7 +34,7 @@
     <img id="register_img" src="img/register.png">
     <div id="registerFormDiv">
 
-        <form>
+         <form action="servlet/zhuce" method="post">
             <label for="username">&nbsp;&nbsp;用户名:</label>
             <input class="text" type="text" name="username" id="username" value="">
             <span id="uspan"></span>

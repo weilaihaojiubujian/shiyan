@@ -51,16 +51,17 @@ public class checkagreement extends HttpServlet {
 				
 				
 		Agreement w=new Agreement();
+	
 		if(w.insertsameagreement(aid,tid,session)==1)
 					{
 						
 				
 					
-						response.sendRedirect(request.getContextPath()+"/releaseagreement_success.jsp");
+						response.sendRedirect(request.getContextPath()+"/releaseagreement.jsp?b=1");
 					}
 		else
 					{
-						response.sendRedirect(request.getContextPath()+"/releaseagreement_failure.jsp");
+						response.sendRedirect(request.getContextPath()+"/releaseagreement.jsp?b=0");
 					}
 	
 	}

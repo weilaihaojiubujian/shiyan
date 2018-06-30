@@ -252,6 +252,13 @@
     		call(k);
     	}
     </script>
+     <script>
+        var a=<%=request.getParameter("b")%>;
+        if(a==1){
+            alert("恭喜你,删除用户成功!");
+            parent.location.href=("administrator.jsp");
+        }
+    </script>
     <link rel="stylesheet" type="text/css" href="css/table.css">
     <link rel="stylesheet" type="text/css" href="css/button.css">
     <link rel="stylesheet" type="text/css" href="css/deleteUser.css">

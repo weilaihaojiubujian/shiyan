@@ -50,13 +50,14 @@ public class checktask extends HttpServlet {
 			
 		Alreadytask k=new Alreadytask();
 		Agreement a=new Agreement();
+		int b;
 		if(k.selectall(uid)==1 && a.selectagreement(tid, session)==1)
 				 {
-					 response.sendRedirect(request.getContextPath()+"/signagreement.jsp");
+					 response.sendRedirect(request.getContextPath()+"/task.jsp?b=1");
 				 }
 		else
 				 {
-					 response.sendRedirect(request.getContextPath()+"/accepttask_failure.jsp");
+					 response.sendRedirect(request.getContextPath()+"/task.jsp?b=0");
 				 }
 			 
 		 

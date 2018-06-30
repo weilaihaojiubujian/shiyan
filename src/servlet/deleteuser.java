@@ -43,9 +43,10 @@ public class deleteuser extends HttpServlet {
 		
 		
 		User k=new User();
+		int b;
 		if(k.deleteuser(list)==1)
 				 {
-					 response.sendRedirect(request.getContextPath()+"/deleteuser_success.jsp");
+					 response.sendRedirect(request.getContextPath()+"/deleteuser.jsp?b=1");
 				 }
 			
 			 

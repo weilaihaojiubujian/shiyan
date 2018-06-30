@@ -5,6 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>发布合同</title>
+ <script>
+        var a=<%=request.getParameter("b")%>;
+        if(a==1){
+            alert("恭喜你,发布合同成功!");
+            parent.location.href=("user.jsp");
+        }else if(a==0)  {
+            alert("发布合同失败，请重新发布!");
+        }
+       
+    </script>
 </head>
 <body>
 <form  action="servlet/releaseagreement"method="post">

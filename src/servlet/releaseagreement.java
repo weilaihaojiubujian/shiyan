@@ -41,7 +41,7 @@ public class releaseagreement extends HttpServlet {
 		
 		HttpSession session = request.getSession(); 
 		int tid=(int)session.getAttribute("tid");
-		
+		int b;
 		Agreement q=new Agreement();
 		if(q.insertagreement(a,tid)==1)
 		{
@@ -49,11 +49,11 @@ public class releaseagreement extends HttpServlet {
 			session.setAttribute("agreementintroduce",agreementintroduce);
 	
 		
-			response.sendRedirect(request.getContextPath()+"/releaseagreement_success.jsp");
+			response.sendRedirect(request.getContextPath()+"/agreement.jsp?b=1");
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath()+"/releaseagreement_failure.jsp");
+			response.sendRedirect(request.getContextPath()+"/agreement.jsp?b=0");
 		}
 	}
 

@@ -50,23 +50,15 @@ public class searchcomplete extends HttpServlet {
        
        
 		System.out.println(uid);
-		if(uid!=0) {
-			Task s=new Task();
-			
-			List<String> listsearchcompletetask=(List<String>) s.selectsimilarcomplete(uid,keyword);
-			System.out.println(listsearchcompletetask);
-			response.getWriter().write(JSONArray.fromObject(listsearchcompletetask).toString());
-			
-		}
-		else
-		{
-			Task s=new Task();
 		
-			List<String> listsearchcompletetask=(List<String>)s.selectallsimilarcomplete(keyword);
-			System.out.println(listsearchcompletetask);
-			response.getWriter().write(JSONArray.fromObject(listsearchcompletetask).toString());
+		Task s=new Task();
 			
-		}
+		List<String> listsearchcompletetask=(List<String>) s.selectsimilarcomplete(uid,keyword);
+		System.out.println(listsearchcompletetask);
+		response.getWriter().write(JSONArray.fromObject(listsearchcompletetask).toString());
+			
+		
+	
 		
 	}
 

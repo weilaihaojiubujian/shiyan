@@ -18,7 +18,7 @@
                 <li><i><a href="checkalreadytaskbyuser.jsp" target="content_frame">查看已被人接受的任务</a></i></li>
                 <li><i><a href="checktaskbyuser.jsp" target="content_frame">查看未接受的任务</a></i></li>
                 <li><i><a href="checkcompletetaskbyuser.jsp" target="content_frame">查看已完成的任务</a></i></li>
-                <li><i><a href="table.jsp" target="content_frame">表格</a></i></li>
+          
                 <li><i></i></li>
                 <li><i></i></li>
                 <li><i></i></li>

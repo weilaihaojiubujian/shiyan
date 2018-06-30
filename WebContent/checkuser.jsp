@@ -149,7 +149,7 @@
 </head>
 <body>
 
-用户总数为:${count }
+
 用户工作总数为:<label id="93" value=""></label><br><br>
 
 <body onload="call(1)">

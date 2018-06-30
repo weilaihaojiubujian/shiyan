@@ -259,6 +259,15 @@
     		call(k);
     	}
     </script>
+       <script>
+        var a=<%=request.getParameter("b")%>;
+        if(a==1){
+            alert("恭喜你,接受任务成功!");
+            window.location.href=("signagreement.jsp");
+        }else if(a==0)  {
+            alert("接受任务失败,您还有任务没完成，不能再接受任务!");
+        }
+    </script>
     <link type="text/css" rel="stylesheet" href="css/table.css">
     <link type="text/css" rel="stylesheet" href="css/task.css">
     <link type="text/css" rel="stylesheet" href="css/button.css">
