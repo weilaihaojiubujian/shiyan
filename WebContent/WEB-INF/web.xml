@@ -449,7 +449,7 @@
     <servlet-name>searchcompletetaskbyuser</servlet-name>
     <url-pattern>/servlet/searchcompletetaskbyuser</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>searchcompleteby</servlet-name>
@@ -458,5 +458,15 @@
   <servlet-mapping>
     <servlet-name>searchcompleteby</servlet-name>
     <url-pattern>/servlet/searchcompleteby</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>updateuserinformation</servlet-name>
+    <servlet-class>servlet.updateuserinformation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateuserinformation</servlet-name>
+    <url-pattern>/servlet/updateuserinformation</url-pattern>
   </servlet-mapping>
 </web-app>

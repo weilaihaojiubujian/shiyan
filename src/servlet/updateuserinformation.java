@@ -11,16 +11,16 @@ import javax.servlet.http.HttpSession;
 import dao.User;
 
 /**
- * Servlet implementation class reducemoney
+ * Servlet implementation class updateuserinformation
  */
-@WebServlet("/reducemoney")
-public class reducemoney extends HttpServlet {
+@WebServlet("/updateuserinformation")
+public class updateuserinformation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reducemoney() {
+    public updateuserinformation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +32,18 @@ public class reducemoney extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
-		String p = request.getParameter("reducemoney");
-		double reducemoney=Double.parseDouble(p);
+		String username = request.getParameter("username");
+		String address = request.getParameter("address");
+		String bankaccount = request.getParameter("bankaccount");
+		String card = request.getParameter("card");
 		HttpSession session = request.getSession(); 
 		int uid=(int)session.getAttribute("uid");
-		double money=(double)session.getAttribute("money");
-		money-=reducemoney;
-		User u=new User();
-		int b;
-		if(u.updatereducemoney(uid,money,session)==1) {
-			response.sendRedirect(request.getContextPath()+"/userinformation.jsp?b=1");
+		User a=new User();
+		if(a.updateuserinformation(username, address, bankaccount, card, uid)==1) {
+			response.sendRedirect(request.getContextPath()+"/user.jsp?a=5");
 		}
-		else {
-			response.sendRedirect(request.getContextPath()+"/userinformation.jsp?b=0");
-		}
+		
+		
 	}
 
 	/**

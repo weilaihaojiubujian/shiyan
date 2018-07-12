@@ -36,7 +36,7 @@
 <img id="title_img"  src="img/title2.png">
 <div >
     <img id="loginForm_img" src="img/loginForm.png">
-    <form action="servlet/denlu" method="post" align="center">
+    <form action="servlet/denlu" method="post" >
         <label for="username">用户名:</label>
         <input class="text" type="text" name="username" id="username" value="" size="35">
         <span id="user_span"></span>
@@ -47,9 +47,7 @@
         <span id="password_span"></span>
         <br>
         <br>
-        <tr>
-            <td colspan="2"><input type="checkbox" name="isUseCookie" checked="checked"/>十天内记住我的登录状态</td>
-        </tr>
+      
         <br>
         <input type="radio" name="user" checked="checked" value="用户">用户
         <input type="radio" name="user" value="管理员">管理员<br>

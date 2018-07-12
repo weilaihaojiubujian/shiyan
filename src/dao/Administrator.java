@@ -33,7 +33,7 @@ public class Administrator {
 			    	  int aid=rs.getInt("id");
 			    	  System.out.println("管理员登陆成功");
 			    	  session.setAttribute("aid", aid);	
-				         
+			    	  session.setAttribute("ausername", name);	   
 			          return i;
 			      }
 			      else

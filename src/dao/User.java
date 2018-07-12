@@ -459,7 +459,39 @@ public class User {
 	   }//end try
 			return 0;
 	}
-	
+	public int updateuserinformation(String username,String address,String bankaccount,String card,int uid) {
+		
+		try {
+			conn = connection.getConnection();
+			 stmt = (Statement) conn.createStatement();
+		   
+		    
+			
+			
+		      int i=0;
+		      String sql_2="UPDATE user SET username='"+username+"',address='"+address+"',bankaccount='"+bankaccount+"',card='"+card+"' WHERE  id='"+uid+"'  ";
+		      
+		      stmt.executeUpdate(sql_2); 
+		   
+		      i=1;
+		      return i;
+		  
+		    
+		   
+
+  }catch(SQLException se){
+      //Handle errors for JDBC
+      se.printStackTrace();
+   }catch(Exception e){
+      //Handle errors for Class.forName
+      e.printStackTrace();
+   }finally{
+	   
+	   Catch c=new Catch();
+	   c.close(rs, stmt);
+   }//end try
+		return 0;
+}
 	
 	public List<String> selectsimilar(String keyword) {
 	
